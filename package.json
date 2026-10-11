@@ -1,43 +1,73 @@
 {
-    "name": "vuejs-neshan-map-leaflet",
-    "version": "1.1.7",
-    "description": "vuejs neshan map leaflet",
-    "main": "./dist/vuejs-neshan-map-leaflet.umd.js",
-    "module": "./dist/vuejs-neshan-map-leaflet.mjs",
-    "exports": {
-        ".": {
-            "import": "./dist/vuejs-neshan-map-leaflet.mjs",
-            "require": "./dist/vuejs-neshan-map-leaflet.umd.js"
-        },
-        "./dist/style.css": "./dist/style.css"
+  "name": "vuejs-neshan-map-leaflet",
+  "version": "2.0.0",
+  "description": "Typed, reactive Vue 3 components for Neshan Leaflet maps",
+  "main": "./dist/vuejs-neshan-map-leaflet.cjs",
+  "module": "./dist/vuejs-neshan-map-leaflet.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/vuejs-neshan-map-leaflet.js",
+      "require": "./dist/vuejs-neshan-map-leaflet.cjs"
     },
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build && copy README.md dist",
-        "preview": "vite preview"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/sajadabs/vuejs-neshan-map-leaflet.git"
-    },
-    "keywords": [
-        "neshan",
-        "map",
-        "vuejs",
-        "vue",
-        "leaflet"
-    ],
-    "author": "Sajad Abasi",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/sajadabs/vuejs-neshan-map-leaflet/issues"
-    },
-    "homepage": "https://github.com/sajadabs/vuejs-neshan-map-leaflet#readme",
-    "devDependencies": {
-        "@vitejs/plugin-vue": "^4.1.0",
-        "vite": "^4.2.1"
-    },
-    "dependencies": {
-        "vue": "^3.2.47"
-    }
+    "./style.css": "./dist/vuejs-neshan-map-leaflet.css",
+    "./dist/style.css": "./dist/vuejs-neshan-map-leaflet.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vue-tsc -p tsconfig.build.json",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "build:demo": "vite build --config vite.demo.config.ts",
+    "preview": "vite preview",
+    "prepack": "npm run typecheck && npm test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sajadjanat/vuejs-neshan-map-leaflet.git"
+  },
+  "keywords": [
+    "neshan",
+    "map",
+    "vuejs",
+    "vue",
+    "leaflet"
+  ],
+  "author": "Sajad Abasi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sajadjanat/vuejs-neshan-map-leaflet/issues"
+  },
+  "homepage": "https://github.com/sajadjanat/vuejs-neshan-map-leaflet#readme",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vue/server-renderer": "^3.5.0",
+    "@vue/test-utils": "2.4.6",
+    "jsdom": "^26.1.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.0.0",
+    "vitest": "^5.0.3",
+    "vue": "^3.5.0",
+    "vue-tsc": "^3.0.0"
+  },
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "engines": {
+    "node": "^22.12.0 || >=24.0.0"
+  },
+  "dependencies": {
+    "@types/leaflet": "^1.9.0"
+  }
 }
