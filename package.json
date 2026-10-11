@@ -18,6 +18,7 @@
     "build": "vite build && vue-tsc -p tsconfig.build.json",
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest run",
+    "test:sdk": "vitest run --config vitest.sdk.config.ts",
     "build:demo": "vite build --config vite.demo.config.ts",
     "preview": "vite preview",
     "prepack": "npm run typecheck && npm test && npm run build",

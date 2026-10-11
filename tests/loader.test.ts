@@ -8,7 +8,7 @@ describe('SDK loader', () => {
     const first = loadNeshanSdk()
     expect(loadNeshanSdk()).toBe(first)
     expect(document.querySelectorAll('script')).toHaveLength(1)
-    window.L = {} as never
+    window.L = {version:'1.9.4',Map:class {setMapType(){}}} as never
     document.querySelector('script')!.dispatchEvent(new Event('load'))
     let resolved = false
     first.then(() => { resolved = true })
@@ -25,7 +25,7 @@ describe('SDK loader', () => {
     await assertion
     expect(document.querySelectorAll('script,link')).toHaveLength(0)
     const retry = loadNeshanSdk()
-    window.L = {} as never
+    window.L = {version:'1.9.4',Map:class {setMapType(){}}} as never
     document.querySelector('script')!.dispatchEvent(new Event('load'))
     document.querySelector('link')!.dispatchEvent(new Event('load'))
     await expect(retry).resolves.toBe(window.L)
@@ -41,7 +41,7 @@ describe('SDK loader', () => {
     expect(document.querySelector('script')).toBeNull()
   })
   it('loads missing CSS for a preloaded global and retries CSS failures', async () => {
-    window.L = {} as never
+    window.L = {version:'1.9.4',Map:class {setMapType(){}}} as never
     const { loadNeshanSdk } = await import('../src/loader')
     const first = loadNeshanSdk()
     expect(document.querySelector('script')).toBeNull()
@@ -51,5 +51,13 @@ describe('SDK loader', () => {
     const second = loadNeshanSdk()
     document.querySelector('link')!.dispatchEvent(new Event('load'))
     await expect(second).resolves.toBe(window.L)
+  })
+  it('rejects old or vanilla Leaflet globals before loading resources',async()=>{
+    window.L={version:'1.4.0',Map:class {}} as never
+    const {loadNeshanSdk}=await import('../src/loader')
+    await expect(loadNeshanSdk()).rejects.toThrow('incompatible Leaflet')
+    expect(document.querySelector('script,link')).toBeNull()
+    window.L={version:'1.9.4',Map:class {}} as never
+    await expect(loadNeshanSdk()).rejects.toThrow('incompatible Leaflet')
   })
 })

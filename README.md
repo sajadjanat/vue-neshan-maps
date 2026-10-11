@@ -2,7 +2,7 @@
 
 Typed, reactive Neshan maps for **Vue 3.5.43+**. Includes a Composition API helper, location picking, declarative overlays and lazy SDK loading. This is a community wrapper, not an official Neshan product.
 
-> Version 2 is a major migration. The wrapper tooling is modernized; the default map engine remains Neshan's hosted Leaflet 1.4.0 SDK. It does not claim to upgrade that vendor engine or replace it with MapLibre.
+> Version 2 uses the official Neshan Leaflet **1.9.4 / SDK 1.0.8**. Neshan states that traffic and POI layers are no longer updated in this SDK. Those legacy options are ignored with a warning instead of loading obsolete tiles.
 
 ## Install
 
@@ -41,11 +41,11 @@ Neshan's SDK and CSS load automatically on mount. Import the package CSS once fo
 
 - `v-model` coordinates and `v-model:zoom`, with no feedback loop on equal positions.
 - Reactive markers with text popups, tooltips, dragging and click events.
-- Reactive polylines, circles and GeoJSON overlays; optional fit to markers.
+- Reactive polylines, polygons, circles and GeoJSON overlays; optional fit to markers.
 - Center pin, custom pin slot and click-to-pick location.
 - Exposed map methods, native Leaflet access and a Composition API helper.
 - Shared lazy SDK promise, timeout, retry and configurable URLs/CSP nonce.
-- Loading/error slots, accessible status text and automatic container resize handling.
+- Loading/error/tile-error slots, tile loading events and automatic container resize handling.
 - Unmount cleanup and cancellation of pending initialization; SSR-safe imports.
 - Vue peer dependency, ESM/CommonJS exports and generated TypeScript declarations.
 
@@ -56,12 +56,13 @@ Neshan's SDK and CSS load automatically on mount. Import the package CSS once fo
 | `apiKey` | `string` | Web key; overrides `options.key` |
 | `modelValue` | `[number, number]` | Latitude, longitude; falls back to `options.center`, then Tehran |
 | `zoom` | `number` | Falls back to `options.zoom`, then `13` |
-| `options` | `NeshanMapOptions` | Native constructor options; default dreamy, POI enabled, traffic disabled |
+| `options` | `NeshanMapOptions` | Native constructor options; default dreamy; POI/traffic ignored |
 | `styles` | `Record<string, string \| number>` | Reactive container styles; default width 100%, height 450px |
 | `centerMarker` | `boolean` | `true` |
 | `pickOnClick` | `boolean` | `false`; pans the center to the clicked point |
 | `markers` | `MapMarker[]` | `[]` |
 | `polylines` | `MapPolyline[]` | `[]` |
+| `polygons` | `MapPolygon[]` | `[]`; coordinates or coordinate rings |
 | `circles` | `MapCircle[]` | `[]`; radius in meters |
 | `geojson` | `GeoJSON.GeoJsonObject` | Optional GeoJSON (longitude first, per GeoJSON standard) |
 | `geojsonOptions` | `L.GeoJSONOptions` | Native style/filter/callback options |
@@ -69,7 +70,11 @@ Neshan's SDK and CSS load automatically on mount. Import the package CSS once fo
 | `sdk` | `SdkOptions` | Optional `scriptUrl`, `styleUrl`, `timeout` (15000ms), `nonce` |
 | `ariaLabel` | `string` | `Neshan map` |
 
-`center`, `zoom`, key, maptype, POI and traffic updates are reactive. Changing key, maptype, POI, traffic or SDK configuration rebuilds the map and emits `destroy` then `ready`; consumer-owned native layers must be restored in `ready`. Other native `options` are constructor-only: remount with Vue's `:key` to change them. Uncontrolled maps preserve their current view when rebuilding. Overlay arrays are deeply watched and rebuilt as a group; for very large datasets use native Leaflet in `ready` instead of frequent full-array updates. IDs are application identifiers, not a differential update cache.
+`center` and `zoom` updates move the existing map. Changing `maptype` uses Neshan's documented `setMapType`, preserving native layers and open popups. The documented style names are `dreamy` and `standard-night`; custom tile URLs are also accepted. Other names depend on vendor availability.
+
+Changing the API key or SDK configuration rebuilds the map and emits `destroy` then `ready`; restore consumer-owned layers after those changes. Other native options are constructor-only: remount with Vue's `:key` to change them. Uncontrolled maps preserve their view when rebuilding.
+
+Marker IDs must be unique. Markers retain identity when their position, text or unrelated overlays change. Changing native marker options recreates that marker. Lines, polygons, circles and GeoJSON each rebuild independently when their own props change. For very large datasets use native Leaflet in `ready`.
 
 Popup and tooltip strings are rendered as **plain text**, including strings that contain HTML. Custom HTML can be added using native Leaflet; your app is responsible for sanitizing it.
 
@@ -100,7 +105,9 @@ interface MapCircle {
 | --- | --- |
 | `ready` | `{ map, L }` |
 | `destroy` | none |
-| `error` | `Error` for initialization/overlay failure; tile authentication/network errors remain SDK events |
+| `error` | `Error` for initialization/overlay failure |
+| `warning` | Unsupported legacy option message |
+| `tiles-loading`, `tiles-loaded`, `tile-error` | `{ status, loaded, failed }` for the current tile batch |
 | `update:modelValue` | `[latitude, longitude]` after moveend |
 | `update:zoom` | zoom after zoomend |
 | `latitude`, `longitude` | individual coordinates (v1 compatibility) |
@@ -122,9 +129,11 @@ function locate() { map.value?.locate({ setView: true, maxZoom: 16 }) }
 </template>
 ```
 
-Define `webKey` as in the first example. `useNeshanMap` provides shallow refs; call it in setup. The component owns map disposal. Use `@destroy="onDestroy"` to clear the helper refs on component unmount/rebuild. A template ref additionally exposes `map`, `leaflet`, `retry()`, `invalidateSize()`, `fitBounds(bounds, options?)`, `flyTo(center, zoom?, options?)`, and `locate(options?)`. Geolocation requires browser permission and HTTPS (or localhost).
+`ready` means the engine initialized, not that tiles authenticated successfully. Listen for `tiles-loaded` and `tile-error` separately. Tile errors do not dispose the map; a successful new batch clears the warning. Counts aggregate currently tracked tile layers.
 
-Slots: `loading`, `error` (`{ error, retry }`), `center-marker`, and the default slot (`{ map, leaflet }`, after initialization). Put interactive map controls in the default slot with your own absolute positioning.
+Define `webKey` as in the first example. `useNeshanMap` provides shallow refs; call it in setup. The component owns map disposal. Use `@destroy="onDestroy"` to clear the helper refs on component unmount/rebuild. A template ref additionally exposes `map`, `leaflet`, `tileState`, `retry()`, `fitToMarkers()`, `invalidateSize()`, `fitBounds(bounds, options?)`, `flyTo(center, zoom?, options?)`, and `locate(options?)`. Geolocation requires browser permission and HTTPS (or localhost).
+
+Slots: `loading`, `error` (`{ error, retry }`), `tile-error` (`{ state }`), `center-marker`, and the default slot (`{ map, leaflet, tileState }`, after initialization). Put interactive map controls in the default slot with your own absolute positioning.
 
 ## Global plugin
 
@@ -159,8 +168,8 @@ Pass with `:sdk="sdk"`. Configure CSP to allow the Neshan SDK, styles, tile host
 3. Existing `options.key`, `options.center`, `styles`, `latitude` and `longitude` still work. Prefer `api-key` and two-way models for new apps.
 4. The package now ships ESM and CommonJS, not a UMD script-tag build.
 5. Default width is responsive (100%); set `styles.width` to preserve a fixed width.
-6. The center pin uses a customizable default emoji instead of the old embedded image.
-7. Native map references must be refreshed on each `ready` after SDK option changes.
+6. The center pin uses customizable CSS instead of the old embedded image.
+7. Native map references must be refreshed on each `ready` after key or SDK configuration changes.
 
 ## Development
 
@@ -173,13 +182,14 @@ cp .env.example .env.local
 npm run dev
 npm run typecheck
 npm test
+npm run test:sdk
 npm run build
 npm run build:demo
 npm run test:package
 npm pack --dry-run
 ```
 
-The playground also accepts a web key at runtime without saving it. Never commit `.env.local`. Tests use an SDK double and cover lifecycle, overlays, failures and SSR; they do not prove vendor tile availability. Live tiles need a valid domain-allowed web key. CI checks Node 22 and 24. Publishing is a separate maintainer action.
+The playground accepts a web key at runtime without saving it. Never commit `.env.local`. Unit tests cover loader failures, lifecycle and SSR. `test:sdk` downloads the pinned official SDK (cached under ignored `work/`) and exercises its real renderer, marker dragging events, styles, picking, zoom, fit bounds, overlay validation and tile failure recovery in jsdom. Image networking and quota requests are stubbed, and location events are simulated; these tests do not prove live tiles or device GPS. Live tiles require a valid domain-allowed web key. CI checks Node 22 and 24. Publishing is a separate maintainer action.
 
 ## راهنمای فارسی
 
@@ -187,13 +197,13 @@ The playground also accepts a web key at runtime without saving it. Never commit
 
 ‏مختصات معمول پکیج به ترتیب عرض و طول جغرافیایی است. مختصات داخل GeoJSON مطابق استاندارد آن، طول و سپس عرض است. برای انتخاب موقعیت از `v-model` و برای کنترل زوم از `v-model:zoom` استفاده کنید.
 
-‏برای اجرای نمونه، وابستگی‌ها را نصب و دستور `npm run dev` را اجرا کنید. کلید وب را در صفحهٔ نمونه وارد کنید یا در فایل محلی محیط قرار دهید. نمونه شامل تغییر سبک، ترافیک، انتخاب نقطه، مارکر قابل جابه‌جایی و دریافت موقعیت مرورگر است.
+‏برای اجرای نمونه، وابستگی‌ها را نصب و دستور `npm run dev` را اجرا کنید. کلید وب را در صفحهٔ نمونه وارد کنید یا در فایل محلی محیط قرار دهید. نمونه شامل تغییر سبک، انتخاب نقطه، مارکر قابل جابه‌جایی، چندضلعی، محدودهٔ شعاعی، اندازه‌گیری فاصله و دریافت موقعیت مرورگر است. ترافیک و POI مطابق محدودیت رسمی این SDK غیرفعال‌اند.
 
 ## References
 
 - [Vue composables and lifecycle cleanup](https://vuejs.org/guide/reusability/composables)
-- [Neshan web platform](https://platform.neshan.org/sdk/web-sdk/)
+- [Neshan Leaflet SDK documentation](https://platform.neshan.org/docs/sdk/web/leaflet/neshan-leaflet-sdk/)
 - [Neshan's original Leaflet wrapper and native map access](https://github.com/NeshanMaps/react-neshan-map-leaflet)
-- [Leaflet API reference](https://leafletjs.com/reference.html)
+- [Leaflet 1.9.4 API reference](https://leafletjs.com/reference-1.9.4.html)
 
 MIT © Sajad Abasi

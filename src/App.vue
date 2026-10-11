@@ -1,53 +1,80 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { NeshanMapLeaflet, useNeshanMap, type Coordinates, type MapMarker } from './index'
-const key = ref(import.meta.env.VITE_NESHAN_WEB_KEY ?? '')
-const activeKey = ref(key.value)
-const center = ref<Coordinates>([35.6997, 51.338])
-const zoom = ref(13)
-const maptype = ref('dreamy')
-const traffic = ref(false)
-const showMarkers = ref(true)
-const pick = ref(false)
-const { map, onReady, onDestroy } = useNeshanMap()
-const places: MapMarker[] = [
-  { id: 'azadi', position: [35.6997, 51.338], popup: 'میدان آزادی', tooltip: 'آزادی' },
-  { id: 'milad', position: [35.7448, 51.3753], popup: 'برج میلاد', options: { draggable: true } },
-]
-const markers = computed(() => showMarkers.value ? places : [])
-const status = ref('کلید وب نشان را وارد کنید')
-function applyKey() {
-  activeKey.value = key.value.trim()
-  status.value = activeKey.value ? 'در حال اتصال…' : 'کلید وب نشان را وارد کنید'
-}
+import { ref, shallowRef, computed } from 'vue'
+import type * as L from 'leaflet'
+import { NeshanMapLeaflet, useNeshanMap, type Coordinates, type MapMarker, type TileState, type MapReady } from './index'
+const key=ref(import.meta.env.VITE_NESHAN_WEB_KEY ?? '')
+const activeKey=ref(key.value)
+const center=ref<Coordinates>([35.72,51.36]), zoom=ref(12)
+const maptype=ref('dreamy'), mode=ref<'pan'|'pick'|'measure'>('pan')
+const showMarkers=ref(true), showLine=ref(true), showCircle=ref(true), showPolygon=ref(false), showGeojson=ref(false)
+const radius=ref(500), focused=ref(false), locating=ref(false)
+const mapComponent=ref<InstanceType<typeof NeshanMapLeaflet>>()
+const {map,leaflet,onReady,onDestroy}=useNeshanMap()
+const places=shallowRef<MapMarker[]>([
+  {id:'azadi',position:[35.6997,51.338],popup:'میدان آزادی — برای جابه‌جایی مارکر را بکشید.',tooltip:'میدان آزادی',options:{draggable:true,title:'میدان آزادی',alt:'مارکر میدان آزادی'}},
+  {id:'milad',position:[35.7448,51.3753],popup:'برج میلاد — موقعیت مارکر قابل تغییر است.',tooltip:'برج میلاد',options:{draggable:true,title:'برج میلاد',alt:'مارکر برج میلاد'}},
+])
+const measured=ref<Coordinates[]>([])
+const markers=computed(()=>showMarkers.value ? places.value : [])
+const lines=computed(()=>[
+  ...(showLine.value ? [{id:'sample-line',positions:places.value.map(p=>p.position),options:{color:'#0d9488',weight:4}}] : []),
+  ...(measured.value.length>1 ? [{id:'measurement',positions:measured.value,options:{color:'#d97706',weight:4,dashArray:'8 6'}}] : []),
+])
+const circles=computed(()=>showCircle.value ? [{id:'radius',center:places.value[0].position,radius:radius.value,options:{color:'#0d9488',fillOpacity:0.12}}] : [])
+const polygons=computed(()=>showPolygon.value ? [{id:'district',positions:[[35.714,51.35],[35.728,51.35],[35.728,51.37],[35.714,51.37]] as Coordinates[],options:{color:'#7c3aed',fillOpacity:0.16}}] : [])
+const sampleGeojson: GeoJSON.Feature={type:'Feature',properties:{name:'محدودهٔ نمونه'},geometry:{type:'Polygon',coordinates:[[[51.365,35.735],[51.38,35.735],[51.38,35.745],[51.365,35.745],[51.365,35.735]]]}}
+const geojsonOptions:L.GeoJSONOptions={style:{color:'#dc4d77',fillOpacity:0.16}}
+const distance=computed(()=>measured.value.slice(1).reduce((sum,point,index)=>sum+(map.value?.distance(measured.value[index],point) ?? 0),0))
+const tiles=ref<TileState>({status:'idle',loaded:0,failed:0})
+const status=ref('کلید وب نشان را وارد کنید'), lastAction=ref('برای دیدن توضیح مکان، روی مارکر کلیک کنید.')
+const tileText=computed(()=>tiles.value.status==='loaded' ? `کاشی‌ها بارگیری شدند (${tiles.value.loaded})` : tiles.value.status==='error' ? tiles.value.loaded>0 ? `نقشه نمایش داده شد؛ ${tiles.value.failed} کاشی بدون تصویر یا ناموفق` : 'دریافت تصویر نقشه ناموفق بود؛ کلید، دامنه و شبکه را بررسی کنید.' : tiles.value.status==='loading' ? 'در حال دریافت کاشی‌های نقشه…' : 'در انتظار نقشه')
+function applyKey(){const next=key.value.trim();if(next===activeKey.value && next)void mapComponent.value?.retry();else activeKey.value=next;status.value=next ? 'در حال راه‌اندازی…' : 'کلید وب نشان را وارد کنید'}
+function ready(context:MapReady){onReady(context);status.value='موتور نقشه آماده است';mapComponent.value?.fitToMarkers()}
+function markerDragged(marker:MapMarker,point:Coordinates){places.value=places.value.map(item=>item.id===marker.id ? {...item,position:point} : item);lastAction.value='موقعیت جدید مارکر ذخیره شد؛ خط و شعاع هم به‌روز شدند.'}
+function clicked(event:L.LeafletMouseEvent){if(mode.value==='measure'){measured.value=[...measured.value,[event.latlng.lat,event.latlng.lng]];lastAction.value='نقطهٔ اندازه‌گیری اضافه شد؛ نقطهٔ بعدی را روی نقشه انتخاب کنید.'}else if(mode.value==='pick')lastAction.value='مختصات مرکز روی نقطهٔ انتخاب‌شده قرار گرفت.'}
+function locate(){if(!map.value)return;locating.value=true;lastAction.value='در انتظار موقعیت مرورگر…';map.value.locate({setView:true,maxZoom:16,timeout:10000,enableHighAccuracy:true})}
+function locationError(event:L.ErrorEvent){locating.value=false;lastAction.value=event.code===1 ? 'اجازهٔ دسترسی به موقعیت داده نشد. دسترسی مکان را در مرورگر فعال کنید.' : event.code===3 ? 'دریافت موقعیت زمان‌بر شد؛ دوباره تلاش کنید.' : 'مرورگر نتوانست موقعیت را پیدا کند.'}
+function focusPlace(place:MapMarker){map.value?.setView(place.position,16);map.value?.eachLayer(layer=>{if(leaflet.value && layer instanceof leaflet.value.Marker && layer.getElement()?.dataset.markerId===String(place.id))layer.openPopup()})}
+function reset(){measured.value=[];mode.value='pan';mapComponent.value?.fitToMarkers();lastAction.value='نمای نقشه روی مکان‌های نمونه تنظیم شد.'}
 </script>
-
 <template>
   <main>
-    <header><span class="badge">VUE 3 · TYPESCRIPT · LEAFLET</span><h1>نقشه، به سبک شما.</h1><p>محیط آزمایش نسخهٔ دوم پکیج نقشه نشان</p></header>
-    <form @submit.prevent="applyKey"><label for="key">کلید وب نشان</label><div class="key-row"><input id="key" v-model="key" type="password" placeholder="web.…" autocomplete="off" dir="ltr" /><button>نمایش نقشه</button></div><small>کلید فقط در حافظهٔ همین صفحه نگهداری می‌شود؛ کلید سرویس برای نمایش نقشه قابل استفاده نیست.</small></form>
-    <section class="workspace">
+    <header><span class="badge">VUE 3 · NESHAN LEAFLET 1.9.4</span><h1>نقشه، به سبک شما.</h1><p>مکان انتخاب کنید، مارکرها را جابه‌جا کنید و فاصله را روی نقشه اندازه بگیرید.</p></header>
+    <form @submit.prevent="applyKey"><label for="key">کلید وب نشان</label><div class="key-row"><input id="key" v-model="key" type="password" placeholder="web.…" autocomplete="off" dir="ltr" /><button>نمایش نقشه</button></div><small>کلید در حافظهٔ همین صفحه می‌ماند. کلید سرویس برای نمایش نقشه قابل استفاده نیست.</small></form>
+    <section class="workspace" :class="{'workspace--focus':focused}">
       <aside>
-        <h2>کنترل نقشه</h2>
-        <label>سبک نقشه<select v-model="maptype"><option>dreamy</option><option>standard-day</option><option>standard-night</option><option>neshan</option></select></label>
-        <label><input v-model="traffic" type="checkbox" /> ترافیک</label>
-        <label><input v-model="showMarkers" type="checkbox" /> مکان‌های نمونه</label>
-        <label><input v-model="pick" type="checkbox" /> انتخاب موقعیت با کلیک</label>
-        <button type="button" @click="map?.locate({ setView: true, maxZoom: 16 })">موقعیت من</button>
-        <button type="button" @click="center = [35.6997, 51.338]; zoom = 13">بازگشت به تهران</button>
-        <dl><dt>عرض جغرافیایی</dt><dd>{{ center[0].toFixed(6) }}</dd><dt>طول جغرافیایی</dt><dd>{{ center[1].toFixed(6) }}</dd><dt>بزرگ‌نمایی</dt><dd>{{ zoom }}</dd></dl>
-        <p role="status">{{ status }}</p>
+        <div class="section-title"><h2>ابزارهای نقشه</h2><span class="live-dot" :class="{'live-dot--ready':tiles.status==='loaded','live-dot--partial':tiles.status==='error' && tiles.loaded>0}" /></div>
+        <label>سبک نقشه<select v-model="maptype" :disabled="!map"><option value="dreamy">روشن — Dreamy</option><option value="standard-night">تاریک — Standard Night</option></select></label>
+        <label>حالت تعامل<select v-model="mode" :disabled="!map"><option value="pan">جابه‌جایی نقشه</option><option value="pick">انتخاب نقطه</option><option value="measure">اندازه‌گیری فاصله</option></select></label>
+        <p v-if="mode==='measure'" class="measure-result">{{ measured.length }} نقطه · {{ (distance/1000).toFixed(2) }} کیلومتر<button type="button" class="subtle" @click="measured=measured.slice(0,-1)">حذف آخرین نقطه</button><button type="button" class="subtle" @click="measured=[]">پاک‌کردن اندازه‌گیری</button></p>
+        <fieldset :disabled="!map"><legend>لایه‌های نمایشی</legend>
+          <label><input v-model="showMarkers" type="checkbox" /> مارکرهای قابل جابه‌جایی</label>
+          <label><input v-model="showLine" type="checkbox" /> خط بین مکان‌ها</label>
+          <label><input v-model="showCircle" type="checkbox" /> محدودهٔ شعاعی</label>
+          <label v-if="showCircle">شعاع محدوده: {{ radius }} متر<input v-model.number="radius" type="range" min="100" max="2000" step="100" aria-label="شعاع محدوده" /></label>
+          <label><input v-model="showPolygon" type="checkbox" /> چندضلعی نمونه</label>
+          <label><input v-model="showGeojson" type="checkbox" /> لایهٔ GeoJSON</label>
+        </fieldset>
+        <label class="unsupported"><input type="checkbox" disabled /> ترافیک زنده و POI</label><small>این دو لایه در SDK فعلی Leaflet نشان به‌روز نمی‌شوند. <a href="https://platform.neshan.org/docs/sdk/web/leaflet/neshan-leaflet-sdk/" target="_blank" rel="noreferrer">محدودیت رسمی SDK</a></small>
+        <div class="actions"><button type="button" :disabled="!map || locating" @click="locate">{{ locating ? 'در حال مکان‌یابی…' : 'موقعیت من' }}</button><button type="button" :disabled="!map" @click="reset">نمایش همهٔ مکان‌ها</button><button type="button" class="subtle" :disabled="!map" @click="focused=!focused">{{ focused ? 'خروج از نمای بزرگ' : 'نمای بزرگ نقشه' }}</button></div>
+        <div class="places"><button v-for="place in places" :key="place.id" type="button" class="subtle" :disabled="!map" @click="focusPlace(place)">{{ place.tooltip }}</button></div>
+        <label>بزرگ‌نمایی: {{ zoom }}<input v-model.number="zoom" type="range" min="4" max="19" :disabled="!map" aria-label="بزرگ‌نمایی" /></label>
+        <dl><dt>عرض جغرافیایی مرکز</dt><dd data-testid="latitude">{{ center[0].toFixed(6) }}</dd><dt>طول جغرافیایی مرکز</dt><dd data-testid="longitude">{{ center[1].toFixed(6) }}</dd></dl>
       </aside>
-      <NeshanMapLeaflet v-if="activeKey" v-model="center" v-model:zoom="zoom" :api-key="activeKey" :options="{ maptype, traffic }" :markers="markers" :pick-on-click="pick" :polylines="[{id: 'route', positions: places.map(p => p.position), options: { color: '#0d9488', weight: 4 }}]" :circles="[{id: 'area', center: places[0].position, radius: 500, options: { color: '#0d9488' }}]" :styles="{ height: '600px' }" aria-label="نقشهٔ تعاملی نشان" @ready="context => { onReady(context); status = 'نقشه آماده است' }" @destroy="onDestroy" @error="status = $event.message" @location-error="status = $event.message" @marker-dragend="(_, point) => center = point">
-        <template #loading>در حال بارگیری نقشه…</template>
-        <template #error="{ error, retry }"><span>{{ error.message }}</span><button @click="retry">تلاش دوباره</button></template>
-      </NeshanMapLeaflet>
-      <div v-else class="empty"><span>◎</span><h2>آمادهٔ کشف</h2><p>برای دیدن نقشه، کلید وب نشان را وارد کنید.</p></div>
+      <div class="map-panel">
+        <NeshanMapLeaflet v-if="activeKey" ref="mapComponent" v-model="center" v-model:zoom="zoom" :api-key="activeKey" :options="{maptype}" :markers="markers" :polylines="lines" :circles="circles" :polygons="polygons" :geojson="showGeojson ? sampleGeojson : undefined" :geojson-options="geojsonOptions" :pick-on-click="mode==='pick'" :center-marker="mode==='pick'" :styles="{height:focused ? 'calc(100vh - 130px)' : '640px'}" aria-label="نقشهٔ تعاملی نشان" @ready="ready" @destroy="onDestroy" @click="clicked" @error="status=$event.message" @warning="lastAction=$event" @marker-dragend="markerDragged" @tiles-loading="tiles=$event" @tiles-loaded="tiles=$event" @tile-error="tiles=$event" @location-found="locating=false;lastAction='موقعیت مرورگر روی نقشه نمایش داده شد.'" @location-error="locationError">
+          <template #loading>در حال راه‌اندازی نقشه…</template>
+          <template #error="{error,retry}"><div class="error-message"><p>{{ error.message }}</p><button @click="retry">تلاش دوباره</button></div></template>
+          <template #tile-error>{{ tiles.loaded>0 ? 'نقشهٔ پایه نمایش داده شده؛ دریافت برخی کاشی‌های تکمیلی ناموفق است.' : 'دریافت نقشه ناموفق است؛ کلید وب، دامنهٔ مجاز و اتصال شبکه را بررسی کنید.' }}</template>
+        </NeshanMapLeaflet>
+        <div v-else class="empty"><span>◎</span><h2>آمادهٔ کشف</h2><p>کلید وب نشان را وارد کنید تا نقشه و ابزارها فعال شوند.</p></div>
+        <div class="map-status" role="status"><span>{{ status }}</span><span>{{ tileText }}</span></div>
+        <div class="action-status" role="status">{{ lastAction }}</div>
+      </div>
     </section>
-    <footer>خط نمونه یک مسیر نمایشی مستقیم است؛ خروجی سرویس مسیریابی نیست. دریافت موقعیت به اجازهٔ مرورگر و HTTPS نیاز دارد.</footer>
+    <footer>خط بین مکان‌ها مسیر محاسبه‌شده نیست. اندازه‌گیری، فاصلهٔ جغرافیایی بین نقاط است. دریافت موقعیت به اجازهٔ مرورگر و HTTPS یا localhost نیاز دارد.</footer>
   </main>
 </template>
-
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f2f5f4;color:#172e2b;font-family:Tahoma,Arial,sans-serif}main{max-width:1280px;margin:auto;padding:44px 24px}header{margin-bottom:30px}.badge{font:12px monospace;letter-spacing:2px;color:#0f766e}h1{font-size:clamp(30px,5vw,56px);margin:14px 0}p{line-height:1.8;color:#56716b}form{padding:22px;background:white;border:1px solid #dbe5e1;border-radius:16px;margin-bottom:24px}label{display:block;font-size:14px}.key-row{display:flex;gap:12px;margin:12px 0}input[type=password],select{padding:12px;border:1px solid #bfd2ca;border-radius:8px;background:white;min-width:0}input[type=password]{flex:1}small,footer{font-size:12px;line-height:1.9;color:#56716b}button{padding:11px 18px;border:0;border-radius:8px;background:#0f766e;color:white;cursor:pointer;font:inherit}button:hover{background:#115e59}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}.workspace{display:grid;grid-template-columns:250px 1fr;border:1px solid #dbe5e1;border-radius:18px;overflow:hidden;background:white}aside{padding:24px}aside label{margin:20px 0}select{display:block;width:100%;margin-top:10px}aside button{width:100%;margin:6px 0}h2{font-size:19px}dl{border-top:1px solid #dbe5e1;margin-top:24px;padding-top:14px}dt{font-size:12px;color:#56716b}dd{margin:6px 0 14px;font:16px monospace;direction:ltr;text-align:right}.empty{min-height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle,#d7eee5,#eef4f0)}.empty span{font-size:100px;color:#0f766e}footer{margin-top:20px}@media(max-width:760px){main{padding:24px 14px}.workspace{grid-template-columns:1fr}.key-row{flex-direction:column}.empty{min-height:350px}aside{display:flex;flex-wrap:wrap;gap:12px}aside>*{flex:1 1 140px}aside dl{display:none}}
+*{box-sizing:border-box}body{margin:0;background:#f2f5f4;color:#172e2b;font-family:Tahoma,Arial,sans-serif}main{max-width:1440px;margin:auto;padding:36px 24px}header{margin-bottom:26px}.badge{font:12px monospace;letter-spacing:2px;color:#0f766e}h1{font-size:clamp(30px,5vw,52px);margin:14px 0}p{line-height:1.8;color:#56716b}form{padding:20px;background:white;border:1px solid #dbe5e1;border-radius:16px;margin-bottom:24px}label{display:block;font-size:13px}.key-row{display:flex;gap:12px;margin:12px 0}input[type=password],select{padding:11px;border:1px solid #bfd2ca;border-radius:8px;background:white;min-width:0}input[type=password]{flex:1}input[type=range]{width:100%;accent-color:#0f766e;margin:10px 0 0}small,footer{font-size:12px;line-height:1.9;color:#56716b}a{color:#0f766e}button{padding:10px 14px;border:0;border-radius:8px;background:#0f766e;color:white;cursor:pointer;font:inherit;font-size:13px}button:hover{background:#115e59}button:disabled{opacity:.5;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}.workspace{display:grid;grid-template-columns:290px minmax(0,1fr);border:1px solid #dbe5e1;border-radius:18px;overflow:hidden;background:white}.workspace--focus{position:fixed;inset:12px;z-index:10000;box-shadow:0 0 0 20px #172e2b55}aside{padding:22px;max-height:740px;overflow:auto}aside label{margin:15px 0}.section-title{display:flex;align-items:center;justify-content:space-between}.live-dot{width:9px;height:9px;border-radius:50%;background:#c2cbc7}.live-dot--ready{background:#10b981}.live-dot--partial{background:#d97706}select{display:block;width:100%;margin-top:9px}.actions{display:grid;gap:8px;margin:20px 0 12px}.subtle{color:#0f766e;background:#eaf4ef}.subtle:hover{background:#d3e9df}.places{display:flex;gap:8px}.places button{flex:1}.unsupported{color:#87948e}fieldset{border:1px solid #dbe5e1;border-radius:10px;padding:0 12px 6px;margin:20px 0}legend{font-size:12px;color:#56716b;padding:0 6px}h2{font-size:18px}dl{border-top:1px solid #dbe5e1;padding-top:14px}dt{font-size:12px;color:#56716b}dd{margin:6px 0 12px;font:15px monospace;direction:ltr;text-align:right}.map-panel{min-width:0;display:flex;flex-direction:column}.empty{min-height:640px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle,#d7eee5,#eef4f0)}.empty span{font-size:100px;color:#0f766e}.map-status{padding:12px 16px;display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;border-top:1px solid #dbe5e1;font-size:12px;line-height:1.8}.action-status{padding:4px 16px 14px;font-size:12px;line-height:1.8;color:#56716b}.measure-result{padding:12px;background:#fff5e4;border-radius:10px;font-size:13px}.measure-result button{display:block;margin-top:8px}.error-message{text-align:center}footer{margin-top:20px}@media(max-width:760px){main{padding:24px 14px}.workspace{grid-template-columns:1fr}.key-row{flex-direction:column}.empty{min-height:350px}aside{max-height:360px}.workspace--focus aside{max-height:180px}.workspace--focus{overflow:auto}}
 </style>

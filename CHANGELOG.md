@@ -13,4 +13,8 @@
 - Added interactive playground, automated tests and CI.
 - Switched from UMD to ESM/CommonJS exports. See README migration notes.
 - Removed the example's embedded web key. Service keys are rejected by map initialization.
-- Default Neshan Leaflet engine remains vendor-hosted 1.4.0; this release updates the Vue wrapper.
+- Upgraded to documented Neshan Leaflet 1.9.4 / SDK 1.0.8; rejected incompatible preloaded globals.
+- Changed styles in place using setMapType; preserved consumer layers and marker/popup identity through unrelated updates.
+- Ignored obsolete traffic/POI options with warnings, following vendor documentation.
+- Added polygons, tile loading/failure events, recovery warnings and independent overlay updates.
+- Added official SDK integration tests and persistent marker dragging, distance measurement, radius and layer controls in the playground.
