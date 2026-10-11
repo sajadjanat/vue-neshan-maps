@@ -1,0 +1,46 @@
+name: Publish npm
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing release tag matching package.json (for example v2.0.1)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.tag }}
+      - name: Verify release tag and ancestry
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          node --input-type=module -e 'import fs from "node:fs"; const p=JSON.parse(fs.readFileSync("package.json","utf8")); if(process.env.RELEASE_TAG!==`v${p.version}`) throw new Error("Tag must match package version");'
+          git merge-base --is-ancestor HEAD origin/master
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm install --global npm@11 --registry=https://registry.npmjs.org
+      - run: npm ci --registry=https://registry.npmjs.org
+      - run: npm run test:sdk
+      - run: npm pack
+      - run: npm run test:package
+      - name: Publish with npm trusted publishing (OIDC)
+        run: npm publish ./vuejs-neshan-map-leaflet-*.tgz --access public --registry=https://registry.npmjs.org

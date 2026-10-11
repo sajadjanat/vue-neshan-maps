@@ -1,6 +1,6 @@
 {
   "name": "vuejs-neshan-map-leaflet",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Typed Vue 3 Leaflet and MapLibre maps with Neshan live traffic and POI",
   "main": "./dist/vuejs-neshan-map-leaflet.cjs",
   "module": "./dist/vuejs-neshan-map-leaflet.js",
@@ -33,7 +33,12 @@
     "map",
     "vuejs",
     "vue",
-    "leaflet"
+    "leaflet",
+    "maplibre",
+    "vue3",
+    "typescript",
+    "traffic",
+    "poi"
   ],
   "author": "Sajad Abasi",
   "license": "MIT",
@@ -57,6 +62,8 @@
   "files": [
     "dist",
     "README.md",
+    "README.fa.md",
+    "docs",
     "CHANGELOG.md",
     "LICENSE"
   ],

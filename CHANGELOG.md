@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.1
+
+- Added full English and Persian guides with real MapLibre/Leaflet screenshots and language navigation.
+- Expanded API documentation, engine comparison, coordinate conventions, troubleshooting, migration and vendor limitations.
+- Added complete Vue examples for dragging, styles, native access, GeoJSON, slots, diagnostics, geolocation and Nuxt setup.
+- Included both guides, API reference, examples and images in the npm package.
+- Added a manually triggered GitHub Actions workflow for npm trusted publishing, restricted to release tags contained in master.
+- No map runtime behavior changed from 2.0.0.
+
 ## 2.0.0
 
 - Added an SSR-safe, lazy `NeshanMapLibre` component using official SDK 5.24.4; retained the Leaflet component and public API.
