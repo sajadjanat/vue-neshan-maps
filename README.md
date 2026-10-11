@@ -1,6 +1,6 @@
 # Vue Neshan Map Leaflet · v2
 
-Typed, reactive Neshan maps for **Vue 3.3+**. Includes a Composition API helper, location picking, declarative overlays and lazy SDK loading. This is a community wrapper, not an official Neshan product.
+Typed, reactive Neshan maps for **Vue 3.5.43+**. Includes a Composition API helper, location picking, declarative overlays and lazy SDK loading. This is a community wrapper, not an official Neshan product.
 
 > Version 2 is a major migration. The wrapper tooling is modernized; the default map engine remains Neshan's hosted Leaflet 1.4.0 SDK. It does not claim to upgrade that vendor engine or replace it with MapLibre.
 
@@ -154,7 +154,7 @@ Pass with `:sdk="sdk"`. Configure CSP to allow the Neshan SDK, styles, tile host
 
 ## Migration from 1.x
 
-1. Vue is now a peer dependency; use Vue 3.3 or newer.
+1. Vue is now a peer dependency; use Vue 3.5.43 or newer.
 2. Import `vuejs-neshan-map-leaflet/style.css`. Legacy `dist/style.css` remains an export alias.
 3. Existing `options.key`, `options.center`, `styles`, `latitude` and `longitude` still work. Prefer `api-key` and two-way models for new apps.
 4. The package now ships ESM and CommonJS, not a UMD script-tag build.
@@ -175,6 +175,7 @@ npm run typecheck
 npm test
 npm run build
 npm run build:demo
+npm run test:package
 npm pack --dry-run
 ```
 
