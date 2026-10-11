@@ -1,8 +1,59 @@
 # Vue Neshan Map Leaflet · v2
 
-Typed, reactive Neshan maps for **Vue 3.5.43+**. Includes a Composition API helper, location picking, declarative overlays and lazy SDK loading. This is a community wrapper, not an official Neshan product.
+Typed, reactive Neshan **Leaflet and MapLibre** maps for **Vue 3.5.43+**. Includes Composition API helpers, live traffic/POI on MapLibre, location picking, declarative overlays and lazy SDK loading. This is a community wrapper, not an official Neshan product.
 
 > Version 2 uses the official Neshan Leaflet **1.9.4 / SDK 1.0.8**. Neshan states that traffic and POI layers are no longer updated in this SDK. Those legacy options are ignored with a warning instead of loading obsolete tiles.
+
+## MapLibre: live traffic and places
+
+Use `NeshanMapLibre` for the official vector renderer and live layers. Existing `NeshanMapLeaflet` imports and `useNeshanMap` remain available. Both components use **latitude, longitude** for public coordinates; native MapLibre and GeoJSON use longitude first.
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { NeshanMapLibre, MAPLIBRE_STYLES, useNeshanMapLibre, type Coordinates } from 'vuejs-neshan-map-leaflet'
+import 'vuejs-neshan-map-leaflet/style.css'
+const center = ref<Coordinates>([35.7, 51.34])
+const zoom = ref(13)
+const traffic = ref(true), poi = ref(true)
+const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
+const { map, onReady, onDestroy } = useNeshanMapLibre()
+</script>
+<template>
+  <NeshanMapLibre
+    v-model="center" v-model:zoom="zoom" :api-key="webKey"
+    :map-style="MAPLIBRE_STYLES.light" :traffic="traffic" :poi="poi"
+    :markers="[{ id: 'azadi', position: [35.7, 51.34], popup: 'Azadi', options: { draggable: true } }]"
+    :pick-on-click="true" :styles="{ height: '550px' }"
+    @ready="onReady" @destroy="onDestroy"
+  />
+  <label><input v-model="traffic" type="checkbox">Traffic</label>
+  <label><input v-model="poi" type="checkbox">Places</label>
+</template>
+```
+
+MapLibre SDK **5.24.4** loads dynamically on mount from the installed official package. Package CSS includes its styles. SSR imports do not evaluate the renderer. Modern browsers with WebGL and `DecompressionStream` are required. All concurrent Neshan MapLibre maps on a page must use the same API key; the wrapper rejects conflicting keys because the vendor protocol stores a global key.
+
+| MapLibre prop | Behavior |
+| --- | --- |
+| `apiKey`, `modelValue`, `zoom` | Web key and latitude-first controlled view |
+| `mapStyle` | Official `MAPLIBRE_STYLES.light`, `dark`, `monochrome_light`, `monochrome_dark`, `pastel`; or a style URL/version-8 object |
+| `traffic`, `poi` | Default `false`; toggles layers sourced from `traffic` / `points_source` in the supplied style |
+| `markers` | `MapLibreMarker[]`; stable IDs, text popup, title tooltip, dragging; native `MarkerOptions` or a custom `element` |
+| `polylines`, `polygons`, `circles` | Same coordinate models as Leaflet; line color/weight/opacity/dashArray, polygon/circle color/fillColor/fillOpacity/weight supported; radius in meters |
+| `geojson` | GeoJSON features/collection/geometry, longitude first |
+| `geojsonLayers` | Optional native layer definitions without source; otherwise point, line and polygon styles are supplied |
+| `geojsonOptions` | Native GeoJSON source options; Leaflet style callbacks do not apply |
+| `options` | Native Neshan MapLibre constructor options; remount to change them |
+| `styles`, `centerMarker`, `pickOnClick`, `fitMarkers`, `ariaLabel` | Same purpose as the Leaflet component |
+
+Style changes keep the map, DOM markers and open popups, then restore custom GeoJSON layers and traffic/POI visibility on `style.load`. Traffic re-requests visible tiles every 60 seconds while enabled; HTTP caching and data freshness are controlled by Neshan. Custom styles must actually include the corresponding Neshan sources/layers; missing live layers emit a warning.
+
+`ready` payload is `{ map, maplibre }`. `click` is the native event plus `coordinates: [latitude, longitude]`. Drag events match Leaflet's `(marker, coordinates)` shape. Location events contain `{ latlng: { lat, lng }, accuracy }` or `{ code, message }`. Loading/tile/error/warning, coordinate, zoom and destroy events and slots follow the Leaflet names below. MapLibre tile counters count source readiness/error events, rather than raster image counts. `live-layers` reports enabled flags and matched layer IDs.
+
+A component ref exposes `map`, `maplibre`, `tileState`, `retry`, `fitToMarkers`, `invalidateSize`, `locate`, `openPopup(id)`, `flyTo(latitudeFirstCenter, zoom?, options?)`, `fitBounds(nativeLongitudeFirstBounds, options?)`, and `getDiagnostics()` (rendered traffic/POI feature counts, custom overlay kinds and marker count). Use `useNeshanMapLibre` with `@ready`/`@destroy` to retain native refs. Picking, marker edits, measurement and engine switching in the playground preserve application-owned coordinates.
+
+**Vendor security limitation:** the current official SDK depends on a MapLibre release covered by [GHSA-jrc7-96c5-q579](https://github.com/advisories/GHSA-jrc7-96c5-q579), so npm audit still reports the vendor advisory. This wrapper sanitizes source attributions in fetched/provided style objects and custom attribution control options using DOMPurify and renders popup strings as text. Use trusted style/TileJSON hosts. Native API calls, remote TileJSON attribution, and custom DOM elements remain the caller's responsibility; this mitigation is not a claim that the vendor engine is patched.
 
 ## Install
 
@@ -142,7 +193,7 @@ import NeshanMapPlugin from 'vuejs-neshan-map-leaflet'
 app.use(NeshanMapPlugin)
 ```
 
-The named `NeshanMapLeaflet` export is also installable with `app.use(NeshanMapLeaflet)`. For local use, import it directly in `<script setup>`.
+Both named component exports are installable individually. The default plugin registers `NeshanMapLeaflet` and `NeshanMapLibre`. For local use, import the desired component directly in `<script setup>`.
 
 ## SSR / Nuxt
 
@@ -197,12 +248,13 @@ The playground accepts a web key at runtime without saving it. Never commit `.en
 
 ‏مختصات معمول پکیج به ترتیب عرض و طول جغرافیایی است. مختصات داخل GeoJSON مطابق استاندارد آن، طول و سپس عرض است. برای انتخاب موقعیت از `v-model` و برای کنترل زوم از `v-model:zoom` استفاده کنید.
 
-‏برای اجرای نمونه، وابستگی‌ها را نصب و دستور `npm run dev` را اجرا کنید. کلید وب را در صفحهٔ نمونه وارد کنید یا در فایل محلی محیط قرار دهید. نمونه شامل تغییر سبک، انتخاب نقطه، مارکر قابل جابه‌جایی، چندضلعی، محدودهٔ شعاعی، اندازه‌گیری فاصله و دریافت موقعیت مرورگر است. ترافیک و POI مطابق محدودیت رسمی این SDK غیرفعال‌اند.
+‏برای اجرای نمونه، وابستگی‌ها را نصب و دستور `npm run dev` را اجرا کنید. کلید وب را در صفحهٔ نمونه وارد کنید یا در فایل محلی محیط قرار دهید. نمونه شامل تغییر سبک، انتخاب نقطه، مارکر قابل جابه‌جایی، چندضلعی، محدودهٔ شعاعی، اندازه‌گیری فاصله و دریافت موقعیت مرورگر است. در موتور MapLibre ترافیک و POI فعال هستند؛ در موتور Leaflet مطابق محدودیت رسمی آن SDK غیرفعال‌اند.
 
 ## References
 
 - [Vue composables and lifecycle cleanup](https://vuejs.org/guide/reusability/composables)
 - [Neshan Leaflet SDK documentation](https://platform.neshan.org/docs/sdk/web/leaflet/neshan-leaflet-sdk/)
+- [Neshan MapLibre SDK documentation](https://platform.neshan.org/docs/sdk/web/maplibre/neshan-maplibre-gl-js/)
 - [Neshan's original Leaflet wrapper and native map access](https://github.com/NeshanMaps/react-neshan-map-leaflet)
 - [Leaflet 1.9.4 API reference](https://leafletjs.com/reference-1.9.4.html)
 

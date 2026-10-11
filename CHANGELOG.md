@@ -2,6 +2,13 @@
 
 ## 2.0.0
 
+- Added an SSR-safe, lazy `NeshanMapLibre` component using official SDK 5.24.4; retained the Leaflet component and public API.
+- Added real traffic and POI style toggles, traffic refresh, diagnostics, native MapLibre access and `useNeshanMapLibre`.
+- Ported coordinate/zoom models, stable draggable markers/popups, line/polygon/circle/GeoJSON overlays, picking, fitting, resize, slots and geolocation handling to MapLibre.
+- Restored custom layers and live-layer visibility after style changes; prevented conflicting concurrent vendor API keys.
+- Sanitized style/control attributions as a mitigation for the current vendor dependency advisory; see README security limitations.
+- Added a dual-engine playground and MapLibre regression tests.
+
 - Rebuilt public API with TypeScript and generated declarations; Vue is a peer dependency.
 - Added coordinate/zoom v-models, marker interaction, polylines, circles and GeoJSON.
 - Added click picking, custom pin/loading/error slots, geolocation events and exposed map methods.

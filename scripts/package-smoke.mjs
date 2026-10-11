@@ -19,20 +19,24 @@ try {
   writeFileSync(join(dir, 'smoke.mjs'), `
     import assert from 'node:assert/strict'
     import { createRequire } from 'node:module'
-    import plugin, { NeshanMapLeaflet, loadNeshanSdk } from 'vuejs-neshan-map-leaflet'
+    import plugin, { NeshanMapLeaflet, NeshanMapLibre, loadNeshanMapLibre, useNeshanMapLibre, loadNeshanSdk } from 'vuejs-neshan-map-leaflet'
     const require = createRequire(import.meta.url)
     assert.equal(typeof plugin.install, 'function')
     assert.equal(typeof NeshanMapLeaflet.install, 'function')
+    assert.equal(typeof NeshanMapLibre.install, 'function')
+    assert.equal(typeof loadNeshanMapLibre, 'function')
+    assert.equal(typeof useNeshanMapLibre, 'function')
     assert.equal(typeof loadNeshanSdk, 'function')
     assert.equal(typeof require('vuejs-neshan-map-leaflet').NeshanMapLeaflet.install, 'function')
     assert.ok(require.resolve('vuejs-neshan-map-leaflet/style.css'))
   `)
   writeFileSync(join(dir, 'check.ts'), `
-    import { NeshanMapLeaflet, type Coordinates, type NeshanMapOptions, type MapMarker } from 'vuejs-neshan-map-leaflet'
+    import { NeshanMapLeaflet, type Coordinates, type NeshanMapOptions, type MapMarker, type MapLibreProps } from 'vuejs-neshan-map-leaflet'
     const center: Coordinates = [35, 51]
     const options: NeshanMapOptions = { center, zoom: 13, traffic: true }
     const marker: MapMarker = { id: 1, position: center, options: { draggable: true } }
-    void [NeshanMapLeaflet, options, marker]
+    const libre: MapLibreProps = { apiKey: 'web.consumer-fixture', modelValue: center, traffic: true, poi: true, geojsonLayers: [{id:'points',type:'circle',paint:{'circle-radius':6}}] }
+    void [NeshanMapLeaflet, options, marker, libre]
   `)
   execFileSync(process.execPath, ['smoke.mjs'], { cwd: dir, stdio: 'inherit' })
   execFileSync(process.execPath, [require.resolve('typescript/bin/tsc'), '--noEmit', '--strict', '--target', 'ES2022', '--module', 'ESNext', '--moduleResolution', 'Bundler', 'check.ts'], { cwd: dir, stdio: 'inherit' })
