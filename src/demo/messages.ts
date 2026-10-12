@@ -27,6 +27,7 @@ const messages = {
   zoom: ['بزرگ‌نمایی', 'Zoom'], fit: ['نمایش مکان‌ها', 'Fit places'], reset: ['نمای اولیه', 'Reset view'], locate: ['موقعیت من', 'My location'], locating: ['در حال مکان‌یابی…', 'Locating…'],
   locationHelp: ['فقط با زدن این دکمه، اجازهٔ موقعیت از مرورگر درخواست می‌شود.', 'Location permission is requested only when you press this button.'],
   clustering: ['خوشه‌بندی نقاط', 'Point clusters'], clusterHelp: ['روی دایرهٔ شمارنده کلیک کنید تا نقاط داخل آن را ببینید.', 'Click a numbered circle to explore the points inside it.'],
+  pointLayer: ['نمایش نقاط نمونه', 'Show sample points'],
   pointCount: ['تعداد نقاط نمونه', 'Sample point count'], clusterRadius: ['شعاع خوشه (پیکسل)', 'Cluster radius (px)'], autoExpand: ['بازشدن خودکار خوشه', 'Expand clusters on click'],
   heatmap: ['هیت‌مپ وزن‌دار', 'Weighted heatmap'], heatHelp: ['از وزن هر نقطه استفاده می‌کند و هم‌زمان با خوشه‌ها فعال می‌شود.', 'Uses each point’s weight and works alongside clusters.'],
   heatRadius: ['شعاع هیت‌مپ', 'Heatmap radius'], intensity: ['شدت هیت‌مپ', 'Heatmap intensity'], opacity: ['شفافیت', 'Opacity'],
