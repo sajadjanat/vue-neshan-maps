@@ -68,7 +68,7 @@ Requires **Vue 3.5.43+**. Tooling: **Node 22.12+ within 22.x, or Node 24+**. Map
 Install from npm:
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.2.0
+npm install vuejs-neshan-map-leaflet@^2.2.1
 ```
 
 Create a domain-allowed **web key** in the Neshan dashboard. For Vite, put it in your ignored `.env.local`:
@@ -245,7 +245,7 @@ npm run build:demo
 npm run test:package
 ```
 
-Validation includes 51 unit/contract tests, 9 tests using the actual pinned Leaflet SDK, strict installed-package TypeScript checks and real-map browser checks. Automated SDK tests stub image/quota networking and simulate location callbacks; actual device GPS was not requested. CI covers Node 22 and 24.
+Validation includes 55 unit/contract tests, 9 tests using the actual pinned Leaflet SDK, strict installed-package TypeScript checks and real-map browser checks. Automated SDK tests stub image/quota networking and simulate location callbacks; actual device GPS was not requested. CI covers Node 22 and 24.
 
 For issues, include engine/package/browser versions, a small reproduction and sanitized errors. Never include service keys or account tokens.
 
