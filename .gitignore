@@ -1,6 +1,8 @@
 node_modules/
 dist/
 demo-dist/
+.nuxt/
+.output/
 coverage/
 work/
 .env

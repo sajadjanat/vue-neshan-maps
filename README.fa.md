@@ -12,11 +12,11 @@
 
 ‏**فارسی** · [English](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/README.md)
 
-‏[شروع سریع](#installation) · [آموزش امکانات](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.fa.md) · [مرجع API](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [مثال‌های کامل](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md)
+‏[شروع سریع](#installation) · [آموزش امکانات](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.fa.md) · [مرجع API](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [مثال‌های کامل](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) · [راهنمای Nuxt 4](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.fa.md)
 
 </div>
 
-![نقشهٔ واقعی تهران با ترافیک، مکان‌ها، مارکرها و محدودهٔ خدمات](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light.png)
+![نقشهٔ واقعی تهران با ترافیک، مکان‌ها، مارکرها و محدودهٔ خدمات](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light-fa.png)
 
 ‏نقشه و لایه‌های ترافیک و مکان‌ها از نشان بارگیری شده‌اند. مارکرها، محدوده و خط‌چین، داده‌های نمونهٔ برنامه‌اند. این رابط یک نمونهٔ طراحی است؛ کامپوننت، نقشه را در رابط دلخواه شما قرار می‌دهد.
 
@@ -64,7 +64,7 @@
 ‏بسته را از رجیستری npm نصب کنید:
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.0.1
+npm install vuejs-neshan-map-leaflet@^2.1.0
 ```
 
 ‏از پنل نشان یک **کلید وب** با دامنه‌های مجاز بسازید. برای پروژهٔ `Vite` آن را در فایل نادیده‌گرفته‌شدهٔ `.env.local` قرار دهید:
@@ -114,7 +114,7 @@ const poi = ref(true)
 />
 ```
 
-![نقشهٔ واقعی Leaflet همراه مارکرها و محدودهٔ خدمات نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/leaflet.png)
+![نقشهٔ واقعی Leaflet همراه مارکرها و محدودهٔ خدمات نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/leaflet-fa.png)
 
 ### ترتیب مختصات
 
@@ -123,6 +123,19 @@ const poi = ref(true)
 | مدل، موقعیت مارکر و شکل‌ها، متد `flyTo` کامپوننت | عرض، طول | `[35.6997, 51.338]` |
 | GeoJSON، API بومی MapLibre و `fitBounds` آن | طول، عرض | `[51.338, 35.6997]` |
 | متد `fitBounds` در Leaflet | عرض، طول | `[[35.69, 51.32], [35.73, 51.39]]` |
+
+## ‏استفاده در Nuxt 4
+
+‏ماژول، هر دو کامپوننت، composableها و CSS را خودکار ثبت می‌کند:
+
+```ts
+export default defineNuxtConfig({
+  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  runtimeConfig: { public: { neshanWebKey: '' } },
+})
+```
+
+‏متغیر `NUXT_PUBLIC_NESHAN_WEB_KEY` را تنظیم و کلید را با `useRuntimeConfig()` بخوانید. [آموزش کامل ماژول، پلاگین دستی، SSR و تنظیمات محصول](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.fa.md).
 
 <a id="overlays"></a>
 
@@ -264,7 +277,7 @@ app.use(NeshanMapPlugin)
 
 ## ‏نمای تاریک
 
-![نقشهٔ تاریک نشان با ترافیک و لایه‌های نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-dark.png)
+![نقشهٔ تاریک نشان با ترافیک و لایه‌های نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-dark-fa.png)
 
 ‏این تصویر نیز از نقشهٔ واقعی گرفته شده است. تغییر سبک، وضعیت مارکرها و لایه‌های سفارشی را حفظ می‌کند. تراکم مکان‌ها به زوم، سبک و داده‌های نشان بستگی دارد.
 

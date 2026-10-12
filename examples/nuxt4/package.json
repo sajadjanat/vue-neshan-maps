@@ -1,0 +1,23 @@
+{
+  "name": "neshan-nuxt4-example",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  },
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "prepare": "nuxt prepare",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "nuxt": "^4.6.1",
+    "vue": "^3.5.43",
+    "vuejs-neshan-map-leaflet": "file:../.."
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "vue-tsc": "^3.0.0"
+  }
+}

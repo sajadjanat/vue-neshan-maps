@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.1.0
+
+- Added an optional Nuxt 4 module at `vuejs-neshan-map-leaflet/nuxt`: automatic component registration, composable/style auto-imports, CSS and public web-key config.
+- Added `vuejs-neshan-map-leaflet/nuxt/plugin` for manual Nuxt plugin registration; existing Vue plugin and both map engines remain available.
+- Added a runnable Nuxt 4 application and installed-tarball tests for module/plugin builds, declarations and SSR.
+- Redesigned the English and Persian README, added task-based feature and Nuxt guides, and replaced screenshots with real maps in separate English and Persian interfaces.
+- Nuxt remains an optional peer dependency. Existing Vue integrations do not need to install Nuxt or change their map code.
+- The existing vendor SDK dependency advisory remains; see the documented limitations.
+
 ## 2.0.1
 
 - Added full English and Persian guides with real MapLibre/Leaflet screenshots and language navigation.

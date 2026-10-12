@@ -2,6 +2,7 @@
 
 [Overview](../README.md) · [Feature guide](GUIDE.md) · [آموزش فارسی](GUIDE.fa.md) · [API reference](API.md)
 
+[Nuxt 4: module and plugin](NUXT.md)
 Each Vue example below is a complete single-file component for a Vite/Vue application. Set `VITE_NESHAN_WEB_KEY` in `.env.local` first. Never use a service key. These examples use public component coordinates in latitude/longitude order.
 
 ## Choose an example

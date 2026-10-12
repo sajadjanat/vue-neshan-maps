@@ -42,5 +42,6 @@ jobs:
       - run: npm run test:sdk
       - run: npm pack
       - run: npm run test:package
+      - run: npm run test:nuxt
       - name: Publish with npm trusted publishing (OIDC)
         run: npm publish ./vuejs-neshan-map-leaflet-*.tgz --access public --registry=https://registry.npmjs.org

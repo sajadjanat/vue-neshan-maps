@@ -2,6 +2,7 @@
 
 [Overview](../README.md) · [فارسی](GUIDE.fa.md) · [API reference](API.md) · [More complete examples](EXAMPLES.md)
 
+[Nuxt 4: module and plugin](NUXT.md)
 Start with the README's installation instructions and a domain-allowed Neshan **web** key. This guide builds on Vue's Composition API. Code fences containing a complete `<script setup>` component can be copied into a `.vue` file; shorter snippets extend that component.
 
 ## Contents

@@ -2,7 +2,8 @@
 
 [Overview](../README.md) · [Feature guide](GUIDE.md) · [آموزش فارسی](GUIDE.fa.md) · [Complete examples](EXAMPLES.md)
 
-This reference covers 2.0.1. Start with the [README](../README.md#quick-start) for installation or the [feature guide](GUIDE.md) for task-based explanations. Named imports below are all from `vuejs-neshan-map-leaflet`.
+[Nuxt 4: module and plugin](NUXT.md)
+This reference covers 2.1.0. Start with the [README](../README.md#quick-start) for installation or the [feature guide](GUIDE.md) for task-based explanations. Named imports below are all from `vuejs-neshan-map-leaflet`.
 
 ## On this page
 
@@ -140,7 +141,7 @@ MapLibre default content appears after initialization; Leaflet default content a
 ## Install
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.0.1
+npm install vuejs-neshan-map-leaflet@^2.1.0
 ```
 
 ```vue

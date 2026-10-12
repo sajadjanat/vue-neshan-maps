@@ -12,7 +12,7 @@ Reactive maps for Vue 3 · MapLibre + Leaflet · TypeScript
 
 **English** · [فارسی](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/README.fa.md)
 
-[Get started](#quick-start) · [Feature guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md) · [API reference](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [Examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md)
+[Get started](#quick-start) · [Feature guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md) · [API reference](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [Examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) · [Nuxt 4](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.md)
 
 </div>
 
@@ -62,7 +62,7 @@ Requires **Vue 3.5.43+**. Tooling: **Node 22.12+ within 22.x, or Node 24+**. Map
 Install from npm:
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.0.1
+npm install vuejs-neshan-map-leaflet@^2.1.0
 ```
 
 Create a domain-allowed **web key** in the Neshan dashboard. For Vite, put it in your ignored `.env.local`:
@@ -121,6 +121,19 @@ Use the same `center`, `zoom` and `webKey` setup, import `NeshanMapLeaflet` inst
 | Component model, marker/shape positions, component `flyTo` | Latitude, longitude | `[35.6997, 51.338]` |
 | GeoJSON, native MapLibre APIs, MapLibre `fitBounds` | Longitude, latitude | `[51.338, 35.6997]` |
 | Leaflet `fitBounds` | Latitude, longitude | `[[35.69, 51.32], [35.73, 51.39]]` |
+
+## Nuxt 4
+
+Register the module to add both components, composables and package CSS automatically:
+
+```ts
+export default defineNuxtConfig({
+  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  runtimeConfig: { public: { neshanWebKey: '' } },
+})
+```
+
+Set `NUXT_PUBLIC_NESHAN_WEB_KEY` and read it with `useRuntimeConfig()`. [Complete Nuxt 4 guide: module, manual plugin, SSR and production config →](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.md)
 
 ## Markers and overlays
 
