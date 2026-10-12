@@ -1,41 +1,47 @@
-# Vue Neshan Map
+<div align="center">
 
-**Reactive Neshan maps for Vue 3. MapLibre and Leaflet, one typed component library.**
+# Vue Neshan Maps
 
-[![CI](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml/badge.svg)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions)
-[![npm](https://img.shields.io/npm/v/vuejs-neshan-map-leaflet)](https://www.npmjs.com/package/vuejs-neshan-map-leaflet)
-[![MIT](https://img.shields.io/badge/License-MIT-0f766e.svg)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE)
+### Bring your places to life.
+
+Reactive maps for Vue 3 · MapLibre + Leaflet · TypeScript
+
+[![npm](https://img.shields.io/npm/v/vuejs-neshan-map-leaflet?color=087f8c&label=npm)](https://www.npmjs.com/package/vuejs-neshan-map-leaflet)
+[![CI](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml/badge.svg)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml)
+[![License](https://img.shields.io/badge/license-MIT-173449)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE)
 
 **English** · [فارسی](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/README.fa.md)
 
-Build location pickers, draggable places, service areas and interactive maps. Use MapLibre for live traffic and points of interest, or keep Leaflet for an existing integration. This is a community project, independent of Neshan.
+[Get started](#quick-start) · [Feature guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md) · [API reference](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [Examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md)
 
-![Real Neshan MapLibre map with live traffic, POI and custom overlays](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre.png)
+</div>
 
-*Actual playground capture with an authorized web key. Colored roads show traffic; place labels show POI. The key is masked and is not included in the repository.*
+![Neshan vector map in a Vue application: Tehran, live traffic, places and custom geometry](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light.png)
 
-## Documentation
+<p align="center"><sub>Real Neshan basemap and live layers. Markers, the service area and the dashed connection are sample application data. The interface illustrates what you can build; the component supplies the map.</sub></p>
 
-- [Quick start](#quick-start)
-- [Choose an engine](#choose-an-engine)
-- [Markers and overlays](#markers-and-overlays)
-- [Events, methods and slots](#events-methods-and-slots)
-- [Complete API reference](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md)
-- [Copyable examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md)
-- [Persian guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/README.fa.md)
-- [Migration and runtime](#migration-and-runtime) · [Troubleshooting](#troubleshooting)
-- [Changelog](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/CHANGELOG.md) · [Releases](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/releases) · [Issues](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/issues)
+Build a location picker, show your branches, outline a delivery area or add live traffic to your app. Two Vue components connect Neshan's renderers to reactive state, with typed overlays, lifecycle events and native access when you need it. A community library, independent of Neshan.
 
-## Features
+## One library, two engines
 
-- Vue 3 Composition API, TypeScript declarations, ESM and CommonJS.
-- Coordinates and zoom through `v-model` and `v-model:zoom`.
-- Live traffic and POI on MapLibre, visibility controls and traffic refresh.
-- Stable markers, plain-text popups, tooltips and drag events.
-- Independent polyline, polygon, meter-radius circle and GeoJSON overlays.
-- Point picking, fit-to-markers, native access and browser location events.
-- Lazy SDK loading, loading/error slots, retry, resize and unmount cleanup.
-- SSR-safe imports and a Persian playground with measurement and engine switching.
+| Build with | What you get |
+| --- | --- |
+| **Vue models** | Keep center and zoom in sync; pick a point and persist dragged markers. |
+| **Live vector layers** | Traffic and POI on MapLibre, five map styles and reactive visibility. |
+| **Your geography** | Markers, text popups, tooltips, lines, polygons, meter-radius circles and GeoJSON. |
+| **Application controls** | Fly to a place, frame markers, request browser location and access the native renderer. |
+| **Lifecycle handling** | Lazy SDK initialization, loading/error slots, retry, automatic resize and cleanup. |
+
+## Find your way
+
+| I want to… | Read |
+| --- | --- |
+| Display my first map | [Quick start](#quick-start) |
+| Pick an address, add places or draw a service area | [Feature guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md) |
+| Copy a complete Vue component | [Runnable examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) |
+| Check a prop, event, slot or method | [API reference](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) |
+| Use Nuxt, native APIs or migrate from 1.x | [Integration guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md#integration) |
+| Diagnose blank tiles or missing traffic | [Troubleshooting](#troubleshooting) |
 
 ## Choose an engine
 
@@ -57,12 +63,6 @@ Install from npm:
 
 ```sh
 npm install vuejs-neshan-map-leaflet@^2.0.1
-```
-
-Alternatively, install the tested GitHub release artifact:
-
-```sh
-npm install https://github.com/sajadjanat/vuejs-neshan-map-leaflet/releases/download/v2.0.1/vuejs-neshan-map-leaflet-2.0.1.tgz
 ```
 
 Create a domain-allowed **web key** in the Neshan dashboard. For Vite, put it in your ignored `.env.local`:
@@ -124,6 +124,9 @@ Use the same `center`, `zoom` and `webKey` setup, import `NeshanMapLeaflet` inst
 
 ## Markers and overlays
 
+For point picking, editable markers, shapes, GeoJSON, native controls and status handling, follow the [feature guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md). Each section explains what your application owns and what the component updates.
+
+
 Use unique, stable IDs and persist dragging in application state:
 
 ```ts
@@ -151,6 +154,14 @@ const polygons: MapPolygon[] = [
 Pass `:markers="markers"`, `:circles="circles"`, `:polylines="polylines"`, `:polygons="polygons"` and `@marker-dragend="saveMarker"` to the component. For Leaflet use the `MapMarker` type. Popup/tooltip strings are plain text. A polyline displays supplied coordinates; it does not calculate a road route.
 
 MapLibre supports native `geojsonLayers` and `geojsonOptions`. Shape props support a documented subset of Leaflet-like paint options, not arbitrary Leaflet plugin options. See [API details](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) and [GeoJSON examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md).
+
+## Map styles in practice
+
+Light and dark styles use the same component state. Markers and custom overlays survive style changes.
+
+![Dark Neshan MapLibre map with live traffic and custom overlays](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-dark.png)
+
+The two screenshots are real browser captures. POI density and traffic detail depend on the viewport, zoom, vendor style and available data.
 
 ## Events, methods and slots
 
@@ -218,6 +229,10 @@ npm run test:package
 Validation includes 29 unit/contract tests, 9 tests using the actual pinned Leaflet SDK, strict installed-package TypeScript checks and real-map browser checks. Automated SDK tests stub image/quota networking and simulate location callbacks; actual device GPS was not requested. CI covers Node 22 and 24.
 
 For issues, include engine/package/browser versions, a small reproduction and sanitized errors. Never include service keys or account tokens.
+
+## Project links
+
+[Changelog](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/CHANGELOG.md) · [Releases](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/releases) · [Report an issue](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/issues)
 
 ## Official references
 

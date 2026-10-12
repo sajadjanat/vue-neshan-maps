@@ -1,8 +1,20 @@
 # Examples
 
-[English guide](../README.md) · [راهنمای فارسی](../README.fa.md) · [API reference](API.md)
+[Overview](../README.md) · [Feature guide](GUIDE.md) · [آموزش فارسی](GUIDE.fa.md) · [API reference](API.md)
 
 Each Vue example below is a complete single-file component for a Vite/Vue application. Set `VITE_NESHAN_WEB_KEY` in `.env.local` first. Never use a service key. These examples use public component coordinates in latitude/longitude order.
+
+## Choose an example
+
+| Goal | Component |
+| --- | --- |
+| Editable places and style switching | [Draggable markers](#draggable-markers-styles-and-native-access) |
+| Render your own dataset | [GeoJSON paint](#geojson-and-custom-maplibre-paint) |
+| Loading feedback and recovery | [Errors, diagnostics and location](#error-slots-diagnostics-and-location) |
+| Extend an existing Leaflet map | [Native bounds](#leaflet-and-native-bounds) |
+| Integrate your application | [Nuxt](#nuxt) · [Global registration](#global-registration) |
+
+For a single example combining the main features, see the [complete map](GUIDE.md#complete-map).
 
 ## Draggable markers, styles and native access
 

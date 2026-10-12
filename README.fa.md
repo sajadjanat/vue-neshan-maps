@@ -1,39 +1,59 @@
-# نقشه نشان برای Vue 3
+<div align="center">
 
-‏**کامپوننت‌های واکنشی و تایپ‌شدهٔ نشان با دو موتور `MapLibre` و `Leaflet`.**
+# Vue Neshan Maps
+
+### ‏نقشه‌ای زنده برای برنامهٔ شما
+
+‏نقشهٔ واکنش‌پذیر برای Vue 3 · دو موتور MapLibre و Leaflet · پشتیبانی TypeScript
+
+[![npm](https://img.shields.io/npm/v/vuejs-neshan-map-leaflet?color=087f8c&label=npm)](https://www.npmjs.com/package/vuejs-neshan-map-leaflet)
+[![CI](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml/badge.svg)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml)
+[![License](https://img.shields.io/badge/license-MIT-173449)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE)
 
 ‏**فارسی** · [English](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/README.md)
 
-‏برای انتخاب موقعیت، نمایش مکان‌ها، جابه‌جایی مارکر، نمایش محدودهٔ خدمات و نقشه‌های تعاملی. موتور `MapLibre` ترافیک و مکان‌های نشان را نمایش می‌دهد؛ موتور `Leaflet` برای پروژه‌های موجود و افزونه‌های آن حفظ شده است. این پکیج یک پروژهٔ جامعهٔ توسعه‌دهندگان است و محصول رسمی نشان نیست.
+‏[شروع سریع](#installation) · [آموزش امکانات](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.fa.md) · [مرجع API](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [مثال‌های کامل](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md)
 
-![نقشه واقعی نشان همراه ترافیک، مکان‌ها و لایه‌های سفارشی](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre.png)
+</div>
 
-‏این تصویر از نمونهٔ واقعی پروژه گرفته شده است. خطوط رنگی جاده‌ها ترافیک و برچسب مکان‌ها `POI` هستند. کلید وب در تصویر پوشانده شده و داخل ریپو قرار ندارد.
+![نقشهٔ واقعی تهران با ترافیک، مکان‌ها، مارکرها و محدودهٔ خدمات](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light.png)
 
-## فهرست راهنما
+‏نقشه و لایه‌های ترافیک و مکان‌ها از نشان بارگیری شده‌اند. مارکرها، محدوده و خط‌چین، داده‌های نمونهٔ برنامه‌اند. این رابط یک نمونهٔ طراحی است؛ کامپوننت، نقشه را در رابط دلخواه شما قرار می‌دهد.
 
-- ‏[نصب و شروع سریع](#installation)
-- ‏[انتخاب موتور](#engines)
-- ‏[مارکر و لایه‌های نقشه](#overlays)
-- ‏[مرجع ورودی‌ها](#props)
-- ‏[رویدادها، متدها و اسلات‌ها](#events)
-- ‏[مهاجرت و اجرای سمت سرور](#migration)
-- ‏[عیب‌یابی و محدودیت‌ها](#troubleshooting)
-- ‏[مرجع تفصیلی انگلیسی](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [مثال‌های کامل](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md)
-- ‏[تاریخچه تغییرات](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/CHANGELOG.md) · [نسخه‌ها](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/releases) · [گزارش اشکال](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/issues)
+‏انتخاب موقعیت، نمایش شعب، ترسیم محدودهٔ ارسال و نمایش ترافیک را به برنامهٔ Vue اضافه کنید. این کتابخانه، دو موتور نشان را با وضعیت واکنش‌پذیر، لایه‌های تایپ‌شده و رویدادهای چرخهٔ عمر در اختیار شما می‌گذارد. پروژه مستقل از نشان و با مشارکت جامعه توسعه داده می‌شود.
+
+## ‏امکانات در یک نگاه
+
+| قابلیت | کاربرد |
+| --- | --- |
+| ‏مدل‌های Vue | ‏همگام‌سازی مرکز و زوم، انتخاب نقطه و ذخیرهٔ موقعیت مارکرهای قابل کشیدن |
+| ‏لایه‌های زنده | ‏ترافیک و مکان‌ها در MapLibre، پنج سبک و کنترل نمایش واکنش‌پذیر |
+| ‏داده‌های شما | ‏مارکر، پاپ‌آپ متنی، راهنما، خط، چندضلعی، دایرهٔ متری و GeoJSON |
+| ‏کنترل برنامه | ‏حرکت به نقطه، نمایش همهٔ مارکرها، موقعیت مرورگر و دسترسی به موتور بومی |
+| ‏چرخهٔ عمر | ‏بارگیری تنبل، وضعیت و خطا، تلاش دوباره، تغییر اندازه و پاک‌سازی خودکار |
+
+## ‏از کجا شروع کنم؟
+
+| هدف | راهنما |
+| --- | --- |
+| ‏نمایش اولین نقشه | ‏[شروع سریع](#installation) |
+| ‏انتخاب آدرس، مارکر و محدودهٔ خدمات | ‏[آموزش امکانات](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.fa.md) |
+| ‏استفاده از کامپوننت کامل | ‏[مثال‌های قابل اجرا](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) |
+| ‏بررسی تنظیمات و امضاها | ‏[مرجع API](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) و جدول‌های همین صفحه |
+| ‏اتصال Nuxt، موتور بومی و مهاجرت | ‏[راهنمای یکپارچه‌سازی](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.fa.md#integration) |
 
 <a id="engines"></a>
 
-## انتخاب موتور
+## ‏انتخاب موتور
 
-| قابلیت | `NeshanMapLibre` | `NeshanMapLeaflet` |
+| ویژگی | `NeshanMapLibre` | `NeshanMapLeaflet` |
 | --- | --- | --- |
-| موتور نمایش | برداری با WebGL | کاشی تصویری با DOM |
-| نسخهٔ رسمی | SDK نشان 5.24.4 | Leaflet 1.9.4 / SDK نشان 1.0.8 |
-| ترافیک و مکان‌ها | فعال با سبک‌های سازگار نشان | طبق مستندات نشان به‌روز نمی‌شوند؛ گزینه‌ها با هشدار نادیده گرفته می‌شوند |
-| سبک | روشن، تیره، تک‌رنگ روشن/تیره، پاستلی و سبک سفارشی نسخهٔ ۸ | `dreamy` و `standard-night` و نشانی کاشی سازگار |
-| ترتیب مختصات کامپوننت | عرض، طول جغرافیایی | عرض، طول جغرافیایی |
-| کاربرد | نقشه‌های جدید و لایه‌های زنده | پروژه‌ها و افزونه‌های موجود Leaflet |
+| ‏رندر | ‏برداری با WebGL | ‏کاشی تصویری و DOM |
+| ‏SDK رسمی | `5.24.4` | `Leaflet 1.9.4 / SDK 1.0.8` |
+| ‏ترافیک و مکان‌ها | ‏با سبک سازگار پشتیبانی می‌شود | ‏نشان دیگر به‌روزرسانی نمی‌کند؛ گزینه‌ها با هشدار نادیده گرفته می‌شوند |
+| ‏سبک | ‏روشن، تاریک، دو تک‌رنگ، پاستلی یا سبک سفارشی نسخهٔ ۸ | `dreamy`, `standard-night` |
+| ‏مختصات کامپوننت | ‏عرض و سپس طول جغرافیایی | ‏عرض و سپس طول جغرافیایی |
+| ‏کاربرد | ‏نقشهٔ برداری جدید و لایه‌های زنده | ‏برنامه و افزونهٔ موجود Leaflet |
 
 <a id="installation"></a>
 
@@ -45,12 +65,6 @@
 
 ```sh
 npm install vuejs-neshan-map-leaflet@^2.0.1
-```
-
-‏همچنین می‌توانید بستهٔ تست‌شدهٔ ریلیز گیت‌هاب را نصب کنید:
-
-```sh
-npm install https://github.com/sajadjanat/vuejs-neshan-map-leaflet/releases/download/v2.0.1/vuejs-neshan-map-leaflet-2.0.1.tgz
 ```
 
 ‏از پنل نشان یک **کلید وب** با دامنه‌های مجاز بسازید. برای پروژهٔ `Vite` آن را در فایل نادیده‌گرفته‌شدهٔ `.env.local` قرار دهید:
@@ -100,7 +114,7 @@ const poi = ref(true)
 />
 ```
 
-![نقشه واقعی Leaflet همراه مارکرها و ابزار اندازه‌گیری نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/leaflet.png)
+![نقشهٔ واقعی Leaflet همراه مارکرها و محدودهٔ خدمات نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/leaflet.png)
 
 ### ترتیب مختصات
 
@@ -247,6 +261,12 @@ app.use(NeshanMapPlugin)
 ‏در زمان روشن‌بودن ترافیک، کاشی‌های آن هر ۶۰ ثانیه دوباره درخواست می‌شوند. کش و تازگی داده را نشان تعیین می‌کند. شمارش عوارض `getDiagnostics()` مربوط به نمای فعلی و زوم فعلی است، نه کل داده‌ها. لوگو و حقوق انتساب نشان و OpenStreetMap را حفظ کنید.
 
 ‏**محدودیت امنیتی وابستگی:** نسخهٔ رسمی SDK نشان شامل MapLibre مشمول [هشدار GHSA-jrc7-96c5-q579](https://github.com/advisories/GHSA-jrc7-96c5-q579) است. متن انتساب استایل/کنترل با DOMPurify پاک‌سازی و پاپ‌آپ به شکل متن نمایش داده می‌شود. انتساب TileJSON دوردست، API بومی و DOM سفارشی مسئولیت برنامهٔ مصرف‌کننده است؛ فقط منابع مطمئن و HTML پاک‌سازی‌شده استفاده کنید. این اقدامات به معنی اصلاح موتور رسمی نیست؛ audit دو مورد بحرانی در زنجیرهٔ وابستگی رسمی گزارش می‌کند.
+
+## ‏نمای تاریک
+
+![نقشهٔ تاریک نشان با ترافیک و لایه‌های نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-dark.png)
+
+‏این تصویر نیز از نقشهٔ واقعی گرفته شده است. تغییر سبک، وضعیت مارکرها و لایه‌های سفارشی را حفظ می‌کند. تراکم مکان‌ها به زوم، سبک و داده‌های نشان بستگی دارد.
 
 ## توسعه و تست
 

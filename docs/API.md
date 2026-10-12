@@ -1,8 +1,12 @@
 # API reference
 
-[English guide](../README.md) · [راهنمای فارسی](../README.fa.md) · [Complete examples](EXAMPLES.md)
+[Overview](../README.md) · [Feature guide](GUIDE.md) · [آموزش فارسی](GUIDE.fa.md) · [Complete examples](EXAMPLES.md)
 
-This reference covers 2.0.1. For the registry/publication status and GitHub artifact install command, start with the main guide. Named imports below are all from `vuejs-neshan-map-leaflet`.
+This reference covers 2.0.1. Start with the [README](../README.md#quick-start) for installation or the [feature guide](GUIDE.md) for task-based explanations. Named imports below are all from `vuejs-neshan-map-leaflet`.
+
+## On this page
+
+[MapLibre](#maplibre-live-traffic-and-places) · [Methods](#component-ref-methods) · [Shape options](#shape-option-compatibility) · [Slots](#slots) · [Leaflet props](#leaflet-props) · [Leaflet events](#leaflet-events-and-native-access) · [Plugin](#global-plugin) · [Nuxt](#ssr--nuxt) · [CSP](#leaflet-csp-and-custom-sdk-hosting) · [Migration](#migration-from-1x)
 
 Typed, reactive Neshan **Leaflet and MapLibre** maps for **Vue 3.5.43+**. Includes Composition API helpers, live traffic/POI on MapLibre, location picking, declarative overlays and lazy SDK loading. This is a community wrapper, not an official Neshan product.
 
