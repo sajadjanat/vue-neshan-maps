@@ -22,7 +22,7 @@
 
 
 
-![نقشهٔ واقعی تهران با ترافیک، مکان‌ها، مارکرها و محدودهٔ خدمات](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light-fa.png)
+![نقشهٔ واقعی تهران با ترافیک، مکان‌ها، مارکرها و محدودهٔ خدمات](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light-fa.jpg)
 
 ‏نقشه و لایه‌های ترافیک و مکان‌ها از نشان بارگیری شده‌اند. مارکرها، محدوده و خط‌چین، داده‌های نمونهٔ برنامه‌اند. این رابط یک نمونهٔ طراحی است؛ کامپوننت، نقشه را در رابط دلخواه شما قرار می‌دهد.
 
@@ -122,7 +122,7 @@ const poi = ref(true)
 />
 ```
 
-![نقشهٔ واقعی Leaflet همراه مارکرها و محدودهٔ خدمات نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/leaflet-fa.png)
+‏موتور Leaflet را در [دموی آنلاین](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=fa) امتحان کنید.
 
 ### ترتیب مختصات
 
@@ -285,9 +285,21 @@ app.use(NeshanMapPlugin)
 
 ## ‏نمای تاریک
 
-![نقشهٔ تاریک نشان با ترافیک و لایه‌های نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-dark-fa.png)
+![نقشهٔ تاریک نشان با ترافیک و لایه‌های نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-dark-fa.jpg)
 
 ‏این تصویر نیز از نقشهٔ واقعی گرفته شده است. تغییر سبک، وضعیت مارکرها و لایه‌های سفارشی را حفظ می‌کند. تراکم مکان‌ها به زوم، سبک و داده‌های نشان بستگی دارد.
+
+
+<details>
+<summary>‏تصاویر دموی فارسی: خوشه‌بندی، هیت‌مپ و سه‌بعدی</summary>
+
+![خوشه‌بندی نقاط و کنترل‌های فارسی](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-clusters-fa.jpg)
+
+![هیت‌مپ وزن‌دار و تنظیمات فارسی](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-heatmap-fa.jpg)
+
+![لایهٔ سه‌بعدی و تنظیم ارتفاع و شفافیت به فارسی](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-3d-fa.jpg)
+
+</details>
 
 ## توسعه و تست
 

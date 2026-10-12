@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.2
+
+- Replaced README screenshots with ten real captures of the bilingual online demo: light, dark, clustering, weighted heatmap and 3D. Persian captures use the Persian interface and Vazir; English captures use English controls.
+- Added a compact expandable feature gallery and refreshed advanced documentation images.
+- Completed the GitHub repository description, demo website and discovery topics. No component API changes.
+
 ## 2.2.1
 
 - Fixed a Leaflet v-model feedback loop when requested zoom is fractional or outside the map's limits; verified against the official SDK.

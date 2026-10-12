@@ -4,9 +4,12 @@
 
 Available in **2.2.0**. These features use the same `NeshanMapLibre` component, web key and Neshan base map. Leaflet, Nuxt module/plugin, existing overlays, models, popups and events remain available.
 
-![Clusters and a custom 3D zone on the real Neshan Tehran map](images/advanced-clusters.png)
+![Point clusters and English controls in the live demo](images/advanced-clusters.jpg)
 
-![Weighted sample point density on the real Neshan Tehran map](images/advanced-heatmap.png)
+![Weighted sample point density on the real Neshan Tehran map](images/advanced-heatmap.jpg)
+
+![3D extrusion with English controls on the Neshan map](images/advanced-3d.jpg)
+
 
 ## Complete example: clusters and heatmap
 

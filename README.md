@@ -18,7 +18,7 @@ Reactive maps for Vue 3 · MapLibre + Leaflet · TypeScript
 
 </div>
 
-![Neshan vector map in a Vue application: Tehran, live traffic, places and custom geometry](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light.png)
+![Neshan vector map in a Vue application: Tehran, live traffic, places and custom geometry](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light.jpg)
 
 <p align="center"><sub>Real Neshan basemap and live layers. Markers, the service area and the dashed connection are sample application data. The interface illustrates what you can build; the component supplies the map.</sub></p>
 
@@ -118,7 +118,7 @@ Use the same `center`, `zoom` and `webKey` setup, import `NeshanMapLeaflet` inst
 />
 ```
 
-![Real Leaflet map with markers and custom overlays](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/leaflet.png)
+Try the Leaflet engine in the [live demo](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=en).
 
 ### Coordinate order
 
@@ -178,9 +178,21 @@ MapLibre supports native `geojsonLayers` and `geojsonOptions`. Shape props suppo
 
 Light and dark styles use the same component state. Markers and custom overlays survive style changes.
 
-![Dark Neshan MapLibre map with live traffic and custom overlays](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-dark.png)
+![Dark Neshan MapLibre map with live traffic and custom overlays](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-dark.jpg)
 
-The two screenshots are real browser captures. POI density and traffic detail depend on the viewport, zoom, vendor style and available data.
+These screenshots are unedited captures of the live bilingual demo. POI density and traffic detail depend on the viewport, zoom, vendor style and available data.
+
+
+<details>
+<summary>Live demo gallery: clustering, heatmap and 3D</summary>
+
+![Point clusters with English controls](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-clusters.jpg)
+
+![Weighted heatmap with English controls](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-heatmap.jpg)
+
+![3D layer with English height and opacity controls](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-3d.jpg)
+
+</details>
 
 ## Events, methods and slots
 
