@@ -252,3 +252,19 @@ For issues, include engine/package/browser versions, a small reproduction and sa
 [Neshan MapLibre](https://platform.neshan.org/docs/sdk/web/maplibre/neshan-maplibre-gl-js/) · [Neshan Leaflet](https://platform.neshan.org/docs/sdk/web/leaflet/neshan-leaflet-sdk/) · [Vue](https://vuejs.org/guide/introduction.html) · [Leaflet API](https://leafletjs.com/reference-1.9.4.html)
 
 MIT © Sajad Abasi. [License](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE).
+
+## Vazir font
+
+Vazir 30.1.0 regular and bold are bundled as self-hosted WOFF2 files. The original SIL OFL license and author credits are included in `fonts`. No font CDN is required.
+
+```ts
+import 'vuejs-neshan-map-leaflet/fonts/vazir.css'
+```
+
+```html
+<div class="neshan-font-vazir" lang="fa" dir="rtl">
+  <!-- Your map, popups and Persian controls -->
+</div>
+```
+
+The class styles the interface and HTML popups. Vector labels use the Neshan style glyphs; raster labels are part of tile images. This font does not replace either. GitHub controls its Markdown typography; Persian screenshots are captured with Vazir.

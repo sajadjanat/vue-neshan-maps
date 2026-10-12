@@ -141,3 +141,22 @@ Run these two commands inside `examples/nuxt4`. A production build should succee
 | Native ref stale after navigation | Wire both `@ready="onReady"` and `@destroy="onDestroy"`. |
 
 See the official Nuxt documentation for [modules](https://nuxt.com/docs/4.x/guide/modules/recipes-basics), [plugins](https://nuxt.com/docs/4.x/directory-structure/app/plugins) and [runtime config](https://nuxt.com/docs/4.x/guide/going-further/runtime-config).
+
+## Vazir font
+
+Vazir 30.1.0 regular and bold are bundled as self-hosted WOFF2 files. The original SIL OFL license and author credits are included in `fonts`. No font CDN is required.
+
+```ts
+export default defineNuxtConfig({
+  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  css: ['vuejs-neshan-map-leaflet/fonts/vazir.css'],
+})
+```
+
+```html
+<main class="neshan-font-vazir" lang="fa" dir="rtl">
+  <!-- Your map and Persian controls -->
+</main>
+```
+
+The class styles the interface and HTML popups. Vector labels use the Neshan style glyphs; raster labels are part of tile images. This font does not replace either. GitHub controls its Markdown typography; Persian screenshots are captured with Vazir.

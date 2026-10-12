@@ -280,3 +280,19 @@ Search, geocoding, routing, measurement interfaces and persistence are applicati
 The vendor SDK has a documented dependency advisory; read the [security limitation](API.md#slots) before adding untrusted styles, attribution or DOM. The wrapper's text popups and attribution sanitization do not patch the vendor engine. For CSP/custom SDK hosting and exact defaults, consult the [API reference](API.md).
 
 If something fails, start with the README's [troubleshooting table](../README.md#troubleshooting), then include package/engine/browser versions and a small reproduction in an issue. Remove credentials from reports.
+
+## Vazir font
+
+Vazir 30.1.0 regular and bold are bundled as self-hosted WOFF2 files. The original SIL OFL license and author credits are included in `fonts`. No font CDN is required.
+
+```ts
+import 'vuejs-neshan-map-leaflet/fonts/vazir.css'
+```
+
+```html
+<div class="neshan-font-vazir" lang="fa" dir="rtl">
+  <!-- Your map, popups and Persian controls -->
+</div>
+```
+
+The class styles the interface and HTML popups. Vector labels use the Neshan style glyphs; raster labels are part of tile images. This font does not replace either. GitHub controls its Markdown typography; Persian screenshots are captured with Vazir.

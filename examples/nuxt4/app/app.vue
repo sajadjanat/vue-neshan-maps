@@ -21,7 +21,7 @@ function save(marker: MapLibreMarker, position: Coordinates) {
 </script>
 
 <template>
-  <main>
+  <main class="neshan-font-vazir">
     <h1>Neshan maps · Nuxt 4</h1>
     <p>SSR, auto-registered components, auto-imported composables and package CSS.</p>
     <form v-if="!webKey" @submit.prevent="webKey = key">

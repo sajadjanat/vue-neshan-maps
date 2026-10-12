@@ -1,0 +1,25 @@
+/* Vazir 30.1.0 by Saber Rastikerdar. SIL OFL 1.1; see OFL.txt. */
+@font-face {
+  font-family: 'Vazir';
+  src: url('./Vazir-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vazir';
+  src: url('./Vazir-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+.neshan-font-vazir,
+.neshan-font-vazir button,
+.neshan-font-vazir input,
+.neshan-font-vazir select,
+.neshan-font-vazir textarea,
+.neshan-font-vazir .maplibregl-popup-content,
+.neshan-font-vazir .leaflet-container,
+.neshan-font-vazir .neshan-map__tile-warning {
+  font-family: 'Vazir', sans-serif;
+}

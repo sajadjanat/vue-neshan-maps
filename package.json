@@ -19,7 +19,8 @@
     "./nuxt/plugin": {
       "types": "./nuxt/plugin.d.mts",
       "import": "./nuxt/plugin.mjs"
-    }
+    },
+    "./fonts/vazir.css": "./fonts/vazir.css"
   },
   "scripts": {
     "dev": "vite",
@@ -77,7 +78,8 @@
     "docs",
     "CHANGELOG.md",
     "LICENSE",
-    "nuxt"
+    "nuxt",
+    "fonts"
   ],
   "sideEffects": [
     "**/*.css"

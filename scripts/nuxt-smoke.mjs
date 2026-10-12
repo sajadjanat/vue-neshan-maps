@@ -82,7 +82,7 @@ try {
 
   writeFileSync(join(dir, 'nuxt.config.ts'), `export default defineNuxtConfig({
     plugins: ['vuejs-neshan-map-leaflet/nuxt/plugin'],
-    css: ['vuejs-neshan-map-leaflet/style.css'],
+    css: ['vuejs-neshan-map-leaflet/style.css', 'vuejs-neshan-map-leaflet/fonts/vazir.css'],
     runtimeConfig: { public: { neshanWebKey: '' } },
     compatibilityDate: '2026-10-12', devtools: { enabled: false },
   })`)

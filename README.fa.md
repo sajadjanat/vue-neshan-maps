@@ -310,3 +310,19 @@ npm run test:package
 ‏[مستندات MapLibre نشان](https://platform.neshan.org/docs/sdk/web/maplibre/neshan-maplibre-gl-js/) · [مستندات Leaflet نشان](https://platform.neshan.org/docs/sdk/web/leaflet/neshan-leaflet-sdk/) · [Vue](https://vuejs.org/guide/introduction.html)
 
 ‏مجوز MIT؛ توسعه توسط Sajad Abasi. [متن مجوز](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE).
+
+## ‏فونت وزیر
+
+‏فونت وزیر نسخهٔ ۳۰٫۱٫۰ با وزن‌های معمولی و ضخیم همراه بسته است؛ فایل‌ها از پروژهٔ شما سرو می‌شوند و به CDN نیاز ندارند. مجوز و نام پدیدآورندگان در پوشهٔ `fonts` حفظ شده است.
+
+```ts
+import 'vuejs-neshan-map-leaflet/fonts/vazir.css'
+```
+
+```html
+<div class="neshan-font-vazir" lang="fa" dir="rtl">
+  <!-- Your map, popups and Persian controls -->
+</div>
+```
+
+‏این کلاس فونت رابط و پاپ‌آپ‌های HTML را تنظیم می‌کند. نوشته‌های نقشهٔ برداری از گلیف‌های سبک نشان می‌آیند و نوشته‌های نقشهٔ تصویری داخل کاشی‌ها هستند؛ این فونت آن‌ها را تغییر نمی‌دهد. خود متن Markdown گیت‌هاب هم از فونت سایت گیت‌هاب استفاده می‌کند؛ تصاویر فارسی با وزیر ثبت شده‌اند.

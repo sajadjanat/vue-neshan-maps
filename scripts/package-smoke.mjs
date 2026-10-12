@@ -18,6 +18,8 @@ try {
   npm(['install', join(dir, filename), '--ignore-scripts', '--registry=https://registry.npmjs.org'], dir)
   writeFileSync(join(dir, 'smoke.mjs'), `
     import assert from 'node:assert/strict'
+    import { readFileSync } from 'node:fs'
+    import { dirname, join } from 'node:path'
     import { createRequire } from 'node:module'
     import plugin, { NeshanMapLeaflet, NeshanMapLibre, loadNeshanMapLibre, useNeshanMapLibre, loadNeshanSdk } from 'vuejs-neshan-map-leaflet'
     const require = createRequire(import.meta.url)
@@ -29,6 +31,12 @@ try {
     assert.equal(typeof loadNeshanSdk, 'function')
     assert.equal(typeof require('vuejs-neshan-map-leaflet').NeshanMapLeaflet.install, 'function')
     assert.ok(require.resolve('vuejs-neshan-map-leaflet/style.css'))
+    assert.ok(require.resolve('vuejs-neshan-map-leaflet/fonts/vazir.css'))
+    const fonts = dirname(require.resolve('vuejs-neshan-map-leaflet/fonts/vazir.css'))
+    for (const name of ['Vazir-Regular.woff2', 'Vazir-Bold.woff2']) {
+      assert.equal(readFileSync(join(fonts, name)).subarray(0, 4).toString(), 'wOF2')
+    }
+    assert.match(readFileSync(join(fonts, 'OFL.txt'), 'utf8'), /SIL Open Font License/)
   `)
   writeFileSync(join(dir, 'check.ts'), `
     import { NeshanMapLeaflet, type Coordinates, type NeshanMapOptions, type MapMarker, type MapLibreProps } from 'vuejs-neshan-map-leaflet'

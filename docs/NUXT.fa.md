@@ -147,3 +147,22 @@ npm run build
 | ‏ارجاع بومی پس از جابه‌جایی صفحه قدیمی است | ‏هر دو handler رویدادهای `ready` و `destroy` را متصل کنید. |
 
 ‏منابع رسمی Nuxt: [ماژول‌ها](https://nuxt.com/docs/4.x/guide/modules/recipes-basics)، [پلاگین‌ها](https://nuxt.com/docs/4.x/directory-structure/app/plugins) و [تنظیمات زمان اجرا](https://nuxt.com/docs/4.x/guide/going-further/runtime-config).
+
+## ‏فونت وزیر
+
+‏فونت وزیر نسخهٔ ۳۰٫۱٫۰ با وزن‌های معمولی و ضخیم همراه بسته است؛ فایل‌ها از پروژهٔ شما سرو می‌شوند و به CDN نیاز ندارند. مجوز و نام پدیدآورندگان در پوشهٔ `fonts` حفظ شده است.
+
+```ts
+export default defineNuxtConfig({
+  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  css: ['vuejs-neshan-map-leaflet/fonts/vazir.css'],
+})
+```
+
+```html
+<main class="neshan-font-vazir" lang="fa" dir="rtl">
+  <!-- Your map and Persian controls -->
+</main>
+```
+
+‏این کلاس فونت رابط و پاپ‌آپ‌های HTML را تنظیم می‌کند. نوشته‌های نقشهٔ برداری از گلیف‌های سبک نشان می‌آیند و نوشته‌های نقشهٔ تصویری داخل کاشی‌ها هستند؛ این فونت آن‌ها را تغییر نمی‌دهد. خود متن Markdown گیت‌هاب هم از فونت سایت گیت‌هاب استفاده می‌کند؛ تصاویر فارسی با وزیر ثبت شده‌اند.

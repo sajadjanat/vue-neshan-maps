@@ -2,6 +2,7 @@
 
 ## 2.1.0
 
+- Bundled optional, self-hosted Vazir regular/bold WOFF2 fonts with the original SIL OFL license; added Vue/Nuxt usage instructions and Persian screenshots using Vazir.
 - Added an optional Nuxt 4 module at `vuejs-neshan-map-leaflet/nuxt`: automatic component registration, composable/style auto-imports, CSS and public web-key config.
 - Added `vuejs-neshan-map-leaflet/nuxt/plugin` for manual Nuxt plugin registration; existing Vue plugin and both map engines remain available.
 - Added a runnable Nuxt 4 application and installed-tarball tests for module/plugin builds, declarations and SSR.
