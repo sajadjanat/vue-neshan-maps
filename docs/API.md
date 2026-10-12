@@ -3,7 +3,7 @@
 [Overview](../README.md) · [Feature guide](GUIDE.md) · [آموزش فارسی](GUIDE.fa.md) · [Complete examples](EXAMPLES.md)
 
 [Nuxt 4: module and plugin](NUXT.md)
-This reference covers 2.1.0. Start with the [README](../README.md#quick-start) for installation or the [feature guide](GUIDE.md) for task-based explanations. Named imports below are all from `vuejs-neshan-map-leaflet`.
+This reference covers 2.2.0. Start with the [README](../README.md#quick-start) for installation or the [feature guide](GUIDE.md) for task-based explanations. Named imports below are all from `vuejs-neshan-map-leaflet`.
 
 ## On this page
 
@@ -15,7 +15,7 @@ Typed, reactive Neshan **Leaflet and MapLibre** maps for **Vue 3.5.43+**. Includ
 
 ## MapLibre: live traffic and places
 
-Use `NeshanMapLibre` for the official vector renderer and live layers. Existing `NeshanMapLeaflet` imports and `useNeshanMap` remain available. Both components use **latitude, longitude** for public coordinates; native MapLibre and GeoJSON use longitude first.
+Use `NeshanMapLibre` for the patched vector renderer and adapted Neshan connection and live layers. Existing `NeshanMapLeaflet` imports and `useNeshanMap` remain available. Both components use **latitude, longitude** for public coordinates; native MapLibre and GeoJSON use longitude first.
 
 ```vue
 <script setup lang="ts">
@@ -41,7 +41,7 @@ const { map, onReady, onDestroy } = useNeshanMapLibre()
 </template>
 ```
 
-MapLibre SDK **5.24.4** loads dynamically on mount from the installed official package. Package CSS includes its styles. SSR imports do not evaluate the renderer. Modern browsers with WebGL and `DecompressionStream` are required. All concurrent Neshan MapLibre maps on a page must use the same API key; the wrapper rejects conflicting keys because the vendor protocol stores a global key.
+MapLibre GL JS **6.14.0** and an adapter-only fork of the Neshan connector load dynamically on mount. The self-contained worker is included; CSP must allow `worker-src blob:`. Package CSS includes its styles. SSR imports do not evaluate the renderer. Modern browsers with WebGL and `DecompressionStream` are required. All concurrent Neshan MapLibre maps on a page must use the same API key; the wrapper rejects conflicting keys because the vendor protocol stores a global key.
 
 | MapLibre prop | Behavior |
 | --- | --- |
@@ -52,6 +52,9 @@ MapLibre SDK **5.24.4** loads dynamically on mount from the installed official p
 | `polylines`, `polygons`, `circles` | Same coordinate models as Leaflet; line color/weight/opacity/dashArray, polygon/circle color/fillColor/fillOpacity/weight supported; radius in meters |
 | `geojson` | GeoJSON features/collection/geometry, longitude first |
 | `geojsonLayers` | Optional native layer definitions without source; otherwise point, line and polygon styles are supplied |
+| `cluster` | Boolean or `MapLibreClusterOptions`; automatic cluster circles, counts and click expansion |
+| `heatmap` | Boolean or `MapLibreHeatmapOptions`; separate unclustered weighted point source |
+| `sources`, `layers` | Native source definitions and typed `MapLibreAdvancedLayer[]`; scoped IDs, `beforeId`, restoration |
 | `geojsonOptions` | Native GeoJSON source options; Leaflet style callbacks do not apply |
 | `options` | Native Neshan MapLibre constructor options; remount to change them |
 | `styles`, `centerMarker`, `pickOnClick`, `fitMarkers`, `ariaLabel` | Same purpose as the Leaflet component |
@@ -80,6 +83,9 @@ A component ref exposes `map`, `maplibre`, `tileState`, `retry`, `fitToMarkers`,
 | `tiles-loading`, `tiles-loaded`, `tile-error` | `TileState`: `{ status: 'idle' \| 'loading' \| 'loaded' \| 'error', loaded, failed }` |
 | `location-found` | `{ latlng: { lat, lng }, accuracy }`; accuracy is meters |
 | `location-error` | `{ code, message }`; browser geolocation error code |
+| `resource-error` | `MapResourceFailure`: safe kind/message, optional status/code/retryAfter, retryable |
+| `cluster-click` | `{ clusterId, pointCount, coordinates }` |
+| `layer-click` | `{ layerId, features, coordinates }` for managed advanced layers |
 | `live-layers` | `LiveLayerState`: `{ traffic, poi, trafficLayers: string[], poiLayers: string[] }` |
 
 ### Component ref methods
@@ -94,6 +100,8 @@ A component ref exposes `map`, `maplibre`, `tileState`, `retry`, `fitToMarkers`,
 | `locate(options?)` | `setView` default true, `maxZoom` default 16, `timeout` default 10000, `enableHighAccuracy` default true; one-shot browser position | Native `L.LocateOptions` with wrapper timeout default 10000ms; other defaults from Leaflet |
 | `openPopup(id)` | Opens existing marker popup if closed | Use the native Leaflet map/layer API |
 | `getDiagnostics()` | See below | Not provided |
+| `expandCluster(id, center?)` | Promise of expansion zoom; optional latitude-first center | Not provided |
+| `getClusterLeaves(id, limit = 10, offset = 0)` | Promise of GeoJSON point features | Not provided |
 
 MapLibre diagnostics return `undefined` before map load, otherwise:
 
@@ -122,7 +130,7 @@ Readiness/visibility flags alone do not prove data has loaded. At low zoom POI m
 | Circle | `color`, `weight`, `fill`, `fillColor`, `fillOpacity`; radius meters, geodesic polygon approximation | Native `L.CircleMarkerOptions` with meter-radius `L.circle` |
 | GeoJSON | `geojsonOptions` uses native source options; `geojsonLayers` uses layer definitions without `source` | Native `L.GeoJSONOptions`, including callbacks |
 
-`MapLibreMarker.options` is `Omit<MarkerOptions, 'element'>`; supply a custom DOM node through the separate `element` property. Tooltip text is a DOM title; native marker options are not interchangeable between engines. Marker IDs must be unique. Shape IDs are part of the shared data model; individual native shape instances are rebuilt per overlay kind and are not exposed by ID.
+`MapLibreMarker.options` is `Omit<MarkerOptions, 'element'>`; supply a custom DOM node through the separate `element` property. Tooltip text is a DOM title; native marker options are not interchangeable between engines. Marker IDs must be unique. Shape IDs are part of the shared data model; geometry updates retain worker sources and layers when definitions stay unchanged; individual native shape instances are not exposed by ID.
 
 ### Slots
 
@@ -136,12 +144,12 @@ Readiness/visibility flags alone do not prove data has loaded. At low zoom POI m
 
 MapLibre default content appears after initialization; Leaflet default content appears once a native map exists. Use explicit positioning for controls inside the default slot. MapLibre's initialization watchdog is 30 seconds; Leaflet's SDK loader timeout is configurable with `sdk.timeout` (default 15 seconds).
 
-**Vendor security limitation:** the current official SDK depends on a MapLibre release covered by [GHSA-jrc7-96c5-q579](https://github.com/advisories/GHSA-jrc7-96c5-q579), so npm audit still reports the vendor advisory. This wrapper sanitizes source attributions in fetched/provided style objects and custom attribution control options using DOMPurify and renders popup strings as text. Use trusted style/TileJSON hosts. Native API calls, remote TileJSON attribution, and custom DOM elements remain the caller's responsibility; this mitigation is not a claim that the vendor engine is patched.
+**Patched renderer:** 2.2.0 replaces the vulnerable bundled engine with MapLibre GL JS **6.14.0**. Neshan tile/RTL/branding compatibility comes from an adapter-only ISC fork of SDK 5.24.4, maintained by this community package. Attribution sanitization and text popups remain. See [security, CSP and compatibility](ADVANCED.md#security-and-renderer-compatibility). The release audit reports zero known vulnerabilities; this is a dependency snapshot, not a guarantee about application code.
 
 ## Install
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.1.0
+npm install vuejs-neshan-map-leaflet@^2.2.0
 ```
 
 ```vue
@@ -334,3 +342,7 @@ The playground accepts a web key at runtime without saving it. Never commit `.en
 - [Leaflet 1.9.4 API reference](https://leafletjs.com/reference-1.9.4.html)
 
 MIT © Sajad Abasi
+
+## Advanced MapLibre examples
+
+See [clusters, heatmap, sources/layers, performance, structured errors and security](ADVANCED.md), including defaults and complete Vue/Nuxt usage.

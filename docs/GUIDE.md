@@ -277,7 +277,7 @@ Restrict web keys to your actual domains and keep attribution visible. Import pa
 
 Search, geocoding, routing, measurement interfaces and persistence are application concerns. The playground demonstrates some of these interactions; it is not a bundle of UI widgets exported by this package. A polyline displays supplied coordinates and does not calculate a route.
 
-The vendor SDK has a documented dependency advisory; read the [security limitation](API.md#slots) before adding untrusted styles, attribution or DOM. The wrapper's text popups and attribution sanitization do not patch the vendor engine. For CSP/custom SDK hosting and exact defaults, consult the [API reference](API.md).
+The renderer is patched in 2.2.0. Read [security and adapter compatibility](ADVANCED.md#security-and-renderer-compatibility) and the [complete advanced feature guide](ADVANCED.md).
 
 If something fails, start with the README's [troubleshooting table](../README.md#troubleshooting), then include package/engine/browser versions and a small reproduction in an issue. Remove credentials from reports.
 

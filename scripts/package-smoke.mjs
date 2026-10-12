@@ -43,7 +43,7 @@ try {
     const center: Coordinates = [35, 51]
     const options: NeshanMapOptions = { center, zoom: 13, traffic: true }
     const marker: MapMarker = { id: 1, position: center, options: { draggable: true } }
-    const libre: MapLibreProps = { apiKey: 'web.consumer-fixture', modelValue: center, traffic: true, poi: true, geojsonLayers: [{id:'points',type:'circle',paint:{'circle-radius':6}}] }
+    const libre: MapLibreProps = { apiKey: 'web.consumer-fixture', modelValue: center, traffic: true, poi: true, cluster: {radius:60}, heatmap: {weightProperty:'weight'}, sources: {places:{type:'geojson',data:{type:'FeatureCollection',features:[]}}}, layers:[{id:'points',type:'circle',source:'places',beforeId:'native-style-layer'}], geojsonLayers: [{id:'points',type:'circle',paint:{'circle-radius':6}}] }
     void [NeshanMapLeaflet, options, marker, libre]
   `)
   execFileSync(process.execPath, ['smoke.mjs'], { cwd: dir, stdio: 'inherit' })

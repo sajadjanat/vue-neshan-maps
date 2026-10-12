@@ -9,7 +9,7 @@
 ## ‏روش پیشنهادی: ماژول Nuxt
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.1.0
+npm install vuejs-neshan-map-leaflet@^2.2.0
 ```
 
 ‏ماژول را در فایل `nuxt.config.ts` ریشهٔ پروژه ثبت کنید:

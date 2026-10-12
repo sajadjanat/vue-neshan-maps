@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.2.0
+
+- Added automatic GeoJSON clusters, configurable counts/colors/radius, click expansion and async cluster leaves/zoom methods.
+- Added weighted heatmaps with an independent unclustered source; clusters and heatmap can coexist.
+- Added declarative native sources/layers, scoped IDs, forward beforeId ordering, layer clicks and style restoration, including 3D extrusion.
+- Added structured, redacted resource-error payloads for Neshan key, domain, service, quota, rate, network and decode failures; worker messages preserve numeric details and Retry-After.
+- Updated geometry in place through setData, batched overlay watchers, and grouped polylines by dash pattern with feature-driven styles.
+- Removed the vulnerable renderer bundled in official SDK 5.24.4. Retained its ISC Neshan adapter and replaced the renderer/worker with MapLibre GL JS 6.14.0. Included third-party licenses and reproducible worker build.
+- Preserved Leaflet, Vue 3, Nuxt 4 module/plugin, existing shapes/events and Vazir font. Added bilingual advanced documentation and an interactive 1,000-point playground.
+- Verified 51 unit/contract tests, pinned Leaflet SDK tests, installed-package/Nuxt checks and real Neshan map rendering. Quota branches use controlled responses rather than exhausting a real account.
+
 ## 2.1.0
 
 - Bundled optional, self-hosted Vazir regular/bold WOFF2 fonts with the original SIL OFL license; added Vue/Nuxt usage instructions and Persian screenshots using Vazir.

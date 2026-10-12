@@ -65,7 +65,7 @@ function flyToAzadi() {
 
 ## GeoJSON and custom MapLibre paint
 
-GeoJSON uses **longitude, latitude**. Supply layer definitions without `source`; the wrapper adds and owns the source and prefixes layer IDs. Use native GeoJSON source options for clustering or other supported source features; provide matching cluster layers when enabling clustering.
+GeoJSON uses **longitude, latitude**. Supply layer definitions without `source`; the wrapper adds and owns the source and prefixes layer IDs. Use `cluster` for automatic cluster styling/expansion or native GeoJSON source options for custom clustering. See [complete clustering, heatmap and advanced layer examples](ADVANCED.md).
 
 ```vue
 <script setup lang="ts">

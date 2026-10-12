@@ -35,6 +35,39 @@ async function ready(){await flushPromises();maps.at(-1).fire('style.load');maps
 beforeEach(()=>{maps=[];markers=[];vi.mocked(loadNeshanMapLibre).mockResolvedValue(sdk()as never);vi.stubGlobal('fetch',vi.fn().mockResolvedValue({ok:true,json:async()=>style}))})
 afterEach(()=>{wrappers.splice(0).forEach(w=>w.unmount());vi.unstubAllGlobals();vi.clearAllMocks()})
 describe('MapLibre component lifecycle and integration contract',()=>{
+  it('keeps heatmap data unclustered and expands clicked clusters with native async APIs',async()=>{
+    const data={type:'FeatureCollection',features:[{type:'Feature',properties:{weight:2},geometry:{type:'Point',coordinates:[51,35]}}]}
+    const w=create({geojson:data,cluster:{radius:65},heatmap:{weightProperty:'weight'}});await ready()
+    const map=maps[0],sourceId=Object.keys(map.sources).find(id=>id.endsWith('-geojson'))!
+    const heatId=Object.keys(map.sources).find(id=>id.endsWith('-heatmap'))!
+    expect(map.sources[sourceId]).toMatchObject({cluster:true,clusterRadius:65})
+    expect(map.sources[heatId]).toMatchObject({cluster:false,data})
+    expect(map.layers.some((l:any)=>l.type==='heatmap')).toBe(true)
+    map.sources[sourceId].getClusterExpansionZoom=vi.fn().mockResolvedValue(15)
+    map.sources[sourceId].getClusterLeaves=vi.fn().mockResolvedValue(data.features)
+    map.queryRenderedFeatures=()=>[{geometry:{type:'Point',coordinates:[51,35]},properties:{cluster_id:7,point_count:2}}]
+    map.fire('click',{lngLat:{lat:35,lng:51},point:{x:10,y:10}});await flushPromises()
+    expect(w.emitted('cluster-click')![0][0]).toEqual({clusterId:7,pointCount:2,coordinates:[35,51]})
+    expect(map.easeTo).toHaveBeenCalledWith({center:[51,35],zoom:15})
+    expect(await (w.vm as any).getClusterLeaves(7)).toEqual(data.features)
+    await w.setProps({heatmap:false});await flushPromises()
+    expect(map.layers.some((l:any)=>l.type==='heatmap')).toBe(false)
+  })
+  it('restores advanced layers and cluster/heatmap after switching the base style',async()=>{
+    const w=create({cluster:true,heatmap:true,sources:{district:{type:'geojson',data:{type:'FeatureCollection',features:[]}}},layers:[{id:'district',source:'district',type:'fill-extrusion',paint:{'fill-extrusion-height':200}}]});await ready()
+    await w.setProps({mapStyle:'https://example.test/dark.json'});await flushPromises()
+    expect(maps[0].layers.filter((l:any)=>['fill-extrusion','heatmap'].includes(l.type))).toHaveLength(2)
+    expect(maps[0].layers.some((l:any)=>l.id.endsWith('-clusters'))).toBe(true)
+  })
+  it('groups polylines by dash pattern while retaining per-feature color and width',async()=>{
+    const w=create({polylines:Array.from({length:100},(_,id)=>({id,positions:[[35,51],[36,52]],options:{color:id%2?'red':'blue',weight:4}}))});await ready()
+    const map=maps[0],sourceId=Object.keys(map.sources).find(id=>id.endsWith('-lines'))!
+    const source=map.sources[sourceId],layer=map.layers.find((l:any)=>l.source===sourceId)
+    expect(map.layers.filter((l:any)=>l.source===sourceId)).toHaveLength(1)
+    await w.setProps({polylines:[{id:1,positions:[[35,51],[37,53]],options:{color:'green',weight:8}}]});await flushPromises()
+    expect(map.sources[sourceId]).toBe(source);expect(map.layers.find((l:any)=>l.source===sourceId)).toBe(layer)
+    expect(source.setData).toHaveBeenCalled()
+  })
   it('restores live and custom layers after a style reload while retaining markers and popups',async()=>{
     const w=create({traffic:true,poi:true,markers:[{id:'one',position:[35,51],popup:'keep'}],polylines:[{id:'line',positions:[[35,51],[36,52]]}]});await ready()
     const map=maps[0],marker=markers[0];marker.togglePopup()
@@ -59,6 +92,7 @@ describe('MapLibre component lifecycle and integration contract',()=>{
   })
   it('rejects service keys and allows retry with a web key',async()=>{
     const w=create({apiKey:'service.fixture'});await flushPromises();expect(loadNeshanMapLibre).not.toHaveBeenCalled();expect(w.emitted('error')).toHaveLength(1)
+    expect(w.emitted('resource-error')![0][0]).toMatchObject({kind:'key-type',retryable:false})
     await w.setProps({apiKey:'web.corrected-fixture'});await ready();expect(w.emitted('ready')).toHaveLength(1)
   })
   it('reports resource failures independently from a ready engine and never leaks request keys',async()=>{

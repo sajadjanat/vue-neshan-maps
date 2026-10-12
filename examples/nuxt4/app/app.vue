@@ -11,6 +11,10 @@ const dark = ref(false)
 const traffic = ref(true)
 const poi = ref(true)
 const status = ref('Waiting for map')
+const clustered = ref(true), heat = ref(false)
+const samplePoints: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: Array.from({length: 100}, (_, id) => ({
+  type: 'Feature', properties: { weight: 1 + id % 5 }, geometry: { type: 'Point', coordinates: [51.338 + Math.sin(id) * 0.03, 35.6997 + Math.cos(id * 1.7) * 0.03] },
+})) }
 const { map, onReady, onDestroy } = useNeshanMapLibre()
 const markers = ref<MapLibreMarker[]>([
   { id: 'azadi', position: [35.6997, 51.338], popup: 'Azadi Square', options: { draggable: true } },
@@ -33,11 +37,15 @@ function save(marker: MapLibreMarker, position: Coordinates) {
         <label><input v-model="traffic" type="checkbox">Traffic</label>
         <label><input v-model="poi" type="checkbox">POI</label>
         <label><input v-model="dark" type="checkbox">Dark map</label>
+        <label><input v-model="clustered" type="checkbox">Clusters</label>
+        <label><input v-model="heat" type="checkbox">Heatmap</label>
       </nav>
       <NeshanMapLibre
         v-model="center" v-model:zoom="zoom" :api-key="webKey"
         :map-style="dark ? MAPLIBRE_STYLES.dark : MAPLIBRE_STYLES.light"
         :traffic="traffic" :poi="poi" :markers="markers" :pick-on-click="true"
+        :geojson="samplePoints" :cluster="clustered" :heatmap="heat"
+        @resource-error="status = $event.kind + ': ' + $event.message"
         :styles="{ height: '520px' }" @ready="onReady" @destroy="onDestroy"
         @marker-dragend="save" @tiles-loaded="status = 'Map resources loaded'"
         @warning="status = $event" @error="status = $event.message"

@@ -29,6 +29,7 @@ Build a location picker, show your branches, outline a delivery area or add live
 | **Vue models** | Keep center and zoom in sync; pick a point and persist dragged markers. |
 | **Live vector layers** | Traffic and POI on MapLibre, five map styles and reactive visibility. |
 | **Your geography** | Markers, text popups, tooltips, lines, polygons, meter-radius circles and GeoJSON. |
+| **Spatial analysis** | Automatic point clusters, weighted heatmaps, custom sources/layers and 3D extrusion. |
 | **Application controls** | Fly to a place, frame markers, request browser location and access the native renderer. |
 | **Lifecycle handling** | Lazy SDK initialization, loading/error slots, retry, automatic resize and cleanup. |
 
@@ -42,13 +43,14 @@ Build a location picker, show your branches, outline a delivery area or add live
 | Check a prop, event, slot or method | [API reference](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) |
 | Use Nuxt, native APIs or migrate from 1.x | [Integration guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md#integration) |
 | Diagnose blank tiles or missing traffic | [Troubleshooting](#troubleshooting) |
+| Cluster points, draw a heatmap or add advanced layers | [Advanced MapLibre guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.md) |
 
 ## Choose an engine
 
 | | `NeshanMapLibre` | `NeshanMapLeaflet` |
 | --- | --- | --- |
 | Renderer | Vector / WebGL | Raster / DOM |
-| Official SDK | Neshan MapLibre 5.24.4 | Leaflet 1.9.4 / Neshan SDK 1.0.8 |
+| Renderer / connector | MapLibre 6.14.0 / adapted Neshan connector | Leaflet 1.9.4 / Neshan SDK 1.0.8 |
 | Live traffic / POI | Supported with compatible styles | No longer updated by Neshan; ignored with warnings |
 | Styles | Light, dark, monochrome light/dark, pastel; custom version-8 style | `dreamy`, `standard-night`; vendor-supported tile URLs |
 | Component coordinates | `[latitude, longitude]` | `[latitude, longitude]` |
@@ -62,7 +64,7 @@ Requires **Vue 3.5.43+**. Tooling: **Node 22.12+ within 22.x, or Node 24+**. Map
 Install from npm:
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.1.0
+npm install vuejs-neshan-map-leaflet@^2.2.0
 ```
 
 Create a domain-allowed **web key** in the Neshan dashboard. For Vite, put it in your ignored `.env.local`:
@@ -217,7 +219,7 @@ Use `useNeshanMapLibre()` or `useNeshanMap()` in setup and wire both `@ready="on
 
 Traffic tiles are re-requested every 60 seconds while enabled; Neshan controls caching/freshness. Vendor availability and quotas are outside this wrapper. Keep required Neshan/OpenStreetMap attribution visible.
 
-**Security limitation:** the official SDK pins a MapLibre version affected by [GHSA-jrc7-96c5-q579](https://github.com/advisories/GHSA-jrc7-96c5-q579). Style/control attribution is sanitized with DOMPurify and popups use text. Remote TileJSON attribution, native calls and custom DOM remain caller-owned: use trusted hosts and sanitize your HTML. These mitigations do not patch the vendor engine. `npm audit` currently reports two critical entries in the vendor dependency chain.
+**Patched renderer:** 2.2.0 replaces the vulnerable bundled engine with MapLibre GL JS **6.14.0**. Neshan tile/RTL/branding compatibility comes from an adapter-only ISC fork of SDK 5.24.4, maintained by this community package. Attribution sanitization and text popups remain. See [security, CSP and compatibility](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.md#security-and-renderer-compatibility). The release audit reports zero known vulnerabilities; this is a dependency snapshot, not a guarantee about application code.
 
 ## Playground and contributing
 
@@ -239,7 +241,7 @@ npm run build:demo
 npm run test:package
 ```
 
-Validation includes 29 unit/contract tests, 9 tests using the actual pinned Leaflet SDK, strict installed-package TypeScript checks and real-map browser checks. Automated SDK tests stub image/quota networking and simulate location callbacks; actual device GPS was not requested. CI covers Node 22 and 24.
+Validation includes 51 unit/contract tests, 9 tests using the actual pinned Leaflet SDK, strict installed-package TypeScript checks and real-map browser checks. Automated SDK tests stub image/quota networking and simulate location callbacks; actual device GPS was not requested. CI covers Node 22 and 24.
 
 For issues, include engine/package/browser versions, a small reproduction and sanitized errors. Never include service keys or account tokens.
 
@@ -252,6 +254,10 @@ For issues, include engine/package/browser versions, a small reproduction and sa
 [Neshan MapLibre](https://platform.neshan.org/docs/sdk/web/maplibre/neshan-maplibre-gl-js/) · [Neshan Leaflet](https://platform.neshan.org/docs/sdk/web/leaflet/neshan-leaflet-sdk/) · [Vue](https://vuejs.org/guide/introduction.html) · [Leaflet API](https://leafletjs.com/reference-1.9.4.html)
 
 MIT © Sajad Abasi. [License](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE).
+
+## Clusters, heatmap and advanced layers
+
+Version 2.2 adds automatic point clustering, weighted heatmaps, declarative native sources/layers (including 3D extrusion), structured key/quota errors and incremental geometry updates. [Complete guide and examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.md) · [فارسی](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.fa.md).
 
 ## Vazir font
 

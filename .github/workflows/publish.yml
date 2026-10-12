@@ -39,6 +39,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install --global npm@11 --registry=https://registry.npmjs.org
       - run: npm ci --registry=https://registry.npmjs.org
+      - run: npm audit --omit=dev --audit-level=high --registry=https://registry.npmjs.org
       - run: npm run test:sdk
       - run: npm pack
       - run: npm run test:package

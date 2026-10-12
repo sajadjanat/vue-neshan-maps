@@ -1,17 +1,26 @@
-import type SDK from '@neshan-maps-platform/maplibre-sdk'
+import type * as maplibregl from 'maplibre-gl'
 import type { StyleSpecification, Map as NativeMap, LayerSpecification } from 'maplibre-gl'
 import DOMPurify from 'dompurify'
 import type { Coordinates } from './types'
-import type { NeshanMapOptions as VendorOptions } from '@neshan-maps-platform/maplibre-sdk'
+import type { MapOptions, ControlPosition } from 'maplibre-gl'
 
-export type MapLibreNamespace = typeof SDK
+export interface NeshanMapLibreOptions extends MapOptions {
+  apiKey: string
+  rtl?: boolean | {lazy?:boolean;url?:string}
+  logoPosition?: ControlPosition
+  copyRightPosition?: ControlPosition
+}
+type VendorOptions = NeshanMapLibreOptions
+export type MapLibreNamespace = Omit<typeof maplibregl,'Map'> & {Map:new(options:NeshanMapLibreOptions)=>NativeMap}
 export const MAPLIBRE_STYLES = Object.freeze(Object.fromEntries(
   ['light','dark','monochrome_light','monochrome_dark','pastel'].map(name=>[name,`https://static.neshan.org/sdk/maplibre/styles/${name}.json`]),
 ) as Record<'light'|'dark'|'monochrome_light'|'monochrome_dark'|'pastel',string>)
 let pending: Promise<MapLibreNamespace> | undefined
 export function loadNeshanMapLibre() {
   if(typeof window==='undefined') return Promise.reject(new Error('MapLibre requires a browser'))
-  return pending ??= import('@neshan-maps-platform/maplibre-sdk').then(module=>module.default).catch(error=>{pending=undefined;throw error})
+  // Adapter-only ISC fork: the vulnerable bundled renderer is not shipped.
+  // @ts-expect-error Audited JS adapter is typed through the public namespace above.
+  return pending ??= import('./vendor/neshan-adapter.js').then(module=>module.default as MapLibreNamespace).catch((error:unknown)=>{pending=undefined;throw error})
 }
 // The vendor's protocol holds one key per page. Reject conflicting concurrent keys.
 const keys=new Map<object,string>()

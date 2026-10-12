@@ -9,7 +9,7 @@ The included example uses Nuxt 4.6.1, which requires Node `^22.22.3`, `^24.15.0`
 ## Recommended: Nuxt module
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.1.0
+npm install vuejs-neshan-map-leaflet@^2.2.0
 ```
 
 Add the module to your project's root `nuxt.config.ts`:
