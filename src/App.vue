@@ -17,6 +17,7 @@ const tabs=['view','data','layers','develop'] as const
 const tab=ref<typeof tabs[number]>('view')
 const tabIcons={view:'map',data:'data',layers:'layers',develop:'code'}
 const tabHelp={view:'viewHelp',data:'dataHelp',layers:'layersHelp',develop:'developHelp'} as const
+function moveTab(offset:number){const direction=language.value==='fa'?-offset:offset;tab.value=tabs[(tabs.indexOf(tab.value)+tabs.length+direction)%tabs.length];nextTick(()=>document.getElementById(`tab-${tab.value}`)?.focus())}
 const key=ref(import.meta.env.VITE_NESHAN_WEB_KEY??''), activeKey=ref(key.value), keyOpen=ref(!activeKey.value)
 const hostname=location.hostname
 const engine=ref<'maplibre'|'leaflet'>('maplibre'), style=ref<keyof typeof MAPLIBRE_STYLES>('light')
@@ -28,7 +29,7 @@ const nativeLibre=shallowRef<MapLibreReady['map']>(), nativeLeaflet=shallowRef<M
 const isReady=ref(false), locating=ref(false)
 const tiles=ref<TileState>({status:'idle',loaded:0,failed:0})
 const cluster=ref(true), heatmap=ref(false), autoExpand=ref(true), clusterRadius=ref(50), count=ref(1000), revision=ref(0)
-const heatRadius=ref(30), intensity=ref(.9), heatOpacity=ref(.65)
+const heatRadius=ref(18), intensity=ref(.4), heatOpacity=ref(.55)
 const points=computed(()=>samplePoints(count.value,revision.value))
 const clusterOptions=computed(()=>cluster.value ? {radius:clusterRadius.value,maxZoom:14,expandOnClick:autoExpand.value,color:'#315cf4',pointColor:'#238d86',textColor:'#fff'} : false)
 const heatOptions=computed(()=>heatmap.value ? {weightProperty:'weight',radius:heatRadius.value,intensity:intensity.value,opacity:heatOpacity.value} : false)
@@ -81,7 +82,7 @@ function download(){const url=URL.createObjectURL(new Blob([JSON.stringify(point
 function locate(){locating.value=true;mapComponent.value?.locate({setView:true,maxZoom:16,timeout:10000,enableHighAccuracy:true})}
 function locationError(event:{code:number}){locating.value=false;record(event.code===1?'locationDenied':'locationFailed')}
 function focusPlace(index:number){const p=places.value[index].position;if(nativeLibre.value){nativeLibre.value.flyTo({center:[p[1],p[0]],zoom:15});if(mapComponent.value && 'openPopup'in mapComponent.value)mapComponent.value.openPopup(places.value[index].id)}else nativeLeaflet.value?.setView(p,15)}
-function reset(){center.value=[35.72,51.36];zoom.value=12.2;measured.value=[];mode.value='pan';nativeLibre.value?.easeTo({pitch:show3d.value?48:0,bearing:0})}
+function reset(){center.value=[35.72,51.36];zoom.value=12.2;measured.value=[];mode.value='pan';nativeLibre.value?.jumpTo({center:[51.36,35.72],zoom:12.2,pitch:show3d.value?48:0,bearing:0});nativeLeaflet.value?.setView(center.value,zoom.value)}
 const preset=ref('clusters')
 function scenario(name:string){preset.value=name;engine.value='maplibre';mode.value='pan';cluster.value=name==='clusters';heatmap.value=name==='density';show3d.value=name==='volume';showMarkers.value=name==='places';showCircle.value=name==='places';showLine.value=name==='places';showPolygon.value=false;showCustom.value=false;reset();tab.value=name==='volume'?'layers':name==='places'?'view':'data'}
 const snippetMode=ref<'vue'|'nuxt'>('vue'), copied=ref(false), copyError=ref(false)
@@ -109,7 +110,7 @@ onBeforeUnmount(()=>{clearInterval(diagnosticTimer);window.removeEventListener('
     </form>
     <main class="demo-workspace" :class="{'is-focused':focus}">
       <aside id="map-tools" class="control-panel" :aria-label="t('view')">
-        <div class="tab-nav" role="tablist" :aria-label="t('view')"><button v-for="item in tabs" :id="`tab-${item}`" :key="item" role="tab" :aria-selected="tab===item" :aria-controls="`panel-${item}`" :tabindex="tab===item?0:-1" @click="tab=item" @keydown.right.prevent="tab=tabs[(tabs.indexOf(tab)+1)%tabs.length]" @keydown.left.prevent="tab=tabs[(tabs.indexOf(tab)+tabs.length-1)%tabs.length]"><DemoIcon :name="tabIcons[item]"/><span>{{ t(item) }}</span></button></div>
+        <div class="tab-nav" role="tablist" :aria-label="t('view')"><button v-for="item in tabs" :id="`tab-${item}`" :key="item" role="tab" :aria-selected="tab===item" :aria-controls="`panel-${item}`" :tabindex="tab===item?0:-1" @click="tab=item" @keydown.right.prevent="moveTab(1)" @keydown.left.prevent="moveTab(-1)"><DemoIcon :name="tabIcons[item]"/><span>{{ t(item) }}</span></button></div>
         <section :id="`panel-${tab}`" class="control-content" role="tabpanel" :aria-labelledby="`tab-${tab}`">
           <h2>{{ t(tab) }}</h2><p class="panel-description">{{ t(tabHelp[tab]) }}</p>
           <template v-if="tab==='view'">

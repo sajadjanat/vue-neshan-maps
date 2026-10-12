@@ -17,7 +17,7 @@ export function distanceMeters(points: Coordinates[]): number {
 }
 /** Bounded, inline-only input: editor data never becomes a URL or executable HTML. */
 export function parseGeoJSON(text: string): GeoJSON.Feature | GeoJSON.FeatureCollection {
-  if(text.length>1_000_000) throw Error('GeoJSON input exceeds 1 MB')
+  if(text.length>1_000_000 || new TextEncoder().encode(text).length>1_000_000) throw Error('GeoJSON input exceeds 1 MB')
   const value = JSON.parse(text)
   const geometries: Record<string,number> = {Point:0,MultiPoint:1,LineString:1,MultiLineString:2,Polygon:2,MultiPolygon:3}
   const coordinates=(data:unknown,depth:number):boolean=>Array.isArray(data) && (depth===0 ? data.length>=2 && data.every(Number.isFinite) && Math.abs(data[0])<=180 && Math.abs(data[1])<=90 : data.length>0 && data.every(item=>coordinates(item,depth-1)))

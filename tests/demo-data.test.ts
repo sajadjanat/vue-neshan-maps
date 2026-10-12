@@ -14,6 +14,7 @@ describe('public demo data boundaries',()=>{
     expect(()=>parseGeoJSON('"https://example.com/data.json"')).toThrow()
     expect(()=>parseGeoJSON(JSON.stringify({type:'Feature',properties:{},geometry:{type:'Point',coordinates:[181,35]}}))).toThrow()
     expect(()=>parseGeoJSON(' '.repeat(1000001))).toThrow()
+    expect(()=>parseGeoJSON(JSON.stringify({...customArea,properties:{label:'م'.repeat(500001)}}))).toThrow()
     expect(()=>parseGeoJSON(JSON.stringify({type:'FeatureCollection',features:Array(10001).fill(customArea)}))).toThrow()
   })
   it('measures latitude-first geographic segments in meters',()=>{
