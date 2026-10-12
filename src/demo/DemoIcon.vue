@@ -1,0 +1,5 @@
+<script setup lang="ts">
+defineProps<{name:string}>()
+const paths:Record<string,string>={pin:'M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',map:'m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Zm6-3v15m6-12v15',data:'M4 20v-7m8 7V4m8 16V9M2 20h20',layers:'m12 3 10 6-10 6L2 9l10-6ZM2 13l10 6 10-6M2 17l10 6 10-6',code:'m8 5-6 7 6 7m8-14 6 7-6 7M14 3l-4 18',arrow:'M4 12h16m-6-6 6 6-6 6',check:'m4 12 5 5L20 6',copy:'M8 8h12v13H8V8Zm8-4V2H3v14h2',target:'M12 2v4m0 12v4M2 12h4m12 0h4M19 12a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z',expand:'M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5',close:'m5 5 14 14M19 5 5 19',refresh:'M20 8a9 9 0 1 0 1 8M20 3v6h-6',chevron:'m8 4 8 8-8 8',key:'M14 7a5 5 0 1 1-4 8l-6 6H1v-3l6-6a5 5 0 0 1 7-5ZM16 7h.01',info:'M12 11v6m0-10v.01M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z'}
+</script>
+<template><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path :d="paths[name] || paths.pin"/></svg></template>

@@ -12,6 +12,8 @@
 
 ‏**فارسی** · [English](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/README.md)
 
+‏**[دموی آنلاین فارسی](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=fa)** · [English demo](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=en)
+
 ‏[شروع سریع](#installation) · [آموزش امکانات](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.fa.md) · [مرجع API](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [مثال‌های کامل](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) · [راهنمای Nuxt 4](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.fa.md)
 
 </div>

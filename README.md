@@ -12,6 +12,8 @@ Reactive maps for Vue 3 · MapLibre + Leaflet · TypeScript
 
 **English** · [فارسی](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/README.fa.md)
 
+**[Try the live demo](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=en)** · [دموی فارسی](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=fa)
+
 [Get started](#quick-start) · [Feature guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md) · [API reference](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [Examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) · [Nuxt 4](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.md)
 
 </div>
@@ -21,6 +23,8 @@ Reactive maps for Vue 3 · MapLibre + Leaflet · TypeScript
 <p align="center"><sub>Real Neshan basemap and live layers. Markers, the service area and the dashed connection are sample application data. The interface illustrates what you can build; the component supplies the map.</sub></p>
 
 Build a location picker, show your branches, outline a delivery area or add live traffic to your app. Two Vue components connect Neshan's renderers to reactive state, with typed overlays, lifecycle events and native access when you need it. A community library, independent of Neshan.
+
+The [online playground](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=en) lets you try clusters, weighted heatmaps, 3D layers, editable GeoJSON, styles, markers, point picking and distance measurement. Enter your own **web key** with `sajadjanat.github.io` allowed in Neshan. The key stays in page memory; it is not saved or included in links. Error simulations make no network requests. [Demo guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/DEMO.md).
 
 ## One library, two engines
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.2.1
+
+- Published a responsive Persian/English interactive playground on GitHub Pages, with self-hosted Vazir and live Neshan maps.
+- Added adjustable clusters and weighted heatmaps, up to 10,000 sample points, cluster leaves/expansion, editable inline GeoJSON and 3D layer controls to the demo.
+- Added map styles, draggable markers, shapes, point picking, geographic distance measurement, live diagnostics, localized error simulations and Vue/Nuxt code examples.
+- Linked the demo from both READMEs and the npm homepage. Keys remain in page memory; public builds have no embedded account key by default.
+- Added bounded GeoJSON editor validation and demo data checks. Existing package component APIs are unchanged.
+
 ## 2.2.0
 
 - Added automatic GeoJSON clusters, configurable counts/colors/radius, click expansion and async cluster leaves/zoom methods.
