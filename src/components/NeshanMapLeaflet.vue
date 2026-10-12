@@ -123,8 +123,13 @@ function updateView() {
   const zoom=props.zoom ?? props.options.zoom ?? map.value.getZoom()
   if(!Number.isFinite(zoom)) throw new Error('Zoom must be finite')
   if(center) validatePoint(center)
-  if(center && (!map.value.getCenter().equals(leaflet.value.latLng(center)) || zoom!==map.value.getZoom())) map.value.setView(center,zoom)
-  else if(zoom!==map.value.getZoom()) map.value.setZoom(zoom)
+  // Compare the zoom Leaflet can apply, rather than a fractional/out-of-range
+  // request. Otherwise moveend -> v-model -> setView can repeat indefinitely.
+  const snap=leaflet.value.Browser?.any3d ? (map.value.options.zoomSnap ?? 1) : 1
+  const targetZoom=Math.max(map.value.getMinZoom(),Math.min(map.value.getMaxZoom(),snap ? Math.round(zoom/snap)*snap : zoom))
+  if(center && (!map.value.getCenter().equals(leaflet.value.latLng(center)) || targetZoom!==map.value.getZoom())) map.value.setView(center,targetZoom)
+  else if(targetZoom!==map.value.getZoom()) map.value.setZoom(targetZoom)
+  if(zoom!==map.value.getZoom()) emit('update:zoom',map.value.getZoom())
 }
 async function initialize() {
   const current=++generation
@@ -147,6 +152,7 @@ async function initialize() {
     instance.eachLayer(trackLayer)
     instance.on('moveend',event=>{const point=instance.getCenter();emit('update:modelValue',[point.lat,point.lng]);emit('latitude',point.lat);emit('longitude',point.lng);emit('moveend',event)})
     instance.on('zoomend',event=>{emit('update:zoom',instance.getZoom());emit('zoomend',event)})
+    if(zoom!==instance.getZoom()) emit('update:zoom',instance.getZoom())
     instance.on('click',event=>{const mouse=event as L.LeafletMouseEvent;if(props.pickOnClick) instance.panTo(mouse.latlng);emit('click',mouse)})
     instance.on('locationfound',event=>emit('location-found',event as L.LocationEvent))
     instance.on('locationerror',event=>emit('location-error',event as L.ErrorEvent))

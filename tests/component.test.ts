@@ -19,6 +19,8 @@ function mockSdk() {
     on(event: string, callback: Function) { this.events[event] = callback; return this }
     getCenter() { return { lat: this.center[0], lng: this.center[1], equals: (point: any) => point.lat === this.center[0] && point.lng === this.center[1] } }
     getZoom() { return this.zoom }
+    getMinZoom() { return 0 }
+    getMaxZoom() { return 20 }
     setView = vi.fn((center: number[], zoom: number) => { this.center = center; this.zoom = zoom })
     setZoom = vi.fn((zoom: number) => { this.zoom = zoom })
     panTo = vi.fn()

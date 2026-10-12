@@ -2,6 +2,7 @@
 
 ## 2.2.1
 
+- Fixed a Leaflet v-model feedback loop when requested zoom is fractional or outside the map's limits; verified against the official SDK.
 - Published a responsive Persian/English interactive playground on GitHub Pages, with self-hosted Vazir and live Neshan maps.
 - Added adjustable clusters and weighted heatmaps, up to 10,000 sample points, cluster leaves/expansion, editable inline GeoJSON and 3D layer controls to the demo.
 - Added map styles, draggable markers, shapes, point picking, geographic distance measurement, live diagnostics, localized error simulations and Vue/Nuxt code examples.

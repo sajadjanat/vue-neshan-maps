@@ -26,6 +26,20 @@ beforeAll(async()=>{
 })
 afterEach(()=>{wrappers.splice(0).forEach(w=>w.unmount())})
 describe('official Neshan Leaflet 1.9.4 SDK contract (no tile network)',()=>{
+  it('settles fractional and clamped zoom without repeating setView on model feedback',async()=>{
+    const w=create({modelValue:[35.72,51.36],zoom:12.2});await flushPromises()
+    const map=(w.vm as any).map
+    expect(map.getZoom()).toBe(12)
+    expect(w.emitted('update:zoom')!.at(-1)).toEqual([12])
+    const setView=vi.spyOn(map,'setView')
+    await w.setProps({modelValue:[map.getCenter().lat,map.getCenter().lng]})
+    expect(setView).not.toHaveBeenCalled()
+    await w.setProps({zoom:30});await flushPromises()
+    expect(map.getZoom()).toBe(map.getMaxZoom())
+    setView.mockClear()
+    await w.setProps({modelValue:[map.getCenter().lat,map.getCenter().lng]})
+    expect(setView).not.toHaveBeenCalled()
+  })
   it('uses the current SDK and has the documented style API',async()=>{
     const w=create();await flushPromises()
     const map=(w.vm as any).map
