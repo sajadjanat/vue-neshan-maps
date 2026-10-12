@@ -53,16 +53,16 @@ Build location pickers, draggable places, service areas and interactive maps. Us
 
 Requires **Vue 3.5.43+**. Tooling: **Node 22.12+ within 22.x, or Node 24+**. MapLibre needs a modern browser with WebGL and `DecompressionStream`.
 
-Until npm registry publication, install the tested GitHub release artifact:
-
-```sh
-npm install https://github.com/sajadjanat/vuejs-neshan-map-leaflet/releases/download/v2.0.1/vuejs-neshan-map-leaflet-2.0.1.tgz
-```
-
-After registry publication, use:
+Install from npm:
 
 ```sh
 npm install vuejs-neshan-map-leaflet@^2.0.1
+```
+
+Alternatively, install the tested GitHub release artifact:
+
+```sh
+npm install https://github.com/sajadjanat/vuejs-neshan-map-leaflet/releases/download/v2.0.1/vuejs-neshan-map-leaflet-2.0.1.tgz
 ```
 
 Create a domain-allowed **web key** in the Neshan dashboard. For Vite, put it in your ignored `.env.local`:

@@ -41,16 +41,16 @@
 
 ‏به `Vue 3.5.43+` نیاز دارید. ابزارهای توسعه با `Node 22.12+` در شاخهٔ ۲۲، یا نسخهٔ ۲۴ و بالاتر اجرا می‌شوند. برای موتور برداری، مرورگر باید از `WebGL` و `DecompressionStream` پشتیبانی کند.
 
-‏تا زمان انتشار در رجیستری، بستهٔ تست‌شدهٔ گیت‌هاب را نصب کنید:
-
-```sh
-npm install https://github.com/sajadjanat/vuejs-neshan-map-leaflet/releases/download/v2.0.1/vuejs-neshan-map-leaflet-2.0.1.tgz
-```
-
-‏پس از انتشار در رجیستری، دستور نصب معادل چنین است:
+‏بسته را از رجیستری npm نصب کنید:
 
 ```sh
 npm install vuejs-neshan-map-leaflet@^2.0.1
+```
+
+‏همچنین می‌توانید بستهٔ تست‌شدهٔ ریلیز گیت‌هاب را نصب کنید:
+
+```sh
+npm install https://github.com/sajadjanat/vuejs-neshan-map-leaflet/releases/download/v2.0.1/vuejs-neshan-map-leaflet-2.0.1.tgz
 ```
 
 ‏از پنل نشان یک **کلید وب** با دامنه‌های مجاز بسازید. برای پروژهٔ `Vite` آن را در فایل نادیده‌گرفته‌شدهٔ `.env.local` قرار دهید:
