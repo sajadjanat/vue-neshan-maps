@@ -306,7 +306,7 @@ app.use(NeshanMapPlugin)
 ## توسعه و تست
 
 ```sh
-git clone https://github.com/sajadjanat/vuejs-neshan-map-leaflet.git
+git clone https://github.com/sajadjanat/vuejs-neshan-map-leaflet.git vue-neshan-maps
 cd vue-neshan-maps
 npm ci
 npm run dev

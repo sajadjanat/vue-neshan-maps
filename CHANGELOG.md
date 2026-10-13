@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.1
+
+- Fix the bilingual contributor clone command to explicitly create the `vue-neshan-maps` directory while preserving the historical GitHub repository URL. No runtime/API changes.
+
 ## 2.3.0
 
 - New canonical npm identity `vue-neshan-maps`; historical `vuejs-neshan-map-leaflet` ships the identical compatibility build.

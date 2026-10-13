@@ -242,7 +242,7 @@ Traffic tiles are re-requested every 60 seconds while enabled; Neshan controls c
 ## Playground and contributing
 
 ```sh
-git clone https://github.com/sajadjanat/vuejs-neshan-map-leaflet.git
+git clone https://github.com/sajadjanat/vuejs-neshan-map-leaflet.git vue-neshan-maps
 cd vue-neshan-maps
 npm ci
 npm run dev
