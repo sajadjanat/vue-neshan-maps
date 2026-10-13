@@ -37,10 +37,11 @@ async function contentClick(event:MouseEvent){
   const anchor=target.closest<HTMLAnchorElement>('a');if(!anchor)return
   const link=anchor.getAttribute('href')??''
   if(link.startsWith('#')){const hash=decodeURIComponent(link.slice(1));if(!document.getElementById(hash)){const doc=findAnchor(hash);if(doc){event.preventDefault();await navigate(doc,hash)}}return}
+  if(!link.startsWith('https://github.com/sajadjanat/vue-neshan-maps/blob/master/'))return
   const file=link.split('#')[0].split('/').pop()??''
   const destinations:Record<string,string>={'README':'overview','GUIDE':'quickstart','API':'api','NUXT':'nuxt','ADVANCED':'clusters','MIGRATION':'migration','DEPENDENCY-SECURITY':'security','EXAMPLES':'quickstart','DEMO':'overview'}
   const destination=destinations[file.replace(/(?:\.fa)?\.md$/,'')]
-  if(destination&&(/\.md(?:#|$)/.test(link))){event.preventDefault();const hash=decodeURIComponent(link.split('#')[1]??'');const doc=hash?findAnchor(hash)??destination:destination;await navigate(doc,hash)}
+  if(destination&&(/\.md(?:#|$)/.test(link))){event.preventDefault();language.value=file.endsWith('.fa.md')?'fa':'en';const hash=decodeURIComponent(link.split('#')[1]??'');const doc=hash?findAnchor(hash)??destination:destination;await navigate(doc,hash)}
 }
 watch([id,language],async()=>{document.documentElement.lang=language.value;document.documentElement.dir=language.value==='fa'?'rtl':'ltr';document.title=`${page.value.title[language.value]} · Vue Neshan Maps`;document.querySelector('meta[name="description"]')?.setAttribute('content',page.value.summary[language.value]);await nextTick();observe()},{immediate:true})
 onMounted(async()=>{window.addEventListener('popstate',restore);window.addEventListener('keydown',keydown);await nextTick();observe();if(location.hash)document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView()})
