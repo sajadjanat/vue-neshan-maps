@@ -68,7 +68,7 @@ Requires **Vue 3.5.43+**. Tooling: **Node 22.12+ within 22.x, or Node 24+**. Map
 Install from npm:
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.2.1
+npm install vuejs-neshan-map-leaflet@^2.2.3
 ```
 
 Create a domain-allowed **web key** in the Neshan dashboard. For Vite, put it in your ignored `.env.local`:
@@ -290,3 +290,5 @@ import 'vuejs-neshan-map-leaflet/fonts/vazir.css'
 ```
 
 The class styles the interface and HTML popups. Vector labels use the Neshan style glyphs; raster labels are part of tile images. This font does not replace either. GitHub controls its Markdown typography; Persian screenshots are captured with Vazir.
+
+[Dependency security status and the Nuxt example fix](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/DEPENDENCY-SECURITY.md)

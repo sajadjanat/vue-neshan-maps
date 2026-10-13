@@ -160,3 +160,5 @@ export default defineNuxtConfig({
 ```
 
 The class styles the interface and HTML popups. Vector labels use the Neshan style glyphs; raster labels are part of tile images. This font does not replace either. GitHub controls its Markdown typography; Persian screenshots are captured with Vazir.
+
+In 2.2.3 the Nuxt example Git-tooling critical advisories are fixed with a scoped override; two unpatched upstream high advisories remain. [Exact audit scope, consumer configuration and limitations](DEPENDENCY-SECURITY.md).

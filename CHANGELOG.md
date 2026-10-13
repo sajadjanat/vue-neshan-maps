@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.3
+
+- Updated compatible dependencies, including Vue/server-renderer 3.5.44, DOMPurify 3.4.17 and Vitest 5.0.4. Package name, public APIs, Leaflet/MapLibre and Nuxt module/plugin support are preserved.
+- Fixed the Nuxt example critical Git-tooling advisories with a scoped simple-git 4.0.2 override and argv-parser 2.0.1; refreshed its lockfile. The example audit decreased from 15 affected package nodes (2 critical) to 11 high and 0 critical.
+- Added installed-consumer checks for the patched Git APIs/version and a full audit guard against new/critical advisories.
+- Documented the two remaining unpatched upstream braces/node-forge advisories, consumer override scope and verified compatibility in Persian and English.
+
 ## 2.2.2
 
 - Replaced README screenshots with ten real captures of the bilingual online demo: light, dark, clustering, weighted heatmap and 3D. Persian captures use the Persian interface and Vazir; English captures use English controls.

@@ -4,6 +4,7 @@ import { mkdtempSync, readFileSync, writeFileSync, mkdirSync, rmSync } from 'nod
 import { tmpdir } from 'node:os'
 import { resolve, join, dirname } from 'node:path'
 import { createServer } from 'node:net'
+import { createRequire } from 'node:module'
 
 // Exercise the installed tarball rather than a symlink to source files.
 const npmCli = process.env.npm_execpath
@@ -70,6 +71,42 @@ try {
   writeFileSync(join(dir, 'nuxt.config.ts'), readFileSync(join(root, 'examples/nuxt4/nuxt.config.ts')))
   writeFileSync(join(dir, 'tsconfig.json'), readFileSync(join(root, 'examples/nuxt4/tsconfig.json')))
   npm(['install', '--registry=https://registry.npmjs.org', '--no-audit', '--no-fund'])
+  // Exercise the read-only Git APIs used by Nuxt Devtools with its security override.
+  const consumerRequire = createRequire(join(dir, 'package.json'))
+  const devtoolsRequire = createRequire(consumerRequire.resolve('@nuxt/devtools/package.json'))
+  const { simpleGit } = devtoolsRequire('simple-git')
+  const git = simpleGit(root)
+  assert.match(await git.revparse(['--short', 'HEAD']), /^[a-f0-9]+/)
+  assert.equal(typeof (await git.status()).isClean(), 'boolean')
+  const gitTree = JSON.parse(execFileSync(process.execPath, [npmCli, 'ls', 'simple-git', '--all', '--json'], { cwd: dir, encoding: 'utf8' }))
+  let gitPackages = 0
+  const checkGit = tree => {
+    for (const [name, dependency] of Object.entries(tree.dependencies ?? {})) {
+      if (name === 'simple-git') { assert.equal(dependency.version, '4.0.2'); gitPackages++ }
+      checkGit(dependency)
+    }
+  }
+  checkGit(gitTree)
+  assert.ok(gitPackages > 0, 'Nuxt Devtools Git dependency was not verified')
+  console.log('Nuxt Devtools: patched simple-git 4.0.2, revparse/status compatibility passed')
+  // Only the two documented, currently unpatched upstream advisories are accepted.
+  // New advisories and any critical finding must stop the compatibility/publish check.
+  let auditOutput
+  try {
+    auditOutput = execFileSync(process.execPath, [npmCli, 'audit', '--json', '--registry=https://registry.npmjs.org'], { cwd: dir, encoding: 'utf8' })
+  } catch (error) {
+    if (error.status !== 1) throw error
+    auditOutput = error.stdout
+  }
+  const audit = JSON.parse(auditOutput)
+  assert.equal(audit.metadata.vulnerabilities.critical, 0, 'Critical Nuxt dependency advisory')
+  const knownUnpatched = new Set(['https://github.com/advisories/GHSA-vfj7-8cjw-p6xm', 'https://github.com/advisories/GHSA-86w9-cpqp-85rv'])
+  for (const vulnerability of Object.values(audit.vulnerabilities)) {
+    for (const advisory of vulnerability.via) {
+      if (typeof advisory === 'object') assert.ok(knownUnpatched.has(advisory.url), `New Nuxt advisory: ${advisory.url}`)
+    }
+  }
+  console.log(`Nuxt dependency audit: ${audit.metadata.vulnerabilities.total} affected package nodes, 0 critical; remaining advisories documented`)
   npm(['run', 'prepare', '--if-present'])
   const cli = join(dir, 'node_modules/nuxt/bin/nuxt.mjs')
   const nuxt = command => execFileSync(process.execPath, [cli, command], { cwd: dir, stdio: 'inherit' })

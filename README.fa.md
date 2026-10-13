@@ -72,7 +72,7 @@
 ‏بسته را از رجیستری npm نصب کنید:
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.2.1
+npm install vuejs-neshan-map-leaflet@^2.2.3
 ```
 
 ‏از پنل نشان یک **کلید وب** با دامنه‌های مجاز بسازید. برای پروژهٔ `Vite` آن را در فایل نادیده‌گرفته‌شدهٔ `.env.local` قرار دهید:
@@ -350,3 +350,5 @@ import 'vuejs-neshan-map-leaflet/fonts/vazir.css'
 ## ‏خوشه‌بندی، هیت‌مپ و لایه‌های پیشرفته
 
 ‏نسخهٔ `2.2` خوشه‌بندی خودکار نقاط، هیت‌مپ وزنی، منابع و لایه‌های بومی شامل حجم سه‌بعدی، خطای دقیق کلید و سهمیه و به‌روزرسانی هندسه بدون بازسازی بی‌دلیل را اضافه می‌کند. [آموزش کامل همراه مثال](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.fa.md) · [English](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.md).
+
+‏[وضعیت امنیت وابستگی‌ها و وصلهٔ نمونهٔ Nuxt](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/DEPENDENCY-SECURITY.fa.md)

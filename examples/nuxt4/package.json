@@ -13,11 +13,16 @@
   },
   "dependencies": {
     "nuxt": "^4.6.1",
-    "vue": "^3.5.43",
+    "vue": "^3.5.44",
     "vuejs-neshan-map-leaflet": "file:../.."
   },
   "devDependencies": {
     "typescript": "^5.9.0",
     "vue-tsc": "^3.0.0"
+  },
+  "overrides": {
+    "@nuxt/devtools": {
+      "simple-git": "4.0.2"
+    }
   }
 }

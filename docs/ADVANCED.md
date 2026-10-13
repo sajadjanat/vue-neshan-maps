@@ -140,7 +140,7 @@ The renderer and self-contained worker load lazily and are bundled in both ESM a
 
 Style/control attribution sanitization and text-only popups remain in place. Use trusted source/TileJSON hosts and sanitize your custom HTML/DOM. A clean dependency audit is a snapshot, not a guarantee against every application security issue. The retained Neshan protocol permits one web key per page; concurrent maps must use the same key.
 
-Audit scope: the root package and the separate plain Vue installed-tarball consumer reported zero vulnerabilities for this release. The optional Nuxt 4.6.1 example has independent upstream framework/tooling advisories (including its devtools and Nitro dependencies); its successful build/SSR checks do not mean its whole dependency tree has a clean audit. Recheck your own application's lockfile when adopting Nuxt.
+Audit scope: the root package and the separate plain Vue installed-tarball consumer reported zero vulnerabilities for this release. The optional Nuxt 4.6.1 example retains two independent, unpatched upstream advisories in its Nitro dependency chain; its successful build/SSR checks do not mean its whole dependency tree has a clean audit. Recheck your own application's lockfile when adopting Nuxt.
 
 ## Nuxt 4
 
@@ -151,3 +151,5 @@ All these props/events/methods work through the existing module or plugin. Follo
 Run `npm test`, `npm run test:sdk`, `npm run test:package`, `npm run test:nuxt`, `npm run build:demo`, and `npm audit --registry=https://registry.npmjs.org`. The playground includes 1,000 deterministic sample points, cluster/heatmap/3D toggles, data replacement and visible diagnostics. Real-map checks validate rendering, clicks, traffic/POI, data updates and style restoration. Quota/error branches are verified with controlled HTTP fixtures; tests do not intentionally exhaust an account's quota.
 
 GeoJSON is compared against its previous JSON snapshot once per update batch, preventing repeated worker indexing for equal inline props while still detecting in-place edits. Comparison costs scale with data size; batch large updates instead of continuously rewriting identical arrays.
+
+In 2.2.3 the Nuxt example Git-tooling critical advisories are fixed with a scoped override; two unpatched upstream high advisories remain. [Exact audit scope, consumer configuration and limitations](DEPENDENCY-SECURITY.md).
