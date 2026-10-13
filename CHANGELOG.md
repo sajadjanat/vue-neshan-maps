@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.0
+
+- Add a bilingual three-column documentation site with full-text chapter search, per-page table of contents, deep links, keyboard navigation and complete Persian API reference.
+- Add interactive real-map examples with matching standalone Vue/TypeScript code, memory-only visitor keys and safe clipboard handling.
+- Redesign the playground connection form for a clear desktop/mobile first view. Existing map APIs and the legacy npm package remain compatible.
+
 ## 2.3.2
 
 - Rename the GitHub repository and Pages demo to `vue-neshan-maps`; update package repository, homepage, issues, README image URLs and documentation links.

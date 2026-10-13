@@ -18,6 +18,8 @@
 
 </div>
 
+‏**[مستندات آنلاین توسعه‌دهندگان](https://sajadjanat.github.io/vue-neshan-maps/?view=docs&lang=fa)**؛ آموزش دوزبانه، مرجع کامل API و مثال‌های تعاملی روی نقشهٔ واقعی.
+
 ‏نام جدید پکیج **`vue-neshan-maps`** است. [راهنمای مهاجرت و سازگاری نام قبلی](docs/MIGRATION.fa.md)؛ نسخه‌های جدید از این پس در **[vue-neshan-maps](https://www.npmjs.com/package/vue-neshan-maps)** منتشر می‌شوند. ریپوی گیت‌هاب و آدرس دمو نیز به نام جدید تغییر کرده‌اند.
 
 ‏در [دموی آنلاین](https://sajadjanat.github.io/vue-neshan-maps/?lang=fa) خوشه‌بندی، هیت‌مپ، لایهٔ سه‌بعدی، ویرایش GeoJSON و ابزارهای انتخاب مکان را با نقشهٔ واقعی امتحان کنید. کلید وب خودتان را وارد کنید و دامنهٔ `sajadjanat.github.io` را در نشان مجاز کنید. کلید فقط در حافظهٔ صفحه می‌ماند. [راهنمای دمو](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/DEMO.fa.md).

@@ -16,6 +16,7 @@ jobs:
       - run: npm audit --omit=dev --audit-level=high --registry=https://registry.npmjs.org
       - run: npm run typecheck
       - run: npm test
+      - run: npm run test:docs
       - run: npm run test:sdk
       - run: npm run build
       - run: npm run build:demo
