@@ -117,7 +117,7 @@ ${section(guideFa,'نمونهٔ کامل').replace(/^## [^\n]+\n/,'')}
 باید نقشه و انتساب آن را ببینید. نشانهٔ مرکز با روشن‌بودن centerMarker نمایش داده می‌شود. نبود CSS، ارتفاع صفر، خطای کلید یا دامنه و نبود WebGL از علت‌های صفحهٔ خالی‌اند. دریافت رویداد ready به‌تنهایی مجوز دریافت کاشی را اثبات نمی‌کند.`),'basic'),
 page('keys',0,'Web key & permissions','کلید وب و مجوزها','Set allowed domains and understand key types, permissions and privacy.','دامنهٔ مجاز، نوع کلید، مجوز سرویس و حریم خصوصی را تنظیم کنید.',pair(
 `## Create the right key
-Open the [Neshan dashboard](https://platform.neshan.org/panel) and create a web map key. Web keys start with \`web.\`. Service keys are for server-side APIs and must not be placed in Vue source, public environment variables or this demo.
+Open the [Neshan dashboard](https://platform.neshan.org/panel/api-key) and create a web map key. Web keys start with \`web.\`. Service keys are for server-side APIs and must not be placed in Vue source, public environment variables or this demo.
 
 ## Allow the domain
 Allow the exact host used by your application. This site runs on \`sajadjanat.github.io\`. A repository path is not a separate domain. Development hosts must also be allowed according to your key settings.
@@ -131,7 +131,7 @@ Browser web keys are visible by design: restrict domains and monitor usage. Do n
 ## Troubleshooting
 \`480\` means invalid key, \`483\` wrong key type, \`484\` disallowed domain and \`485\` missing service permission. Quota and rate limits are different: \`481\` requires a quota change; \`482\` requires waiting. The Errors chapter explains handling without leaking credentials.`,
 `## دریافت کلید مناسب
-در [پنل نشان](https://platform.neshan.org/panel) کلید نقشهٔ وب بسازید. کلید وب با \`web.\` آغاز می‌شود. کلید سرویس برای API سمت سرور است؛ آن را در کد Vue، متغیر محیطی عمومی یا این دمو قرار ندهید.
+در [پنل نشان](https://platform.neshan.org/panel/api-key) کلید نقشهٔ وب بسازید. کلید وب با \`web.\` آغاز می‌شود. کلید سرویس برای API سمت سرور است؛ آن را در کد Vue، متغیر محیطی عمومی یا این دمو قرار ندهید.
 
 ## مجازکردن دامنه
 نام میزبان واقعی برنامه را مجاز کنید. میزبان این سایت \`sajadjanat.github.io\` است؛ مسیر ریپو یک دامنهٔ جدا نیست. میزبان توسعه نیز باید مطابق تنظیمات کلید مجاز باشد.

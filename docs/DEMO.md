@@ -6,7 +6,7 @@ The demo runs the actual package components against Neshan maps. Switch language
 
 ## Connect
 
-1. Create a **web key** in the [Neshan dashboard](https://platform.neshan.org/panel).
+1. Create a **web key** in the [Neshan dashboard](https://platform.neshan.org/panel/api-key).
 2. Allow `sajadjanat.github.io` in the key’s domain settings. Enable the MapLibre map, POI and traffic services you want to try.
 3. Enter the key in **Connect to Neshan** and press **Load map**.
 
