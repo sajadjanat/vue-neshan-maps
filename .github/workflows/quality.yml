@@ -20,6 +20,7 @@ jobs:
       - run: npm run test:sdk
       - run: npm run build
       - run: npm run build:demo
+      - run: npm run test:site-seo
       - run: npm run test:package
       - run: npm run test:nuxt
         if: matrix.node == 24

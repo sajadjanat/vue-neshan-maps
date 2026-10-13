@@ -28,14 +28,15 @@
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest run",
     "test:sdk": "vitest run --config vitest.sdk.config.ts",
-    "build:demo": "vite build --config vite.demo.config.ts",
+    "build:demo": "vite build --config vite.demo.config.ts && node scripts/prerender-site.mjs",
     "preview": "vite preview",
     "prepack": "npm run typecheck && npm test && npm run build",
     "test:package": "node scripts/package-smoke.mjs",
     "test:nuxt": "node scripts/nuxt-smoke.mjs",
     "pack:legacy": "node scripts/pack-legacy.mjs",
     "test:legacy": "node scripts/test-legacy.mjs",
-    "test:docs": "vitest run tests/docs.test.ts && vue-tsc -p work/docs-examples/tsconfig.json --noEmit"
+    "test:docs": "vitest run tests/docs.test.ts && vue-tsc -p work/docs-examples/tsconfig.json --noEmit",
+    "test:site-seo": "node scripts/test-site-seo.mjs"
   },
   "repository": {
     "type": "git",

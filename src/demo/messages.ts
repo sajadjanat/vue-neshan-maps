@@ -1,7 +1,7 @@
 export type Language = 'fa' | 'en'
 const messages = {
   brand: ['نقشه‌های نشان برای Vue', 'Neshan maps for Vue'],
-  title: ['تهران، از زاویهٔ شما.', 'Tehran. Your point of view.'],
+  title: ['دموی نقشه نشان در Vue', 'Neshan maps, live in Vue'],
   intro: ['لایه‌ها را ترکیب کنید، با داده‌ها بازی کنید و نقشهٔ بعدی‌تان را بسازید.', 'Mix layers, explore your data and build your next map.'],
   docs: ['راهنما', 'Documentation'], github: ['گیت‌هاب', 'GitHub'],
   connection: ['اتصال به نشان', 'Connect to Neshan'], connected: ['تغییر کلید', 'Change key'],

@@ -1,3 +1,4 @@
+import { SITE } from '../site/routes'
 import { Marked, Renderer } from 'marked'
 import DOMPurify from 'dompurify'
 export interface Heading { id:string; text:string; level:number }
@@ -20,7 +21,7 @@ export function renderMarkdown(source:string, language:'fa'|'en') {
     }
     return Renderer.prototype.link.call(this,token)
   }
-  renderer.image=function(token){return Renderer.prototype.image.call(this,{...token,href:/^(?:[a-z]+:|\/)/i.test(token.href)?token.href:new URL(token.href,'https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/').href})}
+  renderer.image=function(token){return Renderer.prototype.image.call(this,{...token,href:/^images\//.test(token.href)?new URL('docs/'+token.href,SITE).href:/^(?:[a-z]+:|\/)/i.test(token.href)?token.href:new URL(token.href,'https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/').href}).replace('<img ', '<img loading="lazy" decoding="async" ')}
   renderer.table=function(token){return `<div class="doc-table" tabindex="0">${Renderer.prototype.table.call(this,token)}</div>`}
   const parser=new Marked({gfm:true,renderer})
   const html=DOMPurify.sanitize(parser.parse(source,{async:false}),{FORBID_TAGS:['script','style','iframe','form','input'],FORBID_ATTR:['style'],ADD_ATTR:['tabindex','dir','data-copy-code'],ALLOW_DATA_ATTR:true})

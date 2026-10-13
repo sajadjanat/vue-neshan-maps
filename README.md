@@ -18,7 +18,7 @@ Reactive maps for Vue 3 · MapLibre + Leaflet · TypeScript
 
 </div>
 
-**[Developer documentation](https://sajadjanat.github.io/vue-neshan-maps/?view=docs&lang=en)** · Bilingual guides, complete API reference and interactive examples.
+**[Developer documentation](https://sajadjanat.github.io/vue-neshan-maps/en/docs/overview/)** · Bilingual guides, complete API reference and interactive examples.
 
 Package name: **`vue-neshan-maps`**. Existing users: [migration and legacy compatibility](docs/MIGRATION.md). Future feature releases are published as **[vue-neshan-maps](https://www.npmjs.com/package/vue-neshan-maps)**. The repository is now `sajadjanat/vue-neshan-maps`, with the demo at the matching GitHub Pages address.
 

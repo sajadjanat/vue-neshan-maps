@@ -18,7 +18,7 @@
 
 </div>
 
-‏**[مستندات آنلاین توسعه‌دهندگان](https://sajadjanat.github.io/vue-neshan-maps/?view=docs&lang=fa)**؛ آموزش دوزبانه، مرجع کامل API و مثال‌های تعاملی روی نقشهٔ واقعی.
+‏**[مستندات آنلاین توسعه‌دهندگان](https://sajadjanat.github.io/vue-neshan-maps/fa/docs/overview/)**؛ آموزش دوزبانه، مرجع کامل API و مثال‌های تعاملی روی نقشهٔ واقعی.
 
 ‏نام جدید پکیج **`vue-neshan-maps`** است. [راهنمای مهاجرت و سازگاری نام قبلی](docs/MIGRATION.fa.md)؛ نسخه‌های جدید از این پس در **[vue-neshan-maps](https://www.npmjs.com/package/vue-neshan-maps)** منتشر می‌شوند. ریپوی گیت‌هاب و آدرس دمو نیز به نام جدید تغییر کرده‌اند.
 

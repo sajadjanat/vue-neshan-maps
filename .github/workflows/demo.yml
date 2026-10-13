@@ -23,6 +23,7 @@ jobs:
       - run: npm run test:docs
       - name: Build public demo without private environment files
         run: npm run build:demo
+      - run: npm run test:site-seo
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

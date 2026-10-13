@@ -8,11 +8,13 @@ import DemoIcon from './DemoIcon.vue'
 import './demo.css'
 import pkg from '../../package.json'
 
-const language=ref<Language>(new URLSearchParams(location.search).get('lang')==='en' ? 'en' : 'fa')
+import { resolveRoute, siteHref } from '../site/routes'
+import { applySeo, demoInfo } from '../site/seo'
+const language=ref<Language>(resolveRoute(new URL(location.href)).language)
 const t=(key:MessageKey)=>translate(language.value,key)
 const format=(value:number,digits=0)=>new Intl.NumberFormat(language.value==='fa'?'fa-IR':'en-US',{maximumFractionDigits:digits}).format(value)
-const docs=computed(()=>`?view=docs&lang=${language.value}&doc=overview`)
-watch(language, value=>{document.documentElement.lang=value;const url=new URL(location.href);url.searchParams.set('lang',value);history.replaceState(null,'',url)}, {immediate:true})
+const docs=computed(()=>siteHref({language:language.value,view:'docs',doc:'overview'}))
+watch(language, value=>{if(!import.meta.env.SSR){applySeo({language:value,view:'demo'},demoInfo[value]);history.replaceState(null,'',siteHref({language:value,view:'demo'}))}}, {immediate:true})
 const tabs=['view','data','layers','develop'] as const
 const tab=ref<typeof tabs[number]>('view')
 const tabIcons={view:'map',data:'data',layers:'layers',develop:'code'}
@@ -100,12 +102,12 @@ onBeforeUnmount(()=>{clearInterval(diagnosticTimer);window.removeEventListener('
   <div class="demo-shell neshan-font-vazir" :dir="language==='fa'?'rtl':'ltr'">
     <a class="skip-link" href="#map-tools">{{ t('view') }}</a>
     <header class="site-nav">
-      <a class="brand" href="./" :aria-label="t('brand')"><span class="brand-mark"><DemoIcon name="pin"/></span><span>{{ t('brand') }}<small>Vue 3 + MapLibre + Leaflet</small></span><span class="version" dir="ltr">v{{ pkg.version }}</span></a>
-      <nav :aria-label="t('docs')"><a :href="docs">{{ t('docs') }}</a><a href="https://github.com/sajadjanat/vue-neshan-maps" target="_blank" rel="noopener noreferrer">GitHub</a><div class="language-switch" aria-label="Language"><button :aria-pressed="language==='fa'" @click="language='fa'">فارسی</button><button :aria-pressed="language==='en'" @click="language='en'">EN</button></div></nav>
+      <a class="brand" :href="siteHref({language,view:'demo'})" :aria-label="t('brand')"><span class="brand-mark"><DemoIcon name="pin"/></span><span>{{ t('brand') }}<small>Vue 3 + MapLibre + Leaflet</small></span><span class="version" dir="ltr">v{{ pkg.version }}</span></a>
+      <nav :aria-label="t('docs')"><a :href="docs">{{ t('docs') }}</a><a href="https://github.com/sajadjanat/vue-neshan-maps" target="_blank" rel="noopener noreferrer">GitHub</a><div class="language-switch" aria-label="Language"><a :href="siteHref({language:'fa',view:'demo'})" :aria-current="language==='fa'?'true':undefined" @click.prevent="language='fa'">فارسی</a><a :href="siteHref({language:'en',view:'demo'})" :aria-current="language==='en'?'true':undefined" @click.prevent="language='en'">EN</a></div></nav>
     </header>
     <section class="intro"><div><h1>{{ t('title') }}</h1><p>{{ t('intro') }}</p></div><button class="connect-button" @click="keyOpen=!keyOpen"><DemoIcon name="key"/>{{ t(activeKey?'connected':'connection') }}</button></section>
     <form v-if="keyOpen" class="connection-card" @submit.prevent="applyKey">
-      <div class="connection-copy"><span class="connection-symbol"><DemoIcon name="key"/></span><div><h2>{{ language==='fa'?'نقشه را با کلید خودتان امتحان کنید':'Explore with your own web key' }}</h2><p>{{ language==='fa'?'کلید وب نشان را وارد کنید تا نقشه و ابزارهای زنده فعال شوند.':'Connect a Neshan web key to activate the map and live tools.' }}</p><a :href="`?view=docs&lang=${language}&doc=keys`">{{ language==='fa'?'راهنمای دریافت و تنظیم کلید':'How to create and configure a key' }}</a></div></div>
+      <div class="connection-copy"><span class="connection-symbol"><DemoIcon name="key"/></span><div><h2>{{ language==='fa'?'نقشه را با کلید خودتان امتحان کنید':'Explore with your own web key' }}</h2><p>{{ language==='fa'?'کلید وب نشان را وارد کنید تا نقشه و ابزارهای زنده فعال شوند.':'Connect a Neshan web key to activate the map and live tools.' }}</p><a :href="siteHref({language,view:'docs',doc:'keys'})">{{ language==='fa'?'راهنمای دریافت و تنظیم کلید':'How to create and configure a key' }}</a></div></div>
       <div class="connection-entry"><div class="key-field"><label for="web-key">{{ t('keyLabel') }}</label><input id="web-key" v-model="key" type="password" placeholder="web.…" required autocomplete="off" spellcheck="false" dir="ltr" aria-describedby="key-privacy key-domain"></div><div class="connection-actions"><button class="primary" type="submit">{{ t('showMap') }}<DemoIcon name="arrow"/></button><button v-if="activeKey" class="text-button" type="button" @click="disconnect">{{ t('clearKey') }}</button><a href="https://platform.neshan.org/panel/api-key" target="_blank" rel="noopener noreferrer">{{ t('getKey') }}</a></div></div>
       <div class="connection-foot"><p id="key-privacy">{{ t('keyHelp') }}</p><p id="key-domain" class="domain-hint">{{ t('domainHelp') }} <code>{{ hostname }}</code></p></div>
     </form>
@@ -166,6 +168,6 @@ onBeforeUnmount(()=>{clearInterval(diagnosticTimer);window.removeEventListener('
         </section>
       </div>
     </main>
-    <footer class="site-footer"><p>{{ t('sampleNote') }}</p><a :href="docs" target="_blank" rel="noopener noreferrer">{{ t('docs') }}<DemoIcon name="arrow"/></a></footer>
+    <footer class="site-footer"><p>{{ t('sampleNote') }} · <a href="https://github.com/sajadjanat">Sajad Abasi</a> · <a href="https://github.com/sajadjanat/vue-neshan-maps/blob/master/LICENSE">MIT</a></p><a :href="docs" target="_blank" rel="noopener noreferrer">{{ t('docs') }}<DemoIcon name="arrow"/></a></footer>
   </div>
 </template>
