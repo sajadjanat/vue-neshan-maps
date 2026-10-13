@@ -21,8 +21,8 @@ export function renderMarkdown(source:string, language:'fa'|'en') {
     return Renderer.prototype.link.call(this,token)
   }
   renderer.image=function(token){return Renderer.prototype.image.call(this,{...token,href:/^(?:[a-z]+:|\/)/i.test(token.href)?token.href:new URL(token.href,'https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/').href})}
-  const parser=new Marked({gfm:true,renderer})
   renderer.table=function(token){return `<div class="doc-table" tabindex="0">${Renderer.prototype.table.call(this,token)}</div>`}
+  const parser=new Marked({gfm:true,renderer})
   const html=DOMPurify.sanitize(parser.parse(source,{async:false}),{FORBID_TAGS:['script','style','iframe','form','input'],FORBID_ATTR:['style'],ADD_ATTR:['tabindex','dir','data-copy-code'],ALLOW_DATA_ATTR:true})
   return {html,headings}
 }

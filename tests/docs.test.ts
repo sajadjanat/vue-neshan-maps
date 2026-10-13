@@ -32,6 +32,10 @@ describe('online documentation contracts',()=>{
     expect(result.html).not.toMatch(/<script|onerror=|href="javascript:/i)
     expect(result.html).toContain('&lt;script&gt;alert(2)&lt;/script&gt;')
   })
+  it('keeps wide tables in a keyboard-scrollable container on narrow screens',()=>{
+    const result=renderMarkdown('| Option | Meaning |\n| --- | --- |\n| traffic | Live traffic |','en')
+    expect(result.html).toMatch(/<div class="doc-table" tabindex="0"><table>/)
+  })
   it('ignores code-fence headings and disambiguates repeated heading IDs',()=>{
     const source='## First\n\n```bash\n## Not a heading\n```\n\nbody\n## Second\nnext'
     expect(section(source,'First')).toContain('Not a heading')

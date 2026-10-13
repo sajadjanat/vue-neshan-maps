@@ -95,7 +95,7 @@ VITE_NESHAN_WEB_KEY=web.YOUR_DOMAIN_ALLOWED_KEY
 ${section(guideEn,'Complete map').replace(/^## [^\n]+\n/,'')}
 
 ## Verify the result
-You should see the basemap, attribution and a center pin. An empty map usually means missing CSS, zero container height, a key/domain error or unavailable WebGL. Check the browser resource errors, not only the ready event.`,
+You should see the basemap and attribution. The center pin appears when centerMarker is enabled. An empty map usually means missing CSS, zero container height, a key/domain error or unavailable WebGL. Check the browser resource errors, not only the ready event.`,
 `## پیش‌نیازها
 از Vue نسخهٔ 3.5.43 یا جدیدتر استفاده کنید. ابزارهای بیلد به Node نسخهٔ 22.12 به بالا در شاخهٔ ۲۲ یا نسخهٔ ۲۴ به بالا نیاز دارند. MapLibre به WebGL و DecompressionStream نیاز دارد. پیش‌نیاز نسخهٔ Node در Nuxt 4 سخت‌گیرانه‌تر است؛ راهنمای اختصاصی Nuxt را بخوانید.
 
@@ -114,7 +114,7 @@ VITE_NESHAN_WEB_KEY=web.YOUR_DOMAIN_ALLOWED_KEY
 ${section(guideFa,'نمونهٔ کامل').replace(/^## [^\n]+\n/,'')}
 
 ## بررسی نتیجه
-باید نقشه، انتساب و نشانهٔ مرکز را ببینید. نبود CSS، ارتفاع صفر، خطای کلید یا دامنه و نبود WebGL از علت‌های صفحهٔ خالی‌اند. دریافت رویداد ready به‌تنهایی مجوز دریافت کاشی را اثبات نمی‌کند.`),'basic'),
+باید نقشه و انتساب آن را ببینید. نشانهٔ مرکز با روشن‌بودن centerMarker نمایش داده می‌شود. نبود CSS، ارتفاع صفر، خطای کلید یا دامنه و نبود WebGL از علت‌های صفحهٔ خالی‌اند. دریافت رویداد ready به‌تنهایی مجوز دریافت کاشی را اثبات نمی‌کند.`),'basic'),
 page('keys',0,'Web key & permissions','کلید وب و مجوزها','Set allowed domains and understand key types, permissions and privacy.','دامنهٔ مجاز، نوع کلید، مجوز سرویس و حریم خصوصی را تنظیم کنید.',pair(
 `## Create the right key
 Open the [Neshan dashboard](https://platform.neshan.org/panel) and create a web map key. Web keys start with \`web.\`. Service keys are for server-side APIs and must not be placed in Vue source, public environment variables or this demo.
