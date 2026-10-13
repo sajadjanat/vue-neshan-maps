@@ -1,6 +1,6 @@
 # Demo screenshots
 
-The JPEG images are unedited browser captures of the public demo at https://sajadjanat.github.io/vuejs-neshan-map-leaflet/ on 12 October 2026.
+The JPEG images are unedited browser captures of the public demo at https://sajadjanat.github.io/vue-neshan-maps/ on 12 October 2026.
 
 Each scene has an English image and a Persian image with the `-fa` suffix. The Persian interface uses bundled Vazir and RTL layout. English controls use the English interface; street names and basemap labels are supplied by Neshan and may remain Persian.
 

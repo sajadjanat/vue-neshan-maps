@@ -1,6 +1,6 @@
 {
   "name": "vue-neshan-maps",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "Typed Vue 3 Leaflet and MapLibre maps with Neshan live traffic and POI",
   "main": "./dist/vuejs-neshan-map-leaflet.cjs",
   "module": "./dist/vuejs-neshan-map-leaflet.js",
@@ -38,7 +38,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sajadjanat/vuejs-neshan-map-leaflet.git"
+    "url": "git+https://github.com/sajadjanat/vue-neshan-maps.git"
   },
   "keywords": [
     "neshan",
@@ -57,9 +57,9 @@
   "author": "Sajad Abasi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sajadjanat/vuejs-neshan-map-leaflet/issues"
+    "url": "https://github.com/sajadjanat/vue-neshan-maps/issues"
   },
-  "homepage": "https://sajadjanat.github.io/vuejs-neshan-map-leaflet/",
+  "homepage": "https://sajadjanat.github.io/vue-neshan-maps/",
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/server-renderer": "^3.5.44",

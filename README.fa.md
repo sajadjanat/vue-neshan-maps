@@ -7,24 +7,24 @@
 ‏نقشهٔ واکنش‌پذیر برای Vue 3 · دو موتور MapLibre و Leaflet · پشتیبانی TypeScript
 
 [![npm](https://img.shields.io/npm/v/vue-neshan-maps?color=087f8c&label=npm)](https://www.npmjs.com/package/vue-neshan-maps)
-[![CI](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml/badge.svg)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml)
-[![License](https://img.shields.io/badge/license-MIT-173449)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE)
+[![CI](https://github.com/sajadjanat/vue-neshan-maps/actions/workflows/quality.yml/badge.svg)](https://github.com/sajadjanat/vue-neshan-maps/actions/workflows/quality.yml)
+[![License](https://img.shields.io/badge/license-MIT-173449)](https://github.com/sajadjanat/vue-neshan-maps/blob/master/LICENSE)
 
-‏**فارسی** · [English](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/README.md)
+‏**فارسی** · [English](https://github.com/sajadjanat/vue-neshan-maps/blob/master/README.md)
 
-‏**[دموی آنلاین فارسی](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=fa)** · [English demo](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=en)
+‏**[دموی آنلاین فارسی](https://sajadjanat.github.io/vue-neshan-maps/?lang=fa)** · [English demo](https://sajadjanat.github.io/vue-neshan-maps/?lang=en)
 
-‏[شروع سریع](#installation) · [آموزش امکانات](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.fa.md) · [مرجع API](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [مثال‌های کامل](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) · [راهنمای Nuxt 4](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.fa.md)
+‏[شروع سریع](#installation) · [آموزش امکانات](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/GUIDE.fa.md) · [مرجع API](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/API.md) · [مثال‌های کامل](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/EXAMPLES.md) · [راهنمای Nuxt 4](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/NUXT.fa.md)
 
 </div>
 
-‏نام جدید پکیج **`vue-neshan-maps`** است. [راهنمای مهاجرت و سازگاری نام قبلی](docs/MIGRATION.fa.md)؛ آدرس ریپو و دمو ثابت می‌ماند.
+‏نام جدید پکیج **`vue-neshan-maps`** است. [راهنمای مهاجرت و سازگاری نام قبلی](docs/MIGRATION.fa.md)؛ نسخه‌های جدید از این پس در **[vue-neshan-maps](https://www.npmjs.com/package/vue-neshan-maps)** منتشر می‌شوند. ریپوی گیت‌هاب و آدرس دمو نیز به نام جدید تغییر کرده‌اند.
 
-‏در [دموی آنلاین](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=fa) خوشه‌بندی، هیت‌مپ، لایهٔ سه‌بعدی، ویرایش GeoJSON و ابزارهای انتخاب مکان را با نقشهٔ واقعی امتحان کنید. کلید وب خودتان را وارد کنید و دامنهٔ `sajadjanat.github.io` را در نشان مجاز کنید. کلید فقط در حافظهٔ صفحه می‌ماند. [راهنمای دمو](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/DEMO.fa.md).
+‏در [دموی آنلاین](https://sajadjanat.github.io/vue-neshan-maps/?lang=fa) خوشه‌بندی، هیت‌مپ، لایهٔ سه‌بعدی، ویرایش GeoJSON و ابزارهای انتخاب مکان را با نقشهٔ واقعی امتحان کنید. کلید وب خودتان را وارد کنید و دامنهٔ `sajadjanat.github.io` را در نشان مجاز کنید. کلید فقط در حافظهٔ صفحه می‌ماند. [راهنمای دمو](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/DEMO.fa.md).
 
 
 
-![نقشهٔ واقعی تهران با ترافیک، مکان‌ها، مارکرها و محدودهٔ خدمات](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light-fa.jpg)
+![نقشهٔ واقعی تهران با ترافیک، مکان‌ها، مارکرها و محدودهٔ خدمات](https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/images/maplibre-light-fa.jpg)
 
 ‏نقشه و لایه‌های ترافیک و مکان‌ها از نشان بارگیری شده‌اند. مارکرها، محدوده و خط‌چین، داده‌های نمونهٔ برنامه‌اند. این رابط یک نمونهٔ طراحی است؛ کامپوننت، نقشه را در رابط دلخواه شما قرار می‌دهد.
 
@@ -46,11 +46,11 @@
 | هدف | راهنما |
 | --- | --- |
 | ‏نمایش اولین نقشه | ‏[شروع سریع](#installation) |
-| ‏انتخاب آدرس، مارکر و محدودهٔ خدمات | ‏[آموزش امکانات](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.fa.md) |
-| ‏استفاده از کامپوننت کامل | ‏[مثال‌های قابل اجرا](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) |
-| ‏بررسی تنظیمات و امضاها | ‏[مرجع API](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) و جدول‌های همین صفحه |
-| ‏اتصال Nuxt، موتور بومی و مهاجرت | ‏[راهنمای یکپارچه‌سازی](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.fa.md#integration) |
-| ‏خوشه‌بندی، تراکم و لایه‌های پیشرفته | ‏[آموزش MapLibre پیشرفته](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.fa.md) |
+| ‏انتخاب آدرس، مارکر و محدودهٔ خدمات | ‏[آموزش امکانات](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/GUIDE.fa.md) |
+| ‏استفاده از کامپوننت کامل | ‏[مثال‌های قابل اجرا](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/EXAMPLES.md) |
+| ‏بررسی تنظیمات و امضاها | ‏[مرجع API](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/API.md) و جدول‌های همین صفحه |
+| ‏اتصال Nuxt، موتور بومی و مهاجرت | ‏[راهنمای یکپارچه‌سازی](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/GUIDE.fa.md#integration) |
+| ‏خوشه‌بندی، تراکم و لایه‌های پیشرفته | ‏[آموزش MapLibre پیشرفته](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/ADVANCED.fa.md) |
 
 <a id="engines"></a>
 
@@ -124,7 +124,7 @@ const poi = ref(true)
 />
 ```
 
-‏موتور Leaflet را در [دموی آنلاین](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=fa) امتحان کنید.
+‏موتور Leaflet را در [دموی آنلاین](https://sajadjanat.github.io/vue-neshan-maps/?lang=fa) امتحان کنید.
 
 ### ترتیب مختصات
 
@@ -145,7 +145,7 @@ export default defineNuxtConfig({
 })
 ```
 
-‏متغیر `NUXT_PUBLIC_NESHAN_WEB_KEY` را تنظیم و کلید را با `useRuntimeConfig()` بخوانید. [آموزش کامل ماژول، پلاگین دستی، SSR و تنظیمات محصول](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.fa.md).
+‏متغیر `NUXT_PUBLIC_NESHAN_WEB_KEY` را تنظیم و کلید را با `useRuntimeConfig()` بخوانید. [آموزش کامل ماژول، پلاگین دستی، SSR و تنظیمات محصول](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/NUXT.fa.md).
 
 <a id="overlays"></a>
 
@@ -248,7 +248,7 @@ const polygons: MapPolygon[] = [
 
 ‏در setup از `useNeshanMapLibre()` یا `useNeshanMap()` استفاده کنید و هر دو رویداد `@ready="onReady"` و `@destroy="onDestroy"` را متصل کنید. ارجاع‌ها shallow هستند و مالک حذف نقشه خود کامپوننت است. برای دسترسی مستقیم بومی، از `map.value` استفاده کنید.
 
-‏اسلات‌ها: `loading`، `error` با `{ error, retry }`، `tile-error` با `{ state }`، `center-marker` و اسلات پیش‌فرض با نقشه، namespace موتور و `tileState`. برای کنترل‌های تعاملی روی نقشه، جای‌گذاری CSS کنترل را خودتان تعیین کنید. [مثال کامل اسلات و متدها](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md).
+‏اسلات‌ها: `loading`، `error` با `{ error, retry }`، `tile-error` با `{ state }`، `center-marker` و اسلات پیش‌فرض با نقشه، namespace موتور و `tileState`. برای کنترل‌های تعاملی روی نقشه، جای‌گذاری CSS کنترل را خودتان تعیین کنید. [مثال کامل اسلات و متدها](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/EXAMPLES.md).
 
 ‏پلاگین پیش‌فرض هر دو کامپوننت را سراسری ثبت می‌کند؛ واردکردن محلی برای setup هم پشتیبانی می‌شود:
 
@@ -283,11 +283,11 @@ app.use(NeshanMapPlugin)
 
 ‏در زمان روشن‌بودن ترافیک، کاشی‌های آن هر ۶۰ ثانیه دوباره درخواست می‌شوند. کش و تازگی داده را نشان تعیین می‌کند. شمارش عوارض `getDiagnostics()` مربوط به نمای فعلی و زوم فعلی است، نه کل داده‌ها. لوگو و حقوق انتساب نشان و OpenStreetMap را حفظ کنید.
 
-‏**موتور وصله‌شده:** در `2.2.0` موتور آسیب‌پذیر با `MapLibre GL JS 6.14.0` جایگزین شده است. اتصال کاشی، راست‌به‌چپ و انتساب نشان از فورک محدود به آداپتر SDK رسمی حفظ شده‌اند؛ این اتصال سازگارشده را جامعه نگه‌داری می‌کند. پاک‌سازی انتساب و پاپ‌آپ متنی حفظ شده است. [امنیت، CSP و سازگاری](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.fa.md#امنیت-و-سازگاری-موتور) را بخوانید. بررسی وابستگی‌ها در این انتشار صفر آسیب‌پذیری شناخته‌شده گزارش می‌کند؛ این نتیجه تضمین امنیت همهٔ برنامه نیست.
+‏**موتور وصله‌شده:** در `2.2.0` موتور آسیب‌پذیر با `MapLibre GL JS 6.14.0` جایگزین شده است. اتصال کاشی، راست‌به‌چپ و انتساب نشان از فورک محدود به آداپتر SDK رسمی حفظ شده‌اند؛ این اتصال سازگارشده را جامعه نگه‌داری می‌کند. پاک‌سازی انتساب و پاپ‌آپ متنی حفظ شده است. [امنیت، CSP و سازگاری](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/ADVANCED.fa.md#امنیت-و-سازگاری-موتور) را بخوانید. بررسی وابستگی‌ها در این انتشار صفر آسیب‌پذیری شناخته‌شده گزارش می‌کند؛ این نتیجه تضمین امنیت همهٔ برنامه نیست.
 
 ## ‏نمای تاریک
 
-![نقشهٔ تاریک نشان با ترافیک و لایه‌های نمونه](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-dark-fa.jpg)
+![نقشهٔ تاریک نشان با ترافیک و لایه‌های نمونه](https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/images/maplibre-dark-fa.jpg)
 
 ‏این تصویر نیز از نقشهٔ واقعی گرفته شده است. تغییر سبک، وضعیت مارکرها و لایه‌های سفارشی را حفظ می‌کند. تراکم مکان‌ها به زوم، سبک و داده‌های نشان بستگی دارد.
 
@@ -295,18 +295,18 @@ app.use(NeshanMapPlugin)
 <details>
 <summary>‏تصاویر دموی فارسی: خوشه‌بندی، هیت‌مپ و سه‌بعدی</summary>
 
-![خوشه‌بندی نقاط و کنترل‌های فارسی](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-clusters-fa.jpg)
+![خوشه‌بندی نقاط و کنترل‌های فارسی](https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/images/advanced-clusters-fa.jpg)
 
-![هیت‌مپ وزن‌دار و تنظیمات فارسی](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-heatmap-fa.jpg)
+![هیت‌مپ وزن‌دار و تنظیمات فارسی](https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/images/advanced-heatmap-fa.jpg)
 
-![لایهٔ سه‌بعدی و تنظیم ارتفاع و شفافیت به فارسی](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-3d-fa.jpg)
+![لایهٔ سه‌بعدی و تنظیم ارتفاع و شفافیت به فارسی](https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/images/advanced-3d-fa.jpg)
 
 </details>
 
 ## توسعه و تست
 
 ```sh
-git clone https://github.com/sajadjanat/vuejs-neshan-map-leaflet.git vue-neshan-maps
+git clone https://github.com/sajadjanat/vue-neshan-maps.git vue-neshan-maps
 cd vue-neshan-maps
 npm ci
 npm run dev
@@ -331,7 +331,7 @@ npm run test:package
 
 ‏[مستندات MapLibre نشان](https://platform.neshan.org/docs/sdk/web/maplibre/neshan-maplibre-gl-js/) · [مستندات Leaflet نشان](https://platform.neshan.org/docs/sdk/web/leaflet/neshan-leaflet-sdk/) · [Vue](https://vuejs.org/guide/introduction.html)
 
-‏مجوز MIT؛ توسعه توسط Sajad Abasi. [متن مجوز](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE).
+‏مجوز MIT؛ توسعه توسط Sajad Abasi. [متن مجوز](https://github.com/sajadjanat/vue-neshan-maps/blob/master/LICENSE).
 
 ## ‏فونت وزیر
 
@@ -351,6 +351,6 @@ import 'vue-neshan-maps/fonts/vazir.css'
 
 ## ‏خوشه‌بندی، هیت‌مپ و لایه‌های پیشرفته
 
-‏نسخهٔ `2.2` خوشه‌بندی خودکار نقاط، هیت‌مپ وزنی، منابع و لایه‌های بومی شامل حجم سه‌بعدی، خطای دقیق کلید و سهمیه و به‌روزرسانی هندسه بدون بازسازی بی‌دلیل را اضافه می‌کند. [آموزش کامل همراه مثال](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.fa.md) · [English](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.md).
+‏نسخهٔ `2.2` خوشه‌بندی خودکار نقاط، هیت‌مپ وزنی، منابع و لایه‌های بومی شامل حجم سه‌بعدی، خطای دقیق کلید و سهمیه و به‌روزرسانی هندسه بدون بازسازی بی‌دلیل را اضافه می‌کند. [آموزش کامل همراه مثال](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/ADVANCED.fa.md) · [English](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/ADVANCED.md).
 
-‏[وضعیت امنیت وابستگی‌ها و وصلهٔ نمونهٔ Nuxt](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/DEPENDENCY-SECURITY.fa.md)
+‏[وضعیت امنیت وابستگی‌ها و وصلهٔ نمونهٔ Nuxt](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/DEPENDENCY-SECURITY.fa.md)

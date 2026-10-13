@@ -1,6 +1,6 @@
 # Interactive demo
 
-[English demo](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=en) · [فارسی](DEMO.fa.md) · [API](API.md)
+[English demo](https://sajadjanat.github.io/vue-neshan-maps/?lang=en) · [فارسی](DEMO.fa.md) · [API](API.md)
 
 The demo runs the actual package components against Neshan maps. Switch languages at any time; the map and current settings stay in place. Persian controls and HTML popups use the bundled Vazir font. Vector map labels use the Neshan style’s own glyphs.
 

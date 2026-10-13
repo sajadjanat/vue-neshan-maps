@@ -1,6 +1,6 @@
 # Migrate to vue-neshan-maps
 
-Version 2.3.0 introduces a clearer npm name. The GitHub repository and demo URL stay unchanged. The component API, configuration, events, types, SSR behavior and supported engines are unchanged.
+Version 2.3.0 introduces a clearer npm name. From 2.3.2, the GitHub repository is [sajadjanat/vue-neshan-maps](https://github.com/sajadjanat/vue-neshan-maps) and the [demo](https://sajadjanat.github.io/vue-neshan-maps/) uses the matching address. Future feature releases are published under the new npm name. The component API, configuration, events, types, SSR behavior and supported engines are unchanged.
 
 ## Existing applications
 

@@ -7,26 +7,26 @@
 Reactive maps for Vue 3 · MapLibre + Leaflet · TypeScript
 
 [![npm](https://img.shields.io/npm/v/vue-neshan-maps?color=087f8c&label=npm)](https://www.npmjs.com/package/vue-neshan-maps)
-[![CI](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml/badge.svg)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml)
-[![License](https://img.shields.io/badge/license-MIT-173449)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE)
+[![CI](https://github.com/sajadjanat/vue-neshan-maps/actions/workflows/quality.yml/badge.svg)](https://github.com/sajadjanat/vue-neshan-maps/actions/workflows/quality.yml)
+[![License](https://img.shields.io/badge/license-MIT-173449)](https://github.com/sajadjanat/vue-neshan-maps/blob/master/LICENSE)
 
-**English** · [فارسی](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/README.fa.md)
+**English** · [فارسی](https://github.com/sajadjanat/vue-neshan-maps/blob/master/README.fa.md)
 
-**[Try the live demo](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=en)** · [دموی فارسی](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=fa)
+**[Try the live demo](https://sajadjanat.github.io/vue-neshan-maps/?lang=en)** · [دموی فارسی](https://sajadjanat.github.io/vue-neshan-maps/?lang=fa)
 
-[Get started](#quick-start) · [Feature guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md) · [API reference](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [Examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) · [Nuxt 4](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.md)
+[Get started](#quick-start) · [Feature guide](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/GUIDE.md) · [API reference](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/API.md) · [Examples](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/EXAMPLES.md) · [Nuxt 4](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/NUXT.md)
 
 </div>
 
-Package name: **`vue-neshan-maps`**. Existing users: [migration and legacy compatibility](docs/MIGRATION.md). The repository and demo URLs stay unchanged.
+Package name: **`vue-neshan-maps`**. Existing users: [migration and legacy compatibility](docs/MIGRATION.md). Future feature releases are published as **[vue-neshan-maps](https://www.npmjs.com/package/vue-neshan-maps)**. The repository is now `sajadjanat/vue-neshan-maps`, with the demo at the matching GitHub Pages address.
 
-![Neshan vector map in a Vue application: Tehran, live traffic, places and custom geometry](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light.jpg)
+![Neshan vector map in a Vue application: Tehran, live traffic, places and custom geometry](https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/images/maplibre-light.jpg)
 
 <p align="center"><sub>Real Neshan basemap and live layers. Markers, the service area and the dashed connection are sample application data. The interface illustrates what you can build; the component supplies the map.</sub></p>
 
 Build a location picker, show your branches, outline a delivery area or add live traffic to your app. Two Vue components connect Neshan's renderers to reactive state, with typed overlays, lifecycle events and native access when you need it. A community library, independent of Neshan.
 
-The [online playground](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=en) lets you try clusters, weighted heatmaps, 3D layers, editable GeoJSON, styles, markers, point picking and distance measurement. Enter your own **web key** with `sajadjanat.github.io` allowed in Neshan. The key stays in page memory; it is not saved or included in links. Error simulations make no network requests. [Demo guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/DEMO.md).
+The [online playground](https://sajadjanat.github.io/vue-neshan-maps/?lang=en) lets you try clusters, weighted heatmaps, 3D layers, editable GeoJSON, styles, markers, point picking and distance measurement. Enter your own **web key** with `sajadjanat.github.io` allowed in Neshan. The key stays in page memory; it is not saved or included in links. Error simulations make no network requests. [Demo guide](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/DEMO.md).
 
 ## One library, two engines
 
@@ -44,12 +44,12 @@ The [online playground](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?l
 | I want to… | Read |
 | --- | --- |
 | Display my first map | [Quick start](#quick-start) |
-| Pick an address, add places or draw a service area | [Feature guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md) |
-| Copy a complete Vue component | [Runnable examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) |
-| Check a prop, event, slot or method | [API reference](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) |
-| Use Nuxt, native APIs or migrate from 1.x | [Integration guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md#integration) |
+| Pick an address, add places or draw a service area | [Feature guide](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/GUIDE.md) |
+| Copy a complete Vue component | [Runnable examples](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/EXAMPLES.md) |
+| Check a prop, event, slot or method | [API reference](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/API.md) |
+| Use Nuxt, native APIs or migrate from 1.x | [Integration guide](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/GUIDE.md#integration) |
 | Diagnose blank tiles or missing traffic | [Troubleshooting](#troubleshooting) |
-| Cluster points, draw a heatmap or add advanced layers | [Advanced MapLibre guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.md) |
+| Cluster points, draw a heatmap or add advanced layers | [Advanced MapLibre guide](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/ADVANCED.md) |
 
 ## Choose an engine
 
@@ -120,7 +120,7 @@ Use the same `center`, `zoom` and `webKey` setup, import `NeshanMapLeaflet` inst
 />
 ```
 
-Try the Leaflet engine in the [live demo](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=en).
+Try the Leaflet engine in the [live demo](https://sajadjanat.github.io/vue-neshan-maps/?lang=en).
 
 ### Coordinate order
 
@@ -141,11 +141,11 @@ export default defineNuxtConfig({
 })
 ```
 
-Set `NUXT_PUBLIC_NESHAN_WEB_KEY` and read it with `useRuntimeConfig()`. [Complete Nuxt 4 guide: module, manual plugin, SSR and production config →](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.md)
+Set `NUXT_PUBLIC_NESHAN_WEB_KEY` and read it with `useRuntimeConfig()`. [Complete Nuxt 4 guide: module, manual plugin, SSR and production config →](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/NUXT.md)
 
 ## Markers and overlays
 
-For point picking, editable markers, shapes, GeoJSON, native controls and status handling, follow the [feature guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md). Each section explains what your application owns and what the component updates.
+For point picking, editable markers, shapes, GeoJSON, native controls and status handling, follow the [feature guide](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/GUIDE.md). Each section explains what your application owns and what the component updates.
 
 
 Use unique, stable IDs and persist dragging in application state:
@@ -174,13 +174,13 @@ const polygons: MapPolygon[] = [
 
 Pass `:markers="markers"`, `:circles="circles"`, `:polylines="polylines"`, `:polygons="polygons"` and `@marker-dragend="saveMarker"` to the component. For Leaflet use the `MapMarker` type. Popup/tooltip strings are plain text. A polyline displays supplied coordinates; it does not calculate a road route.
 
-MapLibre supports native `geojsonLayers` and `geojsonOptions`. Shape props support a documented subset of Leaflet-like paint options, not arbitrary Leaflet plugin options. See [API details](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) and [GeoJSON examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md).
+MapLibre supports native `geojsonLayers` and `geojsonOptions`. Shape props support a documented subset of Leaflet-like paint options, not arbitrary Leaflet plugin options. See [API details](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/API.md) and [GeoJSON examples](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/EXAMPLES.md).
 
 ## Map styles in practice
 
 Light and dark styles use the same component state. Markers and custom overlays survive style changes.
 
-![Dark Neshan MapLibre map with live traffic and custom overlays](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-dark.jpg)
+![Dark Neshan MapLibre map with live traffic and custom overlays](https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/images/maplibre-dark.jpg)
 
 These screenshots are unedited captures of the live bilingual demo. POI density and traffic detail depend on the viewport, zoom, vendor style and available data.
 
@@ -188,11 +188,11 @@ These screenshots are unedited captures of the live bilingual demo. POI density 
 <details>
 <summary>Live demo gallery: clustering, heatmap and 3D</summary>
 
-![Point clusters with English controls](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-clusters.jpg)
+![Point clusters with English controls](https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/images/advanced-clusters.jpg)
 
-![Weighted heatmap with English controls](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-heatmap.jpg)
+![Weighted heatmap with English controls](https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/images/advanced-heatmap.jpg)
 
-![3D layer with English height and opacity controls](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/advanced-3d.jpg)
+![3D layer with English height and opacity controls](https://raw.githubusercontent.com/sajadjanat/vue-neshan-maps/master/docs/images/advanced-3d.jpg)
 
 </details>
 
@@ -212,7 +212,7 @@ These screenshots are unedited captures of the live bilingual demo. POI density 
 
 `ready` confirms initialization, not tile authorization. MapLibre counts source readiness events; Leaflet counts raster tile results, so counts are not comparable. `getDiagnostics()` reports rendered MapLibre features in the current viewport/zoom, not totals for the dataset.
 
-Use `useNeshanMapLibre()` or `useNeshanMap()` in setup and wire both `@ready="onReady"` and `@destroy="onDestroy"`. The component owns native map disposal. [Full payloads, defaults and signatures →](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md)
+Use `useNeshanMapLibre()` or `useNeshanMap()` in setup and wire both `@ready="onReady"` and `@destroy="onDestroy"`. The component owns native map disposal. [Full payloads, defaults and signatures →](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/API.md)
 
 ## Migration and runtime
 
@@ -237,12 +237,12 @@ Use `useNeshanMapLibre()` or `useNeshanMap()` in setup and wire both `@ready="on
 
 Traffic tiles are re-requested every 60 seconds while enabled; Neshan controls caching/freshness. Vendor availability and quotas are outside this wrapper. Keep required Neshan/OpenStreetMap attribution visible.
 
-**Patched renderer:** 2.2.0 replaces the vulnerable bundled engine with MapLibre GL JS **6.14.0**. Neshan tile/RTL/branding compatibility comes from an adapter-only ISC fork of SDK 5.24.4, maintained by this community package. Attribution sanitization and text popups remain. See [security, CSP and compatibility](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.md#security-and-renderer-compatibility). The release audit reports zero known vulnerabilities; this is a dependency snapshot, not a guarantee about application code.
+**Patched renderer:** 2.2.0 replaces the vulnerable bundled engine with MapLibre GL JS **6.14.0**. Neshan tile/RTL/branding compatibility comes from an adapter-only ISC fork of SDK 5.24.4, maintained by this community package. Attribution sanitization and text popups remain. See [security, CSP and compatibility](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/ADVANCED.md#security-and-renderer-compatibility). The release audit reports zero known vulnerabilities; this is a dependency snapshot, not a guarantee about application code.
 
 ## Playground and contributing
 
 ```sh
-git clone https://github.com/sajadjanat/vuejs-neshan-map-leaflet.git vue-neshan-maps
+git clone https://github.com/sajadjanat/vue-neshan-maps.git vue-neshan-maps
 cd vue-neshan-maps
 npm ci
 npm run dev
@@ -265,17 +265,17 @@ For issues, include engine/package/browser versions, a small reproduction and sa
 
 ## Project links
 
-[Changelog](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/CHANGELOG.md) · [Releases](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/releases) · [Report an issue](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/issues)
+[Changelog](https://github.com/sajadjanat/vue-neshan-maps/blob/master/CHANGELOG.md) · [Releases](https://github.com/sajadjanat/vue-neshan-maps/releases) · [Report an issue](https://github.com/sajadjanat/vue-neshan-maps/issues)
 
 ## Official references
 
 [Neshan MapLibre](https://platform.neshan.org/docs/sdk/web/maplibre/neshan-maplibre-gl-js/) · [Neshan Leaflet](https://platform.neshan.org/docs/sdk/web/leaflet/neshan-leaflet-sdk/) · [Vue](https://vuejs.org/guide/introduction.html) · [Leaflet API](https://leafletjs.com/reference-1.9.4.html)
 
-MIT © Sajad Abasi. [License](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE).
+MIT © Sajad Abasi. [License](https://github.com/sajadjanat/vue-neshan-maps/blob/master/LICENSE).
 
 ## Clusters, heatmap and advanced layers
 
-Version 2.2 adds automatic point clustering, weighted heatmaps, declarative native sources/layers (including 3D extrusion), structured key/quota errors and incremental geometry updates. [Complete guide and examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.md) · [فارسی](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED.fa.md).
+Version 2.2 adds automatic point clustering, weighted heatmaps, declarative native sources/layers (including 3D extrusion), structured key/quota errors and incremental geometry updates. [Complete guide and examples](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/ADVANCED.md) · [فارسی](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/ADVANCED.fa.md).
 
 ## Vazir font
 
@@ -293,4 +293,4 @@ import 'vue-neshan-maps/fonts/vazir.css'
 
 The class styles the interface and HTML popups. Vector labels use the Neshan style glyphs; raster labels are part of tile images. This font does not replace either. GitHub controls its Markdown typography; Persian screenshots are captured with Vazir.
 
-[Dependency security status and the Nuxt example fix](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/DEPENDENCY-SECURITY.md)
+[Dependency security status and the Nuxt example fix](https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/DEPENDENCY-SECURITY.md)

@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.3.2
+
+- Rename the GitHub repository and Pages demo to `vue-neshan-maps`; update package repository, homepage, issues, README image URLs and documentation links.
+- Add prominent English/Persian notices and a legacy package description directing future feature updates to `vue-neshan-maps`. All legacy runtime exports remain unchanged.
+
 ## 2.3.1
 
 - Fix the bilingual contributor clone command to explicitly create the `vue-neshan-maps` directory while preserving the historical GitHub repository URL. No runtime/API changes.

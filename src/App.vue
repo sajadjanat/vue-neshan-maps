@@ -11,7 +11,7 @@ import pkg from '../package.json'
 const language=ref<Language>(new URLSearchParams(location.search).get('lang')==='en' ? 'en' : 'fa')
 const t=(key:MessageKey)=>translate(language.value,key)
 const format=(value:number,digits=0)=>new Intl.NumberFormat(language.value==='fa'?'fa-IR':'en-US',{maximumFractionDigits:digits}).format(value)
-const docs=computed(()=>`https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/ADVANCED${language.value==='fa'?'.fa':''}.md`)
+const docs=computed(()=>`https://github.com/sajadjanat/vue-neshan-maps/blob/master/docs/ADVANCED${language.value==='fa'?'.fa':''}.md`)
 watch(language, value=>{document.documentElement.lang=value;const url=new URL(location.href);url.searchParams.set('lang',value);history.replaceState(null,'',url)}, {immediate:true})
 const tabs=['view','data','layers','develop'] as const
 const tab=ref<typeof tabs[number]>('view')
@@ -101,7 +101,7 @@ onBeforeUnmount(()=>{clearInterval(diagnosticTimer);window.removeEventListener('
     <a class="skip-link" href="#map-tools">{{ t('view') }}</a>
     <header class="site-nav">
       <a class="brand" href="./" :aria-label="t('brand')"><span class="brand-mark"><DemoIcon name="pin"/></span><span>{{ t('brand') }}<small>Vue 3 + MapLibre + Leaflet</small></span><span class="version" dir="ltr">v{{ pkg.version }}</span></a>
-      <nav :aria-label="t('docs')"><a :href="docs" target="_blank" rel="noopener noreferrer">{{ t('docs') }}</a><a href="https://github.com/sajadjanat/vuejs-neshan-map-leaflet" target="_blank" rel="noopener noreferrer">GitHub</a><div class="language-switch" aria-label="Language"><button :aria-pressed="language==='fa'" @click="language='fa'">فارسی</button><button :aria-pressed="language==='en'" @click="language='en'">EN</button></div></nav>
+      <nav :aria-label="t('docs')"><a :href="docs" target="_blank" rel="noopener noreferrer">{{ t('docs') }}</a><a href="https://github.com/sajadjanat/vue-neshan-maps" target="_blank" rel="noopener noreferrer">GitHub</a><div class="language-switch" aria-label="Language"><button :aria-pressed="language==='fa'" @click="language='fa'">فارسی</button><button :aria-pressed="language==='en'" @click="language='en'">EN</button></div></nav>
     </header>
     <section class="intro"><div><h1>{{ t('title') }}</h1><p>{{ t('intro') }}</p></div><button class="connect-button" @click="keyOpen=!keyOpen"><DemoIcon name="key"/>{{ t(activeKey?'connected':'connection') }}</button></section>
     <form v-if="keyOpen" class="connection-card" @submit.prevent="applyKey">

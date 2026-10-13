@@ -1,6 +1,6 @@
 # ‏دموی تعاملی
 
-‏[اجرای دموی فارسی](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=fa) · [English](DEMO.md) · [مرجع API](API.md)
+‏[اجرای دموی فارسی](https://sajadjanat.github.io/vue-neshan-maps/?lang=fa) · [English](DEMO.md) · [مرجع API](API.md)
 
 ‏دمو از کامپوننت‌های واقعی پکیج و نقشهٔ نشان استفاده می‌کند. زبان را هر زمان عوض کنید؛ نقشه و تنظیمات جاری حفظ می‌شوند. رابط فارسی و پنجره‌های HTML با فونت وزیر نمایش داده می‌شوند؛ نوشته‌های وکتور نقشه از فونتِ سبک نشان استفاده می‌کنند.
 
