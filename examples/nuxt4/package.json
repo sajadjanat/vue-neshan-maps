@@ -14,7 +14,7 @@
   "dependencies": {
     "nuxt": "^4.6.1",
     "vue": "^3.5.44",
-    "vuejs-neshan-map-leaflet": "file:../.."
+    "vue-neshan-maps": "file:../.."
   },
   "devDependencies": {
     "typescript": "^5.9.0",

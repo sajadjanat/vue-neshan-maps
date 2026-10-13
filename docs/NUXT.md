@@ -1,5 +1,7 @@
 # Nuxt 4 integration
 
+Use `vue-neshan-maps` for new apps. Existing `vuejs-neshan-map-leaflet` module and plugin imports remain supported; [migration details](MIGRATION.md).
+
 [Overview](../README.md) · [فارسی](NUXT.fa.md) · [Feature guide](GUIDE.md) · [Runnable Nuxt app](../examples/nuxt4)
 
 The dedicated Nuxt module and plugin are available from **2.1.0**. They use the same map components and preserve their existing props, events, slots and methods. Nuxt is an optional peer: ordinary Vue applications do not install it.
@@ -9,14 +11,14 @@ The included example uses Nuxt 4.6.1, which requires Node `^22.22.3`, `^24.15.0`
 ## Recommended: Nuxt module
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.2.0
+npm install vue-neshan-maps@^2.3.0
 ```
 
 Add the module to your project's root `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  modules: ['vue-neshan-maps/nuxt'],
   runtimeConfig: { public: { neshanWebKey: '' } },
 })
 ```
@@ -36,7 +38,7 @@ Create `app/pages/index.vue` and render `<NuxtPage />` from `app/app.vue`, or pu
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { Coordinates, MapLibreMarker } from 'vuejs-neshan-map-leaflet'
+import type { Coordinates, MapLibreMarker } from 'vue-neshan-maps'
 
 const config = useRuntimeConfig()
 const center = ref<Coordinates>([35.6997, 51.338])
@@ -70,12 +72,12 @@ Type imports remain explicit. The module's components and composables are availa
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  modules: ['vue-neshan-maps/nuxt'],
   neshanMap: { css: true, components: true, imports: true },
 })
 ```
 
-All options default to `true`. Disable `css` only if you import it elsewhere; disable `components` or `imports` to take over registration yourself. Tuple options also work: `modules: [['vuejs-neshan-map-leaflet/nuxt', { imports: false }]]`.
+All options default to `true`. Disable `css` only if you import it elsewhere; disable `components` or `imports` to take over registration yourself. Tuple options also work: `modules: [['vue-neshan-maps/nuxt', { imports: false }]]`.
 
 ## Alternative: register a Nuxt plugin
 
@@ -83,8 +85,8 @@ For manual global registration, use the plugin entry **instead of** the module:
 
 ```ts
 export default defineNuxtConfig({
-  plugins: ['vuejs-neshan-map-leaflet/nuxt/plugin'],
-  css: ['vuejs-neshan-map-leaflet/style.css'],
+  plugins: ['vue-neshan-maps/nuxt/plugin'],
+  css: ['vue-neshan-maps/style.css'],
   runtimeConfig: { public: { neshanWebKey: '' } },
 })
 ```
@@ -94,7 +96,7 @@ This plugin registers both components on `nuxtApp.vueApp`. CSS, public config an
 You can also create `app/plugins/neshan.ts` yourself using the existing Vue plugin; this works with 2.0.1 as well:
 
 ```ts
-import { NeshanMapPlugin } from 'vuejs-neshan-map-leaflet'
+import { NeshanMapPlugin } from 'vue-neshan-maps'
 
 export default defineNuxtPlugin(nuxtApp => {
   nuxtApp.vueApp.use(NeshanMapPlugin)
@@ -148,8 +150,8 @@ Vazir 30.1.0 regular and bold are bundled as self-hosted WOFF2 files. The origin
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['vuejs-neshan-map-leaflet/nuxt'],
-  css: ['vuejs-neshan-map-leaflet/fonts/vazir.css'],
+  modules: ['vue-neshan-maps/nuxt'],
+  css: ['vue-neshan-maps/fonts/vazir.css'],
 })
 ```
 

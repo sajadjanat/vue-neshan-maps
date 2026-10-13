@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
-  css: ['vuejs-neshan-map-leaflet/fonts/vazir.css'],
-  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  css: ['vue-neshan-maps/fonts/vazir.css'],
+  modules: ['vue-neshan-maps/nuxt'],
   neshanMap: { css: true, components: true, imports: true },
   compatibilityDate: '2026-10-12',
   devtools: { enabled: false },

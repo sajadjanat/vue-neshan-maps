@@ -6,7 +6,7 @@
 
 Reactive maps for Vue 3 · MapLibre + Leaflet · TypeScript
 
-[![npm](https://img.shields.io/npm/v/vuejs-neshan-map-leaflet?color=087f8c&label=npm)](https://www.npmjs.com/package/vuejs-neshan-map-leaflet)
+[![npm](https://img.shields.io/npm/v/vue-neshan-maps?color=087f8c&label=npm)](https://www.npmjs.com/package/vue-neshan-maps)
 [![CI](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml/badge.svg)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml)
 [![License](https://img.shields.io/badge/license-MIT-173449)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE)
 
@@ -17,6 +17,8 @@ Reactive maps for Vue 3 · MapLibre + Leaflet · TypeScript
 [Get started](#quick-start) · [Feature guide](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.md) · [API reference](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [Examples](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) · [Nuxt 4](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.md)
 
 </div>
+
+Package name: **`vue-neshan-maps`**. Existing users: [migration and legacy compatibility](docs/MIGRATION.md). The repository and demo URLs stay unchanged.
 
 ![Neshan vector map in a Vue application: Tehran, live traffic, places and custom geometry](https://raw.githubusercontent.com/sajadjanat/vuejs-neshan-map-leaflet/master/docs/images/maplibre-light.jpg)
 
@@ -68,7 +70,7 @@ Requires **Vue 3.5.43+**. Tooling: **Node 22.12+ within 22.x, or Node 24+**. Map
 Install from npm:
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.2.3
+npm install vue-neshan-maps@^2.3.0
 ```
 
 Create a domain-allowed **web key** in the Neshan dashboard. For Vite, put it in your ignored `.env.local`:
@@ -82,8 +84,8 @@ Web keys are visible in browsers by design; restrict their allowed domains. **Se
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLibre, MAPLIBRE_STYLES, type Coordinates } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLibre, MAPLIBRE_STYLES, type Coordinates } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const center = ref<Coordinates>([35.6997, 51.338])
@@ -134,7 +136,7 @@ Register the module to add both components, composables and package CSS automati
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  modules: ['vue-neshan-maps/nuxt'],
   runtimeConfig: { public: { neshanWebKey: '' } },
 })
 ```
@@ -150,7 +152,7 @@ Use unique, stable IDs and persist dragging in application state:
 
 ```ts
 import { ref } from 'vue'
-import type { Coordinates, MapLibreMarker, MapCircle, MapPolygon, MapPolyline } from 'vuejs-neshan-map-leaflet'
+import type { Coordinates, MapLibreMarker, MapCircle, MapPolygon, MapPolyline } from 'vue-neshan-maps'
 
 const markers = ref<MapLibreMarker[]>([
   { id: 'azadi', position: [35.6997, 51.338], popup: 'Azadi Square',
@@ -241,7 +243,7 @@ Traffic tiles are re-requested every 60 seconds while enabled; Neshan controls c
 
 ```sh
 git clone https://github.com/sajadjanat/vuejs-neshan-map-leaflet.git
-cd vuejs-neshan-map-leaflet
+cd vue-neshan-maps
 npm ci
 npm run dev
 ```
@@ -280,7 +282,7 @@ Version 2.2 adds automatic point clustering, weighted heatmaps, declarative nati
 Vazir 30.1.0 regular and bold are bundled as self-hosted WOFF2 files. The original SIL OFL license and author credits are included in `fonts`. No font CDN is required.
 
 ```ts
-import 'vuejs-neshan-map-leaflet/fonts/vazir.css'
+import 'vue-neshan-maps/fonts/vazir.css'
 ```
 
 ```html

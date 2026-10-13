@@ -1,5 +1,7 @@
 # ‏استفاده در Nuxt 4
 
+‏برای پروژهٔ جدید از `vue-neshan-maps` استفاده کن. مسیرهای ماژول و پلاگین نام قبلی همچنان پشتیبانی می‌شوند؛ [راهنمای مهاجرت](MIGRATION.fa.md).
+
 ‏[معرفی](../README.fa.md) · [English](NUXT.md) · [آموزش امکانات](GUIDE.fa.md) · [پروژهٔ قابل اجرا](../examples/nuxt4)
 
 ‏ورودی اختصاصی ماژول و پلاگین Nuxt از نسخهٔ **۲٫۱٫۰** در دسترس است. همان کامپوننت‌ها با ورودی، رویداد، slot و متدهای قبلی استفاده می‌شوند. Nuxt یک وابستگی peer اختیاری است و با نصب در برنامهٔ معمولی Vue به آن اضافه نمی‌شود.
@@ -9,14 +11,14 @@
 ## ‏روش پیشنهادی: ماژول Nuxt
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.2.0
+npm install vue-neshan-maps@^2.3.0
 ```
 
 ‏ماژول را در فایل `nuxt.config.ts` ریشهٔ پروژه ثبت کنید:
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  modules: ['vue-neshan-maps/nuxt'],
   runtimeConfig: { public: { neshanWebKey: '' } },
 })
 ```
@@ -36,7 +38,7 @@ NUXT_PUBLIC_NESHAN_WEB_KEY=web.YOUR_DOMAIN_ALLOWED_KEY
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { Coordinates, MapLibreMarker } from 'vuejs-neshan-map-leaflet'
+import type { Coordinates, MapLibreMarker } from 'vue-neshan-maps'
 
 const config = useRuntimeConfig()
 const center = ref<Coordinates>([35.6997, 51.338])
@@ -72,7 +74,7 @@ const { map, onReady, onDestroy } = useNeshanMapLibre()
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  modules: ['vue-neshan-maps/nuxt'],
   neshanMap: { css: true, components: true, imports: true },
 })
 ```
@@ -80,7 +82,7 @@ export default defineNuxtConfig({
 ‏پیش‌فرض هر سه گزینه روشن است. اگر CSS را جای دیگری وارد می‌کنید، `css` را خاموش کنید. با خاموش‌کردن `components` یا `imports` ثبت آن‌ها را خودتان انجام دهید. تنظیمات tuple هم پشتیبانی می‌شود:
 
 ```ts
-modules: [['vuejs-neshan-map-leaflet/nuxt', { imports: false }]]
+modules: [['vue-neshan-maps/nuxt', { imports: false }]]
 ```
 
 ## ‏روش جایگزین: پلاگین Nuxt
@@ -89,8 +91,8 @@ modules: [['vuejs-neshan-map-leaflet/nuxt', { imports: false }]]
 
 ```ts
 export default defineNuxtConfig({
-  plugins: ['vuejs-neshan-map-leaflet/nuxt/plugin'],
-  css: ['vuejs-neshan-map-leaflet/style.css'],
+  plugins: ['vue-neshan-maps/nuxt/plugin'],
+  css: ['vue-neshan-maps/style.css'],
   runtimeConfig: { public: { neshanWebKey: '' } },
 })
 ```
@@ -100,7 +102,7 @@ export default defineNuxtConfig({
 ‏همچنین می‌توانید خودتان فایل `app/plugins/neshan.ts` را بسازید. این روش با نسخهٔ ۲٫۰٫۱ هم کار می‌کند:
 
 ```ts
-import { NeshanMapPlugin } from 'vuejs-neshan-map-leaflet'
+import { NeshanMapPlugin } from 'vue-neshan-maps'
 
 export default defineNuxtPlugin(nuxtApp => {
   nuxtApp.vueApp.use(NeshanMapPlugin)
@@ -154,8 +156,8 @@ npm run build
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['vuejs-neshan-map-leaflet/nuxt'],
-  css: ['vuejs-neshan-map-leaflet/fonts/vazir.css'],
+  modules: ['vue-neshan-maps/nuxt'],
+  css: ['vue-neshan-maps/fonts/vazir.css'],
 })
 ```
 

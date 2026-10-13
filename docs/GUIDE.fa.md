@@ -21,8 +21,8 @@ import {
   NeshanMapLibre, MAPLIBRE_STYLES,
   type Coordinates, type MapLibreMarker, type MapCircle,
   type MapPolygon, type MapPolyline, type TileState,
-} from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+} from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const center = ref<Coordinates>([35.6997, 51.338])
@@ -162,7 +162,7 @@ markers.value = markers.value.filter(marker => marker.id !== 'new-place')
 ‏ترتیب GeoJSON همیشه **طول و سپس عرض جغرافیایی** است؛ حتی در کامپوننت Leaflet. آرایهٔ اختیاری `geojsonLayers` سبک بومی MapLibre را کنترل می‌کند. ویژگی `source` را ندهید؛ کامپوننت آن را مدیریت می‌کند. بدون لایهٔ سفارشی، سبک پیش‌فرض نقطه، خط و چندضلعی استفاده می‌شود.
 
 ```ts
-import type { MapLibreOverlayLayer } from 'vuejs-neshan-map-leaflet'
+import type { MapLibreOverlayLayer } from 'vue-neshan-maps'
 
 const geojson = {
   type: 'FeatureCollection' as const,
@@ -219,8 +219,8 @@ const geojsonLayers: MapLibreOverlayLayer[] = [{
 
 ```vue
 <script setup lang="ts">
-import { NeshanMapLibre, useNeshanMapLibre } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLibre, useNeshanMapLibre } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const { map, onReady, onDestroy } = useNeshanMapLibre()
 function go() {
@@ -242,7 +242,7 @@ function go() {
 
 ```ts
 export default defineNuxtConfig({
-  css: ['vuejs-neshan-map-leaflet/style.css'],
+  css: ['vue-neshan-maps/style.css'],
   runtimeConfig: { public: { neshanWebKey: '' } },
 })
 ```
@@ -261,8 +261,8 @@ export default defineNuxtConfig({
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLeaflet, type Coordinates, type MapMarker } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLeaflet, type Coordinates, type MapMarker } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const center = ref<Coordinates>([35.6997, 51.338])
 const zoom = ref(13)
@@ -295,7 +295,7 @@ const markers: MapMarker[] = [{ id: 'azadi', position: [35.6997, 51.338], popup:
 ‏فونت وزیر نسخهٔ ۳۰٫۱٫۰ با وزن‌های معمولی و ضخیم همراه بسته است؛ فایل‌ها از پروژهٔ شما سرو می‌شوند و به CDN نیاز ندارند. مجوز و نام پدیدآورندگان در پوشهٔ `fonts` حفظ شده است.
 
 ```ts
-import 'vuejs-neshan-map-leaflet/fonts/vazir.css'
+import 'vue-neshan-maps/fonts/vazir.css'
 ```
 
 ```html

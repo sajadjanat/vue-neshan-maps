@@ -7,6 +7,14 @@ on:
         description: 'Existing release tag matching package.json (for example v2.0.1)'
         required: true
         type: string
+      package:
+        description: 'Package identity to publish'
+        required: true
+        default: vue-neshan-maps
+        type: choice
+        options:
+          - vue-neshan-maps
+          - vuejs-neshan-map-leaflet
 
 permissions:
   contents: read
@@ -44,5 +52,15 @@ jobs:
       - run: npm pack
       - run: npm run test:package
       - run: npm run test:nuxt
+      - run: npm run pack:legacy && npm run test:legacy
       - name: Publish with npm trusted publishing (OIDC)
-        run: npm publish ./vuejs-neshan-map-leaflet-*.tgz --access public --registry=https://registry.npmjs.org
+        env:
+          PACKAGE_NAME: ${{ inputs.package }}
+        run: |
+          if [ "$PACKAGE_NAME" = "vue-neshan-maps" ]; then
+            npm publish ./vue-neshan-maps-*.tgz --access public --registry=https://registry.npmjs.org
+          elif [ "$PACKAGE_NAME" = "vuejs-neshan-map-leaflet" ]; then
+            npm publish ./work/vuejs-neshan-map-leaflet-*.tgz --access public --registry=https://registry.npmjs.org
+          else
+            exit 1
+          fi

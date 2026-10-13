@@ -16,8 +16,8 @@ Available in **2.2.0**. These features use the same `NeshanMapLibre` component, 
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLibre, type Coordinates, type MapResourceFailure } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLibre, type Coordinates, type MapResourceFailure } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const center = ref<Coordinates>([35.72, 51.36])
@@ -72,8 +72,8 @@ Heatmap weights read `weightProperty`; missing or nonnumeric values become 0, ne
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLibre, type MapLibreAdvancedLayer } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLibre, type MapLibreAdvancedLayer } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const districts = ref<GeoJSON.FeatureCollection>({
   type: 'FeatureCollection', features: [{ type: 'Feature', properties: { height: 450 },

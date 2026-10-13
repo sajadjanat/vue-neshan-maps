@@ -8,7 +8,9 @@ import { createRequire } from 'node:module'
 const require = createRequire(import.meta.url)
 const npmCli = process.env.npm_execpath
 if (!npmCli) throw new Error('Run with npm run test:package')
-const root = process.cwd()
+const sourceRoot = process.cwd()
+const root = process.env.NESHAN_PACKAGE_DIR || sourceRoot
+const packageName = process.env.NESHAN_PACKAGE_NAME || 'vue-neshan-maps'
 const tempRoot = resolve(tmpdir())
 const dir = mkdtempSync(join(tempRoot, 'neshan-package-'))
 const npm = (args, cwd = root) => execFileSync(process.execPath, [npmCli, ...args], { cwd, encoding: 'utf8' })
@@ -21,7 +23,7 @@ try {
     import { readFileSync } from 'node:fs'
     import { dirname, join } from 'node:path'
     import { createRequire } from 'node:module'
-    import plugin, { NeshanMapLeaflet, NeshanMapLibre, loadNeshanMapLibre, useNeshanMapLibre, loadNeshanSdk } from 'vuejs-neshan-map-leaflet'
+    import plugin, { NeshanMapLeaflet, NeshanMapLibre, loadNeshanMapLibre, useNeshanMapLibre, loadNeshanSdk } from '${packageName}'
     const require = createRequire(import.meta.url)
     assert.equal(typeof plugin.install, 'function')
     assert.equal(typeof NeshanMapLeaflet.install, 'function')
@@ -29,17 +31,20 @@ try {
     assert.equal(typeof loadNeshanMapLibre, 'function')
     assert.equal(typeof useNeshanMapLibre, 'function')
     assert.equal(typeof loadNeshanSdk, 'function')
-    assert.equal(typeof require('vuejs-neshan-map-leaflet').NeshanMapLeaflet.install, 'function')
-    assert.ok(require.resolve('vuejs-neshan-map-leaflet/style.css'))
-    assert.ok(require.resolve('vuejs-neshan-map-leaflet/fonts/vazir.css'))
-    const fonts = dirname(require.resolve('vuejs-neshan-map-leaflet/fonts/vazir.css'))
+    assert.equal(typeof require('${packageName}').NeshanMapLeaflet.install, 'function')
+    assert.ok(require.resolve('${packageName}/style.css'))
+    assert.equal(require.resolve('${packageName}/style.css'), require.resolve('${packageName}/dist/style.css'))
+    assert.ok(import.meta.resolve('${packageName}/nuxt'))
+    assert.ok(import.meta.resolve('${packageName}/nuxt/plugin'))
+    assert.ok(require.resolve('${packageName}/fonts/vazir.css'))
+    const fonts = dirname(require.resolve('${packageName}/fonts/vazir.css'))
     for (const name of ['Vazir-Regular.woff2', 'Vazir-Bold.woff2']) {
       assert.equal(readFileSync(join(fonts, name)).subarray(0, 4).toString(), 'wOF2')
     }
     assert.match(readFileSync(join(fonts, 'OFL.txt'), 'utf8'), /SIL Open Font License/)
   `)
   writeFileSync(join(dir, 'check.ts'), `
-    import { NeshanMapLeaflet, type Coordinates, type NeshanMapOptions, type MapMarker, type MapLibreProps } from 'vuejs-neshan-map-leaflet'
+    import { NeshanMapLeaflet, type Coordinates, type NeshanMapOptions, type MapMarker, type MapLibreProps } from '${packageName}'
     const center: Coordinates = [35, 51]
     const options: NeshanMapOptions = { center, zoom: 13, traffic: true }
     const marker: MapMarker = { id: 1, position: center, options: { draggable: true } }

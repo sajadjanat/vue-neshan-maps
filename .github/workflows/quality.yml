@@ -22,3 +22,5 @@ jobs:
       - run: npm run test:package
       - run: npm run test:nuxt
         if: matrix.node == 24
+      - run: npm run pack:legacy && npm run test:legacy
+        if: matrix.node == 24

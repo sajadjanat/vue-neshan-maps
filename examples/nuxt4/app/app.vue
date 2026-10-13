@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { Coordinates, MapLibreMarker } from 'vuejs-neshan-map-leaflet'
+import type { Coordinates, MapLibreMarker } from 'vue-neshan-maps'
 
 const config = useRuntimeConfig()
 const key = ref('')

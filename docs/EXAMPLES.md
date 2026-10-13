@@ -27,8 +27,8 @@ import { ref } from 'vue'
 import {
   NeshanMapLibre, MAPLIBRE_STYLES, useNeshanMapLibre,
   type Coordinates, type MapLibreMarker, type MapCircle,
-} from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+} from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const center = ref<Coordinates>([35.6997, 51.338])
@@ -69,8 +69,8 @@ GeoJSON uses **longitude, latitude**. Supply layer definitions without `source`;
 
 ```vue
 <script setup lang="ts">
-import { NeshanMapLibre, type MapLibreOverlayLayer } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLibre, type MapLibreOverlayLayer } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const data: GeoJSON.FeatureCollection = {
@@ -103,8 +103,8 @@ Only call location from a user action. Handle permission denial and unavailable 
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLibre } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLibre } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const component = ref<InstanceType<typeof NeshanMapLibre>>()
@@ -144,8 +144,8 @@ Leaflet native coordinates are latitude first. Do not pass obsolete traffic/POI 
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLeaflet, useNeshanMap, type Coordinates, type MapMarker } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLeaflet, useNeshanMap, type Coordinates, type MapMarker } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const center = ref<Coordinates>([35.6997, 51.338])
@@ -173,7 +173,7 @@ Import package CSS in `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
-  css: ['vuejs-neshan-map-leaflet/style.css'],
+  css: ['vue-neshan-maps/style.css'],
   runtimeConfig: { public: { neshanWebKey: '' } },
 })
 ```
@@ -185,8 +185,8 @@ Set `NUXT_PUBLIC_NESHAN_WEB_KEY` to a domain-restricted web key. In a page, read
 ```ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import NeshanMapPlugin from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import NeshanMapPlugin from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 createApp(App).use(NeshanMapPlugin).mount('#app')
 ```

@@ -3,7 +3,7 @@
 [Overview](../README.md) · [Feature guide](GUIDE.md) · [آموزش فارسی](GUIDE.fa.md) · [Complete examples](EXAMPLES.md)
 
 [Nuxt 4: module and plugin](NUXT.md)
-This reference covers 2.2.0. Start with the [README](../README.md#quick-start) for installation or the [feature guide](GUIDE.md) for task-based explanations. Named imports below are all from `vuejs-neshan-map-leaflet`.
+This reference covers 2.3.0, including the compatible historical npm identity. Start with the [README](../README.md#quick-start) for installation or the [feature guide](GUIDE.md) for task-based explanations. Named imports below are all from `vue-neshan-maps`.
 
 ## On this page
 
@@ -20,8 +20,8 @@ Use `NeshanMapLibre` for the patched vector renderer and adapted Neshan connecti
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLibre, MAPLIBRE_STYLES, useNeshanMapLibre, type Coordinates } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLibre, MAPLIBRE_STYLES, useNeshanMapLibre, type Coordinates } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 const center = ref<Coordinates>([35.7, 51.34])
 const zoom = ref(13)
 const traffic = ref(true), poi = ref(true)
@@ -149,14 +149,14 @@ MapLibre default content appears after initialization; Leaflet default content a
 ## Install
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.2.0
+npm install vue-neshan-maps@^2.3.0
 ```
 
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLeaflet, type Coordinates } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLeaflet, type Coordinates } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 const center = ref<Coordinates>([35.6997, 51.338])
 const zoom = ref(13)
@@ -261,7 +261,7 @@ interface MapCircle {
 
 ```vue
 <script setup lang="ts">
-import { useNeshanMap, NeshanMapLeaflet } from 'vuejs-neshan-map-leaflet'
+import { useNeshanMap, NeshanMapLeaflet } from 'vue-neshan-maps'
 const { map, leaflet, onReady, onDestroy } = useNeshanMap()
 function locate() { map.value?.locate({ setView: true, maxZoom: 16 }) }
 </script>
@@ -280,7 +280,7 @@ Slots: `loading`, `error` (`{ error, retry }`), `tile-error` (`{ state }`), `cen
 ## Global plugin
 
 ```ts
-import NeshanMapPlugin from 'vuejs-neshan-map-leaflet'
+import NeshanMapPlugin from 'vue-neshan-maps'
 app.use(NeshanMapPlugin)
 ```
 
@@ -306,7 +306,7 @@ Pass with `:sdk="sdk"`. Configure CSP to allow the Neshan SDK, styles, tile host
 ## Migration from 1.x
 
 1. Vue is now a peer dependency; use Vue 3.5.43 or newer.
-2. Import `vuejs-neshan-map-leaflet/style.css`. Legacy `dist/style.css` remains an export alias.
+2. Import `vue-neshan-maps/style.css`. Legacy `dist/style.css` remains an export alias.
 3. Existing `options.key`, `options.center`, `styles`, `latitude` and `longitude` still work. Prefer `api-key` and two-way models for new apps.
 4. The package now ships ESM and CommonJS, not a UMD script-tag build.
 5. Default width is responsive (100%); set `styles.width` to preserve a fixed width.

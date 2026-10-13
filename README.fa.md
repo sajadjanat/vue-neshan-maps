@@ -6,7 +6,7 @@
 
 ‏نقشهٔ واکنش‌پذیر برای Vue 3 · دو موتور MapLibre و Leaflet · پشتیبانی TypeScript
 
-[![npm](https://img.shields.io/npm/v/vuejs-neshan-map-leaflet?color=087f8c&label=npm)](https://www.npmjs.com/package/vuejs-neshan-map-leaflet)
+[![npm](https://img.shields.io/npm/v/vue-neshan-maps?color=087f8c&label=npm)](https://www.npmjs.com/package/vue-neshan-maps)
 [![CI](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml/badge.svg)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/actions/workflows/quality.yml)
 [![License](https://img.shields.io/badge/license-MIT-173449)](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/LICENSE)
 
@@ -17,6 +17,8 @@
 ‏[شروع سریع](#installation) · [آموزش امکانات](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/GUIDE.fa.md) · [مرجع API](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/API.md) · [مثال‌های کامل](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/EXAMPLES.md) · [راهنمای Nuxt 4](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/NUXT.fa.md)
 
 </div>
+
+‏نام جدید پکیج **`vue-neshan-maps`** است. [راهنمای مهاجرت و سازگاری نام قبلی](docs/MIGRATION.fa.md)؛ آدرس ریپو و دمو ثابت می‌ماند.
 
 ‏در [دموی آنلاین](https://sajadjanat.github.io/vuejs-neshan-map-leaflet/?lang=fa) خوشه‌بندی، هیت‌مپ، لایهٔ سه‌بعدی، ویرایش GeoJSON و ابزارهای انتخاب مکان را با نقشهٔ واقعی امتحان کنید. کلید وب خودتان را وارد کنید و دامنهٔ `sajadjanat.github.io` را در نشان مجاز کنید. کلید فقط در حافظهٔ صفحه می‌ماند. [راهنمای دمو](https://github.com/sajadjanat/vuejs-neshan-map-leaflet/blob/master/docs/DEMO.fa.md).
 
@@ -72,7 +74,7 @@
 ‏بسته را از رجیستری npm نصب کنید:
 
 ```sh
-npm install vuejs-neshan-map-leaflet@^2.2.3
+npm install vue-neshan-maps@^2.3.0
 ```
 
 ‏از پنل نشان یک **کلید وب** با دامنه‌های مجاز بسازید. برای پروژهٔ `Vite` آن را در فایل نادیده‌گرفته‌شدهٔ `.env.local` قرار دهید:
@@ -86,8 +88,8 @@ VITE_NESHAN_WEB_KEY=web.YOUR_DOMAIN_ALLOWED_KEY
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLibre, MAPLIBRE_STYLES, type Coordinates } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLibre, MAPLIBRE_STYLES, type Coordinates } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const center = ref<Coordinates>([35.6997, 51.338])
@@ -138,7 +140,7 @@ const poi = ref(true)
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['vuejs-neshan-map-leaflet/nuxt'],
+  modules: ['vue-neshan-maps/nuxt'],
   runtimeConfig: { public: { neshanWebKey: '' } },
 })
 ```
@@ -153,7 +155,7 @@ export default defineNuxtConfig({
 
 ```ts
 import { ref } from 'vue'
-import type { Coordinates, MapLibreMarker, MapCircle, MapPolygon, MapPolyline } from 'vuejs-neshan-map-leaflet'
+import type { Coordinates, MapLibreMarker, MapCircle, MapPolygon, MapPolyline } from 'vue-neshan-maps'
 
 const markers = ref<MapLibreMarker[]>([
   { id: 'azadi', position: [35.6997, 51.338], popup: 'میدان آزادی',
@@ -251,7 +253,7 @@ const polygons: MapPolygon[] = [
 ‏پلاگین پیش‌فرض هر دو کامپوننت را سراسری ثبت می‌کند؛ واردکردن محلی برای setup هم پشتیبانی می‌شود:
 
 ```ts
-import NeshanMapPlugin from 'vuejs-neshan-map-leaflet'
+import NeshanMapPlugin from 'vue-neshan-maps'
 app.use(NeshanMapPlugin)
 ```
 
@@ -305,7 +307,7 @@ app.use(NeshanMapPlugin)
 
 ```sh
 git clone https://github.com/sajadjanat/vuejs-neshan-map-leaflet.git
-cd vuejs-neshan-map-leaflet
+cd vue-neshan-maps
 npm ci
 npm run dev
 ```
@@ -336,7 +338,7 @@ npm run test:package
 ‏فونت وزیر نسخهٔ ۳۰٫۱٫۰ با وزن‌های معمولی و ضخیم همراه بسته است؛ فایل‌ها از پروژهٔ شما سرو می‌شوند و به CDN نیاز ندارند. مجوز و نام پدیدآورندگان در پوشهٔ `fonts` حفظ شده است.
 
 ```ts
-import 'vuejs-neshan-map-leaflet/fonts/vazir.css'
+import 'vue-neshan-maps/fonts/vazir.css'
 ```
 
 ```html

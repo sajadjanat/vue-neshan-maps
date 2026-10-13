@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.0
+
+- New canonical npm identity `vue-neshan-maps`; historical `vuejs-neshan-map-leaflet` ships the identical compatibility build.
+- Preserve Vue APIs, Nuxt module/manual plugin, all exports, CSS and Vazir fonts.
+- Update bilingual README, docs, Nuxt example and demo snippets; add migration guides. Repository and demo URLs remain stable.
+
 ## 2.2.3
 
 - Updated compatible dependencies, including Vue/server-renderer 3.5.44, DOMPurify 3.4.17 and Vitest 5.0.4. Package name, public APIs, Leaflet/MapLibre and Nuxt module/plugin support are preserved.

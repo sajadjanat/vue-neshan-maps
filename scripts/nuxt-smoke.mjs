@@ -9,7 +9,9 @@ import { createRequire } from 'node:module'
 // Exercise the installed tarball rather than a symlink to source files.
 const npmCli = process.env.npm_execpath
 if (!npmCli) throw Error('Run with npm run test:nuxt')
-const root = process.cwd()
+const sourceRoot = process.cwd()
+const root = process.env.NESHAN_PACKAGE_DIR || sourceRoot
+const packageName = process.env.NESHAN_PACKAGE_NAME || 'vue-neshan-maps'
 const tempRoot = resolve(tmpdir())
 const dir = mkdtempSync(join(tempRoot, 'neshan-nuxt4-'))
 const npm = args => execFileSync(process.execPath, [npmCli, ...args], { cwd: dir, stdio: 'inherit' })
@@ -53,23 +55,25 @@ async function checkSSR(mode) {
 }
 try {
   const [{ filename }] = JSON.parse(execFileSync(process.execPath, [npmCli, 'pack', '--ignore-scripts', '--json', '--pack-destination', dir], { cwd: root, encoding: 'utf8' }))
-  const fixture = JSON.parse(readFileSync(join(root, 'examples/nuxt4/package.json'), 'utf8'))
+  const fixture = JSON.parse(readFileSync(join(sourceRoot, 'examples/nuxt4/package.json'), 'utf8'))
+  delete fixture.dependencies['vue-neshan-maps']
   fixture.dependencies.nuxt = '4.6.1'
-  fixture.dependencies['vuejs-neshan-map-leaflet'] = join(dir, filename)
+  fixture.dependencies[packageName] = join(dir, filename)
   delete fixture.scripts.prepare
   writeFileSync(join(dir, 'package.json'), JSON.stringify(fixture))
   mkdirSync(join(dir, 'app'))
-  const app = readFileSync(join(root, 'examples/nuxt4/app/app.vue'), 'utf8')
+  const adapt = text => text.replaceAll('vue-neshan-maps', packageName)
+  const app = adapt(readFileSync(join(sourceRoot, 'examples/nuxt4/app/app.vue'), 'utf8'))
   writeFileSync(join(dir, 'app/app.vue'), app)
   mkdirSync(join(dir, 'app/components'))
   for (const [file, name] of [['docs/NUXT.md', 'DocsEnglish'], ['docs/NUXT.fa.md', 'DocsPersian']]) {
-    const source = readFileSync(join(root, file), 'utf8')
+    const source = adapt(readFileSync(join(sourceRoot, file), 'utf8'))
     const component = source.match(/```vue\r?\n([\s\S]*?)\r?\n```/)?.[1]
     assert.ok(component?.includes('<script setup'), `Missing full example: ${file}`)
     writeFileSync(join(dir, `app/components/${name}.vue`), component)
   }
-  writeFileSync(join(dir, 'nuxt.config.ts'), readFileSync(join(root, 'examples/nuxt4/nuxt.config.ts')))
-  writeFileSync(join(dir, 'tsconfig.json'), readFileSync(join(root, 'examples/nuxt4/tsconfig.json')))
+  writeFileSync(join(dir, 'nuxt.config.ts'), adapt(readFileSync(join(sourceRoot, 'examples/nuxt4/nuxt.config.ts'), 'utf8')))
+  writeFileSync(join(dir, 'tsconfig.json'), readFileSync(join(sourceRoot, 'examples/nuxt4/tsconfig.json')))
   npm(['install', '--registry=https://registry.npmjs.org', '--no-audit', '--no-fund'])
   // Exercise the read-only Git APIs used by Nuxt Devtools with its security override.
   const consumerRequire = createRequire(join(dir, 'package.json'))
@@ -118,12 +122,12 @@ try {
   for (const name of ['DocsEnglish', 'DocsPersian']) rmSync(join(dir, `app/components/${name}.vue`))
 
   writeFileSync(join(dir, 'nuxt.config.ts'), `export default defineNuxtConfig({
-    plugins: ['vuejs-neshan-map-leaflet/nuxt/plugin'],
-    css: ['vuejs-neshan-map-leaflet/style.css', 'vuejs-neshan-map-leaflet/fonts/vazir.css'],
+    plugins: ['${packageName}/nuxt/plugin'],
+    css: ['${packageName}/style.css', '${packageName}/fonts/vazir.css'],
     runtimeConfig: { public: { neshanWebKey: '' } },
     compatibilityDate: '2026-10-12', devtools: { enabled: false },
   })`)
-  writeFileSync(join(dir, 'app/app.vue'), app.replace("import { ref } from 'vue'", "import { ref } from 'vue'\nimport { useNeshanMapLibre, MAPLIBRE_STYLES } from 'vuejs-neshan-map-leaflet'"))
+  writeFileSync(join(dir, 'app/app.vue'), app.replace("import { ref } from 'vue'", `import { ref } from 'vue'\nimport { useNeshanMapLibre, MAPLIBRE_STYLES } from '${packageName}'`))
   nuxt('prepare')
   nuxt('typecheck')
   nuxt('build')

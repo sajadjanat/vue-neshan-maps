@@ -22,8 +22,8 @@ import {
   NeshanMapLibre, MAPLIBRE_STYLES,
   type Coordinates, type MapLibreMarker, type MapCircle,
   type MapPolygon, type MapPolyline, type TileState,
-} from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+} from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const center = ref<Coordinates>([35.6997, 51.338])
@@ -158,7 +158,7 @@ Leaflet accepts its native shape options. MapLibre translates only the documente
 GeoJSON is **longitude first**, including when used with the Leaflet component. The optional MapLibre `geojsonLayers` array controls native rendering; omit `source` because the component manages it. Without custom layers, the component supplies point/line/polygon styling.
 
 ```ts
-import type { MapLibreOverlayLayer } from 'vuejs-neshan-map-leaflet'
+import type { MapLibreOverlayLayer } from 'vue-neshan-maps'
 
 const geojson = {
   type: 'FeatureCollection' as const,
@@ -212,8 +212,8 @@ Use `useNeshanMapLibre` to retain native refs; wire **both** lifecycle handlers.
 
 ```vue
 <script setup lang="ts">
-import { NeshanMapLibre, useNeshanMapLibre } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLibre, useNeshanMapLibre } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const { map, onReady, onDestroy } = useNeshanMapLibre()
 function go() {
@@ -235,7 +235,7 @@ Imports are SSR-safe; renderer initialization runs on mount. Import CSS globally
 
 ```ts
 export default defineNuxtConfig({
-  css: ['vuejs-neshan-map-leaflet/style.css'],
+  css: ['vue-neshan-maps/style.css'],
   runtimeConfig: { public: { neshanWebKey: '' } },
 })
 ```
@@ -253,8 +253,8 @@ Use `NeshanMapLeaflet` for existing Leaflet integrations. The coordinate model a
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLeaflet, type Coordinates, type MapMarker } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLeaflet, type Coordinates, type MapMarker } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const center = ref<Coordinates>([35.6997, 51.338])
 const zoom = ref(13)
@@ -286,7 +286,7 @@ If something fails, start with the README's [troubleshooting table](../README.md
 Vazir 30.1.0 regular and bold are bundled as self-hosted WOFF2 files. The original SIL OFL license and author credits are included in `fonts`. No font CDN is required.
 
 ```ts
-import 'vuejs-neshan-map-leaflet/fonts/vazir.css'
+import 'vue-neshan-maps/fonts/vazir.css'
 ```
 
 ```html

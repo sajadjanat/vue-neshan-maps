@@ -1,6 +1,6 @@
 {
-  "name": "vuejs-neshan-map-leaflet",
-  "version": "2.2.3",
+  "name": "vue-neshan-maps",
+  "version": "2.3.0",
   "description": "Typed Vue 3 Leaflet and MapLibre maps with Neshan live traffic and POI",
   "main": "./dist/vuejs-neshan-map-leaflet.cjs",
   "module": "./dist/vuejs-neshan-map-leaflet.js",
@@ -32,7 +32,9 @@
     "preview": "vite preview",
     "prepack": "npm run typecheck && npm test && npm run build",
     "test:package": "node scripts/package-smoke.mjs",
-    "test:nuxt": "node scripts/nuxt-smoke.mjs"
+    "test:nuxt": "node scripts/nuxt-smoke.mjs",
+    "pack:legacy": "node scripts/pack-legacy.mjs",
+    "test:legacy": "node scripts/test-legacy.mjs"
   },
   "repository": {
     "type": "git",

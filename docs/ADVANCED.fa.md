@@ -16,9 +16,9 @@
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLibre, type Coordinates, type MapResourceFailure } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
-import 'vuejs-neshan-map-leaflet/fonts/vazir.css'
+import { NeshanMapLibre, type Coordinates, type MapResourceFailure } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
+import 'vue-neshan-maps/fonts/vazir.css'
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const center = ref<Coordinates>([35.72, 51.36])
 const zoom = ref(12)
@@ -84,8 +84,8 @@ const expansionZoom = await map.value!.expandCluster(clusterId, [35.72, 51.36])
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NeshanMapLibre, type MapLibreAdvancedLayer } from 'vuejs-neshan-map-leaflet'
-import 'vuejs-neshan-map-leaflet/style.css'
+import { NeshanMapLibre, type MapLibreAdvancedLayer } from 'vue-neshan-maps'
+import 'vue-neshan-maps/style.css'
 const webKey = import.meta.env.VITE_NESHAN_WEB_KEY
 const districts = ref<GeoJSON.FeatureCollection>({
   type: 'FeatureCollection', features: [{ type: 'Feature', properties: { height: 450 },
